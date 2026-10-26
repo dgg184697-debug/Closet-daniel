@@ -8,21 +8,22 @@
   const BZ = (p, v) => `https://image-resizing.booztcdn.com/polo-ralph-lauren/${p}.webp?has_webp=1${v ? '&version=' + v : ''}&size=w900`;
   const BB = id => `https://assets.burberry.com/is/image/Burberryltd/${id}?$BBY_V3_ML_1$&wid=900&hei=900`;
   const CL = id => `https://bynder.christianlouboutin.com/asset/${id}/FW26_CHAMBELIMOC_FLAT_CALF_PATINE_REG_CALF_TRESSE.jpg`;
+  const YNAP = (site, id, v) => `https://www.${site}.com/variants/images/${id}/${v}/w2000_q60.jpg`;
   const pin = q => 'https://co.pinterest.com/search/pins/?q=' + encodeURIComponent(q);
 
   // f: [caption, [sources to try in order]]
   const BUYS = [
-    { t: 'Blazer azul marino', sw: ['#1f2a44'],
-      why: 'La pieza central del ivy, de Nate y de Harvey. Va con tus pantalones gris (P01 y P02), café (P06) y piedra (P09), y con el chino caqui.',
-      ref: 'Suitsupply · Navy Tailored Fit Havana Blazer', det: 'Lana All Season de Reda, medio forro, hombro natural. Ref. C24205. Unos 485 USD. En la tienda de EE. UU. ya se agotó: pide el navy Havana que tengan.',
-      url: 'https://suitsupply.com/en-sg/men/jackets/navy-tailored-fit-havana-blazer/C24205.html',
-      alt: 'En El Tesoro: Massimo Dutti, americana en lana fría por unos 445 USD; Carlos Nieto te la ajusta.',
-      f: [['La prenda', [SS_P + 'Jackets/default/Summer/C24205_1.jpg', SS_P + 'Jackets/default/Winter/C24205_1.jpg', SS_P + 'Jackets/default/C24205_25.jpg']],
-          ['Puesta', [SS_M2 + 'Jackets/default/Summer/C24205_101.jpg', SS_M2 + 'Jackets/default/Winter/C24205_101.jpg']],
-          ['Puesta', [SS_M2 + 'Jackets/default/Summer/C24205_105.jpg', SS_M2 + 'Jackets/default/Winter/C24205_105.jpg']]],
-      pins: [['Blazer navy con pantalón gris', pin('navy blazer grey trousers loafers ivy style')], ['Nate Archibald', pin('Nate Archibald blazer')]] },
+    { t: 'Blazer azul marino, de blazer y no de traje', sw: ['#1f2a44', '#c9a24a'],
+      why: 'La pieza central del ivy, de Nate y de Harvey. Se usa con pantalón de otro color: tus grises (P01 y P02), el café (P06), el piedra (P09) y el chino caqui. Con tu pantalón azul (P05) no, porque se ve como un traje que no combina.',
+      ref: 'Carlos Nieto (El Tesoro) · blazer azul marino', det: 'Qué pedir: tela con textura (hopsack, sarga o franela liviana), un azul distinto al de tu P05, botones dorados o de cuerno, una fila de dos o tres botones y media forro por el clima. Bolsillos de parche si lo quieres más ivy. Precio en pesos: pregúntalo en la tienda.',
+      url: pin('navy blazer gold buttons patch pockets ivy'),
+      alt: 'Más ejemplos de tiendas en la sección "El blazer azul", justo debajo.',
+      f: [['Así se ve un blazer', [YNAP('mrporter', '11813139151031275', 'ou')]],
+          ['Botones dorados', [YNAP('mrporter', '11813139151031275', 'cu')]],
+          ['Clásico de los 70', ['https://i0.wp.com/journal.styleforum.net/wp-content/uploads/2020/10/1970s-Blazer..jpg?resize=533%2C799&ssl=1']]],
+      pins: [['Blazer navy con pantalón gris', pin('navy blazer grey trousers loafers ivy style')], ['Nate Archibald', pin('Nate Archibald blazer')], ['Botones dorados', pin('navy blazer brass buttons')]] },
     { t: 'Segundo traje, azul marino', sw: ['#1c2740'],
-      why: 'Ya tienes el gris carbón (P08). El siguiente es navy, en lana tropical para el clima de Medellín.',
+      why: 'No es urgente: ya tienes el gris carbón (P08). Atajo: pregunta en Carlos Nieto si tienen la chaqueta en la misma tela de tu pantalón azul (P05); si la tienen, ahí está tu traje azul.',
       ref: 'Suitsupply · Navy Perennial Tailored Fit Havana Suit', det: 'Lana tropical de Vitale Barberis Canonico, una fila. Ref. C9669-S. 548 USD (saco 399 y pantalón 149).',
       url: 'https://suitsupply.com/en-pr/navy-perennial-tailored-fit-havana-suit/C9669-S.html',
       alt: 'Más "Harvey": el cruzado de solapa de pico C6861-S1 (unos 705 USD), pero el de una fila es más versátil.',
@@ -58,7 +59,7 @@
           ['Detalle', [CL('19f03833-f253-4b37-8411-a58ce6063542')]]],
       pins: [['Mocasín café con chinos', pin('brown penny loafers chinos navy blazer')], ['Belgian Shoes puestos', pin('belgian shoes loafers men outfit')]] },
     { t: 'Zapato con suela de goma para lluvia', sw: ['#4a3122'],
-      why: 'Lo que más vas a usar en temporada de lluvias. Tus dos marcas casi no tienen para lluvia, así que aquí vale la excepción.',
+      why: 'Lo que más vas a usar en temporada de lluvias: suela de goma con el cuero sellado. Si prefieres quedarte en tus marcas, mira el Louboutin Chambeliboat en la sección de zapatos.',
       ref: 'Crockett & Jones · Pembroke, Dark Brown Grained Calf', det: 'Derby brogue en cuero de grano con suela de goma Storm Welt, Goodyear. Unos 870 USD.',
       url: 'https://www.careofcarl.co.uk/en/crockett-jones-pembroke-derbys-dark-brown-grained-calf',
       f: [['La prenda', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_1.jpg?m=1672759890']],
@@ -253,7 +254,6 @@
   ];
 
   const MT = id => `https://www.mytheresa.com/image/1094/1238/100/0c/${id}.jpg`;
-  const YNAP = (site, id, v) => `https://www.${site}.com/variants/images/${id}/${v}/w2000_q60.jpg`;
   const HM = id => `https://assets.hermes.com/is/image/hermesproduct/${id}_front_wm_101?extend=0,0,0,0&align=0,0&$product_default_bg$`;
   const DIBS = 'https://a.1stdibscdn.com/louis-vuitton-black-grained-calfskin-low-key-cabas-mm-for-sale';
 
@@ -407,6 +407,85 @@
       pins: [['Pañuelo blanco recto', pin('white pocket square tv fold suit')]] },
   ];
 
+  // Navy blazer examples: what a real blazer looks like next to a suit jacket.
+  const HR = h => `https://hrd-live.cdn.scayle.cloud/images/${h}.jpg?brightness=1&width=922&height=1230&quality=75&bg=ffffff`;
+  const BSH = f => [`https://belgianshoes.com/wp-content/uploads/2017/10/${f}.jpg`, `https://belgianshoes.com/wp-content/uploads/2017/10/${f}-600x600.jpg`, `https://belgianshoes.com/wp-content/uploads/2017/10/${f}-500x500.jpg`];
+  const BLAZER = [
+    { t: 'Polo Ralph Lauren con botones dorados', sw: ['#1f2a44', '#c9a24a'],
+      why: 'El ejemplo más claro de blazer: botones dorados grabados con mazos de polo, sin hombrera y de lino, fresco para Medellín. Esto es lo que buscamos.',
+      ref: 'Polo Ralph Lauren · Navy Slim-Fit Unstructured Linen-Blend Blazer', det: 'Mezcla de lino, medio forro, sin estructura. 995 € en Mr Porter (unos 1.115 USD).',
+      url: 'https://www.mrporter.com/en-dk/mens/product/polo-ralph-lauren/clothing/single-breasted-blazers/navy-slim-fit-unstructured-linen-blend-blazer/11813139151031275',
+      f: [['Puesto', [YNAP('mrporter', '11813139151031275', 'ou')]], ['La prenda', [YNAP('mrporter', '11813139151031275', 'in')]],
+          ['De frente', [YNAP('mrporter', '11813139151031275', 'fr')]], ['Botones', [YNAP('mrporter', '11813139151031275', 'cu')]]],
+      pins: [['Blazer de lino navy', pin('navy linen blazer gold buttons men')]] },
+    { t: 'Polo de lino con textura', sw: ['#1f2a44'],
+      why: 'Tela con textura y hombro natural: se nota que no es de traje. Con chinos y mocasines es la pinta de viernes.',
+      ref: 'Polo Ralph Lauren · Polo Soft Modern Fit Linen-Blend Jacket, Navy', det: '53 % lino, 37 % viscosa y 10 % lana, medio forro, dos botones. 445 € (unos 500 USD); rebajada a unos 375.',
+      url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/fancy-weave-wvn-blazer-sport-coat_33071572/232193767',
+      f: [['La prenda', [BZ('raf715b19049_cnavy_v10703272wbt', '24fc251f505eb06aac4060f788e02f66')]],
+          ['Puesto', [BZ('raf715b19049_cnavy_v10703272wbt_90', '98f5e608b4bec2fe6b5d0022100e335f')]],
+          ['Puesto', [BZ('raf715b19049_cnavy_v10703272wbt_91', '83a43495a8a38884ef025d90467739e4')]],
+          ['Detalle', [BZ('raf715b19049_cnavy_v10703272wbt_1', '5c19c103624fec641b17eee2f8adb60e')]]],
+      pins: [['Blazer con chinos', pin('navy blazer khaki chinos loafers')]] },
+    { t: 'Polo de gabardina', sw: ['#1f2a44'],
+      why: 'La gabardina tiene una diagonal que se ve: es la tela clásica de blazer. Más estructurado, para la oficina.',
+      ref: 'Polo Ralph Lauren · Polo Modern Fit Gabardine Blazer, Navy', det: '80 % lana y 20 % poliéster, forrado completo. 545 € (unos 610 USD).',
+      url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/wool-garbadine-mdn-p2nt_32889176/230353585',
+      f: [['Puesto', [BZ('raf715928570_cnavy_v10044682wbt_10', '95aab6c31a7d65a0ccb7f27250159b4d')]],
+          ['La prenda', [BZ('raf715928570_cnavy_v10044682wbt', 'e68701634fc26f4bd473e4b16de5c6fb')]],
+          ['Detalle', [BZ('raf715928570_cnavy_v10044682wbt_1', '427de5c89d6107a12cea2b62e442c054')]],
+          ['Puesto', [BZ('raf715928570_cnavy_v10044682wbt_11', '4f723bc7807f82666a580553f4943a08')]]],
+      pins: [['Blazer navy con gris', pin('navy blazer grey flannel trousers')]] },
+    { t: 'Suitsupply de tejido con textura', sw: ['#1f2a44'],
+      why: 'Lana de Reda con un tejido apretado y con textura. Ojo: trae botones oscuros y por eso parece de traje. Si lo compras, cámbiale los botones por dorados o de nácar en Carlos Nieto.',
+      ref: 'Suitsupply · Navy Tailored Fit Havana Blazer, ref. C25216', det: 'Lana All Season de Reda, medio canvas. 399 USD.',
+      url: 'https://suitsupply.com/en-us/men/jackets/navy-tailored-fit-havana-blazer/C25216.html',
+      f: [['Puesto', [SS_M + 'Jackets/default/Winter/C25216_101.jpg']], ['Puesto', [SS_M + 'Jackets/default/Winter/C25216_103.jpg']],
+          ['La prenda', [SS + 'b_rgb:efefef,bo_300px_solid_rgb:efefef,c_pad,w_2600/b_rgb:efefef,c_pad,dpr_1,w_850,h_1530,f_auto,q_auto,fl_progressive/products/Jackets/default/Winter/C25216_1.jpg']],
+          ['Tela', [SS_M + 'Jackets/default/C25216_23.jpg']]],
+      pins: [['Cambiar botones a dorados', pin('navy blazer brass buttons replaced')]] },
+    { t: 'Blazer cruzado', sw: ['#1f2a44'],
+      why: 'El de Chuck Bass y Harvey: cruzado de seis botones. Más formal y con mucha presencia, para cenas y eventos.',
+      ref: 'Suitsupply · Navy Tailored Fit Havana Blazer cruzado, ref. C25214', det: '95 % lana y 5 % cachemira de E. Thomas. 579 USD. En cachemira pura, el BBL10038N01: 799 USD.',
+      url: 'https://suitsupply.com/en-us/men/jackets/navy-tailored-fit-havana-blazer/C25214.html',
+      f: [['Puesto', [SS_M + 'Jackets/default/Winter/C25214_101.jpg']], ['Puesto', [SS_M + 'Jackets/default/Winter/C25214_103.jpg']],
+          ['Cachemira', [SS_M + 'Jackets/default/Winter/BBL10038N01_101.jpg']]],
+      pins: [['Chuck Bass cruzado', pin('chuck bass double breasted blazer')], ['Cruzado navy con botones dorados', pin('navy double breasted blazer gold buttons')]] },
+  ];
+
+  // Dressier shoes from his two brands, plus one with a rubber sole for the rain.
+  const ZAPATOS = [
+    { t: 'Oxford café patinado', sw: ['#6b4328'],
+      why: 'El zapato más elegante que hay: cordones cerrados. Para los trajes y las reuniones serias. El café patinado va con el gris y con el azul.',
+      ref: 'Christian Louboutin · Greggo Oxford, café', det: 'Becerro patinado, suela de cuero roja. 960 £ (unos 1.285 USD).',
+      url: 'https://www.harrods.com/en-gb/p/christian-louboutin-greggo-oxford-shoes-000000000006816201',
+      alt: 'También en negro (Greggo o Greghost), el de los eventos de noche.',
+      f: [['La pieza', [HR('16fc3480e607778f7ed1cd085bcae79e')]], ['De lado', [HR('2c059f72f189b298149925ac9ff9e583')]], ['Detalle', [HR('44ca5a481507404196332110dad7b193')]]],
+      pins: [['Oxford café con traje gris', pin('brown oxford shoes charcoal suit')]] },
+    { t: 'Doble hebilla (monk)', sw: ['#111111', '#4a2f1e'],
+      why: 'El zapato de Harvey Specter: elegante pero con carácter. El negro va con tu traje gris carbón; el café, con el blazer.',
+      ref: 'Christian Louboutin · Chambelimonk, becerro negro', det: 'Doble hebilla, suela de cuero roja. 1.120 £ (unos 1.500 USD). El Sartok café: 1.220 £ (unos 1.630 USD).',
+      url: 'https://www.harrods.com/en-gb/p/christian-louboutin-chambelimonk-calfskin-monk-shoes-000000000007707291',
+      f: [['Negro', [HR('fb314715e22bf7c157d907a9a5eb70a1')]], ['De lado', [HR('bdfa3f0fbea0d6cb10a79c6c988f93c4')]],
+          ['Sartok café', [HR('0c5b8bcab8fd430f0a92305c8310e716')]], ['Sartok de lado', [HR('40e20be97d7d1e51a286815f1a0325fd')]]],
+      pins: [['Harvey con monk', pin('harvey specter double monk strap shoes')]] },
+    { t: 'Mocasín con suela de goma', sw: ['#5a3b22'],
+      why: 'El de tus marcas que aguanta el agua: suela de goma flexible, cuero café y el pasador plateado del Chambelimoc. Para lluvia ligera y el día a día; para aguacero, el Crockett & Jones del Tier 1 sigue siendo mejor.',
+      ref: 'Christian Louboutin · Chambeliboat, becerro café', det: 'Suela de goma con el logo rojo grabado. Ref. 3250662BWI3. 4.750 AED (unos 1.295 USD).',
+      url: 'https://www.levelshoes.com/christian-louboutin-chambeliboat-loafers-brown-calf-leather-men-loafers-ziubpo.html',
+      f: [['La pieza', [`https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/3/2/3250662bwi3_1.jpg?ts=20251027101225`]],
+          ['De lado', [`https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/3/2/3250662bwi3_5.jpg?ts=20251027101225`]],
+          ['Suela', [`https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/3/2/3250662bwi3_7.jpg?ts=20251027101225`]]],
+      pins: [['Mocasín café con chinos', pin('brown loafers chinos rain')]] },
+    { t: 'Belgian Henri, el más elegante de Belgian', sw: ['#7a4e2d', '#111111'],
+      why: 'Más alargado que el Mr. Casual, con un tacón pequeño. Sirve con pantalón de vestir y blazer, no solo de fin de semana.',
+      ref: 'Belgian Shoes · Henri, All Calf', det: 'Becerro en negro, café oscuro o café medio, con moño o borla. 800 USD. Solo se compra por teléfono o en su tienda de Nueva York.',
+      url: 'https://belgianshoes.com/shop/all-calf-5/',
+      alt: 'Henri Evening en charol negro (800 USD) para el esmoquin. El Traveler (775 USD) tiene suela más gruesa para caminar, pero tampoco es para lluvia.',
+      f: [['Café', BSH('HEN_MedBrn_Blk_3005')], ['Charol, de noche', BSH('HEN_BlkPtn_Blk_2926')], ['Trenzado', BSH('HEN_MedBrnTres_Brn_3012')]],
+      pins: [['Belgian Shoes con traje', pin('belgian shoes loafers suit')]] },
+  ];
+
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const card = (b, i) => `
     <article class="buy">
@@ -424,6 +503,8 @@
 
   const TIERS = [
     ['tier1', 'Tier 1 · Lo que falta', 'Lo primero, en orden de prioridad: con esto tu clóset queda completo.', BUYS],
+    ['blazer', 'El blazer azul', 'Cómo se ve un blazer de verdad: botones dorados o de cuerno, tela con textura y un azul distinto al del pantalón. La chaqueta de traje, en cambio, es lisa y con botones oscuros. Lleva estas fotos a Carlos Nieto.', BLAZER],
+    ['zapatos', 'Zapatos de tus marcas', 'Más elegantes, de Christian Louboutin y Belgian Shoes, y uno de Louboutin con suela de goma para la lluvia.', ZAPATOS],
     ['tier2', 'Tier 2 · Lo siguiente', 'Para redondear: más color, tierra caliente y viajes.', TIER2],
     ['tier3', 'Tier 3 · Antojos', 'Todo lo que se me ocurre, de lo grande a lo pequeño. Para anotarse.', TIER3],
     ['lujo', 'Tier 3 · Bolsos', 'Bolsos de Bottega Veneta, Loewe, Louis Vuitton y Hermès, como referencia. Empieza por el tote de oficina.', LUJO],
