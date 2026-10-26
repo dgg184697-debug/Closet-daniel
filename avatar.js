@@ -127,21 +127,43 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
   const skull = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR, 48, 32), skinM)); skull.scale.set(1.04, 0.98, 0.96); head.add(skull);
   for (const sx of [-1, 1]) { const ear = new THREE.Mesh(new THREE.SphereGeometry(0.12, 20, 16), skinM); ear.position.set(sx * 0.56, -0.02, 0); ear.scale.set(0.6, 1, 0.8); head.add(ear); }
   const hairM = mat(look.hair, { rough: 0.5 });
-  const hair = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.06, 48, 24, 0, TAU, 0, Math.PI * 0.5), hairM)); hair.rotation.x = -0.32; hair.position.set(0, 0.04, -0.03); hair.scale.set(1.04, 1.02, 1.0); head.add(hair);
-  const fringe = new THREE.Mesh(new THREE.SphereGeometry(0.34, 32, 16), hairM); fringe.scale.set(1.45, 0.42, 0.7); fringe.position.set(-0.08, 0.33, 0.28); fringe.rotation.z = 0.18; head.add(fringe);
+  if (look.hairStyle === 'swept') {
+    // longish hair combed back with volume on top, covering the top of the ears
+    const cap = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.07, 48, 24, 0, TAU, 0, Math.PI * 0.56), hairM)); cap.rotation.x = -0.42; cap.position.set(0, 0.06, -0.04); cap.scale.set(1.06, 1.08, 1.04); head.add(cap);
+    const top = cast(new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 20), hairM)); top.scale.set(1.28, 0.62, 1.08); top.position.set(0.03, 0.42, 0.04); top.rotation.z = -0.08; head.add(top);
+    const front = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 16), hairM); front.scale.set(1.45, 0.62, 0.8); front.position.set(0.06, 0.36, 0.3); front.rotation.set(-0.35, 0, -0.1); head.add(front);
+    for (const sx of [-1, 1]) { const side = new THREE.Mesh(new THREE.SphereGeometry(0.22, 24, 16), hairM); side.scale.set(0.55, 1.05, 1.15); side.position.set(sx * 0.5, 0.12, -0.08); head.add(side); }
+    const back = cast(new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 20), hairM)); back.scale.set(1.1, 0.95, 0.75); back.position.set(0, 0.0, -0.2); head.add(back);
+  } else {
+    const hair = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.06, 48, 24, 0, TAU, 0, Math.PI * 0.5), hairM)); hair.rotation.x = -0.32; hair.position.set(0, 0.04, -0.03); hair.scale.set(1.04, 1.02, 1.0); head.add(hair);
+    const fringe = new THREE.Mesh(new THREE.SphereGeometry(0.34, 32, 16), hairM); fringe.scale.set(1.45, 0.42, 0.7); fringe.position.set(-0.08, 0.33, 0.28); fringe.rotation.z = 0.18; head.add(fringe);
+  }
   const eyes = [];
-  const eyeM = mat('#1b1716', { rough: 0.25 }), whiteM = mat('#ffffff', { rough: 0.3 });
+  const eyeM = mat(look.eyes || '#1b1716', { rough: 0.25 }), whiteM = mat('#ffffff', { rough: 0.3 });
   for (const sx of [-1, 1]) {
     const e = new THREE.Group(); e.position.set(sx * 0.19, 0.04, 0.5); head.add(e);
     const w = new THREE.Mesh(new THREE.SphereGeometry(0.085, 20, 16), whiteM); w.scale.set(0.85, 1.15, 0.35); e.add(w);
     const p = new THREE.Mesh(new THREE.SphereGeometry(0.058, 20, 16), eyeM); p.scale.set(0.9, 1.15, 0.4); p.position.z = 0.02; e.add(p);
     const hl = new THREE.Mesh(new THREE.SphereGeometry(0.016, 8, 8), whiteM); hl.position.set(0.018, 0.03, 0.045); e.add(hl);
     eyes.push(e);
-    const brow = new THREE.Mesh(new THREE.CapsuleGeometry(0.022, 0.12, 4, 8), mat(look.brows)); brow.rotation.z = Math.PI / 2 + sx * 0.12; brow.position.set(sx * 0.19, 0.19, 0.5); head.add(brow);
+    const brow = new THREE.Mesh(new THREE.CapsuleGeometry(0.022, 0.12, 4, 8), mat(look.brows)); brow.scale.set(look.thickBrows ? 1.4 : 1, 1, 1); brow.rotation.z = Math.PI / 2 + sx * 0.12; brow.position.set(sx * 0.19, 0.19, 0.5); head.add(brow);
   }
   const nose = new THREE.Mesh(new THREE.SphereGeometry(0.06, 20, 16), mat(shade(look.skin, -0.05), { rough: 0.55 })); nose.scale.set(1, 0.8, 0.9); nose.position.set(0, -0.08, 0.54); head.add(nose);
-  const mouth = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.018, 8, 24, Math.PI * 0.8), mat('#8a3b33')); mouth.rotation.z = Math.PI * 1.1; mouth.position.set(0, -0.2, 0.5); head.add(mouth);
-  if (look.beard) { const bd = new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.01, 40, 20, 0, TAU, Math.PI * 0.58, Math.PI * 0.3), mat(look.beard, { rough: 0.9 })); head.add(bd); }
+  if (look.smile) {
+    // big open smile: white teeth in a lower half-disc with a lip line
+    const sm = new THREE.Group(); sm.position.set(0, -0.2, 0.565); sm.rotation.x = -0.25; head.add(sm);
+    const teeth = new THREE.Mesh(new THREE.CircleGeometry(0.1, 28, Math.PI, Math.PI), mat('#fbf7f0', { rough: 0.35 })); teeth.scale.set(1.15, 0.62, 1); sm.add(teeth);
+    const lip = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.014, 8, 28, Math.PI), mat('#8a3b33')); lip.rotation.z = Math.PI; lip.scale.set(1.15, 0.62, 1); sm.add(lip);
+    const lid = new THREE.Mesh(new THREE.CapsuleGeometry(0.012, 0.21, 4, 8), mat('#8a3b33')); lid.rotation.z = Math.PI / 2; sm.add(lid);
+  } else {
+    const mouth = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.018, 8, 24, Math.PI * 0.8), mat('#8a3b33')); mouth.rotation.z = Math.PI * 1.1; mouth.position.set(0, -0.2, 0.5); head.add(mouth);
+  }
+  if (look.beard) {
+    // short beard on the front of the jaw, plus moustache
+    const bm = mat(look.beard, { rough: 0.95 }); bm.transparent = true; bm.opacity = 0.82;
+    const bd = new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.005, 40, 20, Math.PI / 2 - 1.25, 2.5, Math.PI * 0.69, Math.PI * 0.23), bm); bd.scale.set(1.03, 1, 0.98); head.add(bd);
+    for (const sx of [-1, 1]) { const m = new THREE.Mesh(new THREE.CapsuleGeometry(0.016, 0.08, 4, 8), bm); m.rotation.z = Math.PI / 2 + sx * 0.25; m.position.set(sx * 0.06, -0.14, 0.555); head.add(m); }
+  }
   if (look.glasses) { const gm = mat('#222', { rough: 0.3 }); for (const sx of [-1, 1]) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 8, 28), gm); r.position.set(sx * 0.19, 0.04, 0.53); head.add(r); } const br = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 0.16, 6), gm); br.rotation.z = Math.PI / 2; br.position.set(0, 0.06, 0.56); head.add(br); }
   const neck = cast(new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.16, 0.3, 20), skinM)); neck.position.y = B.neckY; body.add(neck);
 
