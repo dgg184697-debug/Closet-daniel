@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1A2640">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Clóset">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}</style>
+<title>Clóset de Daniel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: a tailor's catalogue. A regimental-tie band, Cher's dressing-room console, then the rack of tagged garments. */
+:root{
+  --paper:#EDF1F6;      /* oxford-cloth blue-white */
+  --card:#F9FAFC;
+  --stage:#E2E8F0;
+  --ink:#1A2640;        /* navy */
+  --muted:#58647E;
+  --line:#CBD3DF;
+  --claret:#7C1D2C;     /* regimental red */
+  --bottle:#25503E;     /* bottle green */
+  --camel:#A9733F;
+  --ok:#25694A; --warn:#8A5410; --bad:#9A2234;
+  --ok-bg:#DDEEE5; --warn-bg:#F4E8D3; --bad-bg:#F5DDE1;
+  --tie-a:#1A2640; --tie-b:#7C1D2C; --tie-c:#2C5A46; --tie-d:#C7A266;
+  --shadow:rgba(26,38,64,.16);
+  --display:"Libre Caslon Display","Libre Caslon Text",Georgia,"Times New Roman",serif;
+  --serif:"Libre Caslon Text",Georgia,"Times New Roman",serif;
+  --mono:"Courier Prime","Courier New",Courier,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1524; --card:#152036; --stage:#1A2742; --ink:#E6EBF3; --muted:#A2AEC6; --line:#2B3854;
+  --claret:#E2828F; --bottle:#83BFA1; --camel:#D9AA78;
+  --ok:#8FD1AE; --warn:#E8B86C; --bad:#F09AA6; --ok-bg:#183428; --warn-bg:#3A2C14; --bad-bg:#3E1C24;
+  --shadow:rgba(0,0,0,.45); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1524; --card:#152036; --stage:#1A2742; --ink:#E6EBF3; --muted:#A2AEC6; --line:#2B3854;
+  --claret:#E2828F; --bottle:#83BFA1; --camel:#D9AA78;
+  --ok:#8FD1AE; --warn:#E8B86C; --bad:#F09AA6; --ok-bg:#183428; --warn-bg:#3A2C14; --bad-bg:#3E1C24;
+  --shadow:rgba(0,0,0,.45); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.08}
+h2{font-size:clamp(2rem,4.2vw,3rem)}
+h3{font-family:var(--serif);font-weight:700;font-size:1.06rem;line-height:1.3}
+p{margin:0}
+.label{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tie{height:14px;background:repeating-linear-gradient(135deg,var(--tie-a) 0 16px,var(--tie-b) 16px 23px,var(--tie-a) 23px 31px,var(--tie-d) 31px 33px,var(--tie-a) 33px 41px,var(--tie-c) 41px 48px)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--claret);outline-offset:2px}
+
+/* masthead */
+header.mast .wrap{padding-block:clamp(28px,5vw,56px) 28px;display:grid;gap:18px}
+.mast h1{font-size:clamp(3rem,9vw,6.4rem);letter-spacing:-.01em}
+.mast h1 em{font-style:italic;font-family:var(--serif);font-weight:400;font-size:.36em;letter-spacing:0;display:block;color:var(--muted);margin-top:.5em}
+.lede{max-width:62ch;font-size:1.08rem}
+.counts{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:4px}
+.count{font-family:var(--mono);font-size:.86rem;border:1px solid var(--line);background:var(--card);padding:5px 10px 4px;border-radius:2px;font-variant-numeric:tabular-nums}
+.count b{font-weight:700}
+.weather{font-family:var(--mono);font-size:.84rem;color:var(--muted)}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+nav.tabs a{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:7px 10px;border-radius:2px;white-space:nowrap;color:var(--muted)}
+nav.tabs a:hover{color:var(--ink);background:var(--stage)}
+
+section{padding-block:clamp(40px,6vw,72px) 8px}
+.sec-head{display:grid;gap:8px;margin-bottom:24px;max-width:70ch}
+.sec-head p{color:var(--muted)}
+
+/* Probador */
+.probador{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(16px,3vw,36px);align-items:start}
+.stage-frame{background:var(--card);border:1px solid var(--line);padding:10px;box-shadow:0 18px 40px -26px var(--shadow)}
+.stage{position:relative;aspect-ratio:1/1.08;max-width:100%;background:var(--stage);overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.stage .slot img{-webkit-user-drag:none;pointer-events:none}
+.stage.dragging .slot img{transition:none}
+.swipe-hint{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted);text-align:center;margin-top:8px}
+.row{touch-action:pan-y}
+.stage .slot{position:absolute;display:flex;align-items:center;justify-content:center;transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease}
+.stage .slot img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 10px 12px var(--shadow));transition:opacity .25s ease}
+.stage .slot img.out{opacity:0}
+.stage .empty-top{position:absolute;left:8%;top:8%;width:84%;font-family:var(--mono);font-size:.85rem;color:var(--muted);text-align:center}
+.stamp{position:absolute;z-index:6;right:4%;top:4%;font-family:var(--mono);font-weight:700;font-size:clamp(.9rem,2.2vw,1.15rem);letter-spacing:.14em;text-transform:uppercase;padding:6px 10px 5px;border:2px solid currentColor;transform:rotate(-4deg);background:var(--card)}
+.stamp.ok{color:var(--ok)} .stamp.warn{color:var(--warn)} .stamp.bad{color:var(--bad)}
+
+.console{display:grid;gap:16px;min-width:0}
+.rows{display:grid;gap:6px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:5.6rem 2.6rem minmax(0,1fr) 2.6rem;gap:8px;align-items:center;padding-block:8px;border-bottom:1px solid var(--line)}
+.row .label{font-size:.72rem}
+.arrow{width:2.6rem;height:2.6rem;border:1px solid var(--line);background:var(--card);border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:1rem;line-height:1}
+.arrow:hover{border-color:var(--ink)}
+.arrow:active{transform:translateY(1px)}
+.pick{min-width:0}
+.pick .nm{font-weight:700;line-height:1.25}
+.pick .sub{font-family:var(--mono);font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
+.tagid{font-family:var(--mono);font-weight:700;font-size:.78rem;border:1px solid currentColor;padding:1px 5px 0;border-radius:2px;margin-right:6px;color:var(--claret)}
+
+.verdict{border:1px solid var(--line);background:var(--card);padding:14px 16px;display:grid;gap:10px}
+.verdict .big{font-family:var(--display);font-size:1.9rem;line-height:1}
+.verdict.ok .big{color:var(--ok)} .verdict.warn .big{color:var(--warn)} .verdict.bad .big{color:var(--bad)}
+.notes{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.notes li{padding:6px 10px;border-left:3px solid var(--line);font-size:.95rem}
+.notes li.ok{border-color:var(--ok);background:var(--ok-bg)}
+.notes li.warn{border-color:var(--warn);background:var(--warn-bg)}
+.notes li.bad{border-color:var(--bad);background:var(--bad-bg)}
+.meter{display:grid;gap:6px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.scale span{height:8px;background:var(--line)}
+.scale span.on{background:var(--ink)}
+.scale-l{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;font-family:var(--mono);font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.scale-l span{overflow-wrap:anywhere}
+.for{font-size:.95rem}
+
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:9px 14px 8px;font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-radius:2px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.5;cursor:default}
+.switch{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;user-select:none;padding:6px 4px}
+.switch input{width:18px;height:18px;accent-color:var(--claret)}
+.presets{display:grid;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--card);padding:6px 10px 5px;border-radius:999px;cursor:pointer;font-size:.86rem}
+.chip:hover,.chip[aria-pressed="true"]{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.save{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.save input{flex:1 1 180px;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 10px;font:inherit;font-size:.95rem;border-radius:2px}
+.save .msg{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+
+/* saved */
+.saved{margin-top:28px;display:grid;gap:12px}
+.saved-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.sv{border:1px solid var(--line);background:var(--card);padding:10px;display:grid;gap:8px;min-width:0}
+.sv .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:4px;background:var(--stage);padding:6px}
+.sv .thumbs img{aspect-ratio:1;object-fit:contain;width:100%;min-width:0}
+.sv .meta{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.sv .meta b{font-weight:700;overflow-wrap:anywhere;min-width:0}
+.sv .meta span{font-family:var(--mono);font-size:.74rem;color:var(--muted);white-space:nowrap}
+.sv .acts{display:flex;gap:6px;flex-wrap:wrap}
+.sv .acts .btn{padding:6px 10px 5px;font-size:.74rem}
+.muted{color:var(--muted)}
+
+/* outfits */
+.looks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,26px)}
+.look{display:grid;grid-template-rows:auto 1fr;background:var(--card);border:1px solid var(--line);min-width:0}
+.look img{width:100%;max-width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;background:var(--stage);min-width:0}
+.look .body{padding:14px 16px 16px;display:grid;gap:8px;align-content:start}
+.look .kicker{display:flex;justify-content:space-between;gap:8px}
+.look h3{font-family:var(--display);font-weight:400;font-size:1.55rem}
+.look dl{margin:0;display:grid;gap:6px}
+.look dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.look dd{margin:0;font-size:.94rem}
+.look .btn{justify-self:start;margin-top:4px}
+
+/* rack */
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.rack{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.item{background:var(--card);border:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;position:relative;min-width:0}
+.item .tile{background:var(--stage);aspect-ratio:1;position:relative;max-width:100%}
+.item .tile img{position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:contain;filter:drop-shadow(0 8px 10px var(--shadow))}
+.hang{position:absolute;top:10px;left:10px;font-family:var(--mono);font-weight:700;font-size:.8rem;background:var(--card);border:1px solid var(--line);padding:3px 8px 2px 18px;border-radius:2px}
+.hang::before{content:"";position:absolute;left:6px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;border:1px solid var(--muted)}
+.item .info{padding:10px 12px 12px;display:grid;gap:4px;align-content:start}
+.item .t{font-weight:700;line-height:1.25}
+.item .b{font-size:.92rem}
+.item .m{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.dots{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.dots i{font-style:normal;color:var(--ink)}
+.item .q{font-style:italic;font-size:.86rem;color:var(--claret)}
+.item .try{justify-self:start;margin-top:6px;border:1px solid var(--line);background:transparent;padding:5px 9px 4px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border-radius:2px}
+.item .try:hover{border-color:var(--ink)}
+
+/* analysis */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,3vw,32px)}
+.col{display:grid;gap:12px;align-content:start}
+.col h3{font-family:var(--display);font-weight:400;font-size:1.7rem}
+.pts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pts li{border-top:1px solid var(--line);padding-top:10px;display:grid;gap:3px}
+.pts li b{font-weight:700}
+.need{margin-top:clamp(28px,4vw,44px);display:grid;gap:14px}
+.need ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:n}
+.need li{counter-increment:n;background:var(--card);border:1px solid var(--line);padding:14px 14px 14px 52px;position:relative;display:grid;gap:4px}
+.need li::before{content:counter(n);position:absolute;left:14px;top:12px;font-family:var(--display);font-size:1.9rem;line-height:1;color:var(--claret)}
+.need .where{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+.qs{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:q;max-width:78ch}
+.qs li{counter-increment:q;border-top:1px solid var(--line);padding:10px 0 0 40px;position:relative}
+.qs li::before{content:counter(q);position:absolute;left:0;top:8px;font-family:var(--mono);font-weight:700;color:var(--claret)}
+footer{margin-top:56px;border-top:1px solid var(--line)}
+footer .wrap{padding-block:22px 40px;font-family:var(--mono);font-size:.78rem;color:var(--muted);display:grid;gap:4px}
+
+.wx{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(14px,2.4vw,26px);align-items:start}
+.wxcard,.wxpick{background:var(--card);border:1px solid var(--line);padding:clamp(14px,2vw,22px);display:grid;gap:12px;min-width:0}
+.wxcard .when{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--claret)}
+.wxcard .sum{font-family:var(--display);font-size:clamp(1.5rem,3vw,2rem);line-height:1.15;text-wrap:balance}
+.temps{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.temps b{font-size:1.5rem;font-weight:700}
+.temps span{color:var(--muted);font-size:.85rem}
+.franjas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}
+.franjas li{border-top:2px solid var(--line);padding-top:6px;display:grid;gap:2px;min-width:0}
+.franjas li.wet{border-top-color:var(--claret)}
+.franjas .fn{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.franjas .fe{font-size:.92rem;line-height:1.25}
+.stamp-t{font-family:var(--mono);font-size:.76rem;color:var(--muted);line-height:1.45}
+.tip{background:var(--warn-bg);color:var(--warn);padding:8px 10px;font-size:.92rem;line-height:1.35}
+.wxpick h3{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,3vw,2rem)}
+.wxpick .pz{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;align-items:start}
+.wxpick figure{margin:0;display:grid;gap:4px;min-width:0}
+.wxpick figure div{height:0;padding-top:100%;background:var(--stage);position:relative}
+.wxpick figure img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:contain}
+.wxpick figcaption{font-size:.78rem;line-height:1.25;color:var(--muted)}
+.wxpick .why{max-width:62ch}
+.wxpick .btn{justify-self:start}
+.empty{color:var(--muted)}
+.agenda{display:grid;gap:4px}.agenda ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}.agenda li{font-size:.92rem;line-height:1.3}.agenda b{font-family:var(--mono);font-size:.8rem;margin-right:6px}
+@media (max-width:820px){.wx{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.wxpick .pz{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:980px){.looks{grid-template-columns:repeat(2,minmax(0,1fr))}.need ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.probador{grid-template-columns:minmax(0,1fr)}.cols{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.looks{grid-template-columns:minmax(0,1fr)}.need ol{grid-template-columns:minmax(0,1fr)}.rack{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.row{grid-template-columns:4.6rem 2.4rem minmax(0,1fr) 2.4rem}.arrow{width:2.4rem;height:2.4rem}.item .tile img{inset:8px;width:calc(100% - 16px);height:calc(100% - 16px)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stage .slot,.stage .slot img{transition:none}}
+/* app-only pieces */
+.wxbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:0 0 14px}
+.seg{display:inline-flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden}
+.seg button{background:transparent;color:var(--ink);border:0;padding:8px 14px 7px;font-family:var(--mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.seg button+button{border-left:1px solid var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.viewseg{display:flex;width:max-content;margin:0 auto 10px}
+.avatar3d{position:relative;aspect-ratio:1/1.08;max-width:100%;background:var(--stage);overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.avatar3d canvas{display:block;width:100%;height:100%}
+.agdlg{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box}
+.agdlg::backdrop{background:rgba(10,16,30,.55)}
+.agdlg form{display:grid;gap:12px}
+.agdlg h3{font-family:var(--display);font-weight:400;font-size:1.5rem;margin:0}
+.agdlg p{margin:0;color:var(--muted)}
+.agdlg label{display:grid;gap:6px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.agdlg input{font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;padding:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:2px}
+.agdlg .row2{display:flex;gap:10px;justify-content:flex-end}
+
+</style>
+
+</head>
+<body>
+<div class="tie" aria-hidden="true"></div>
+<header class="mast">
+  <div class="wrap">
+    <div class="label">Medellín · inventario del 26 de octubre de 2026</div>
+    <h1>Clóset de Daniel<em>Ivy y preppy, a la medida de Medellín</em></h1>
+    <p class="lede">Las 45 prendas que fotografiaste, recortadas y con su etiqueta. Arma pintas en el probador, mira los outfits sugeridos y revisa qué comprar primero.</p>
+    <div class="counts" id="counts"></div>
+    <p class="weather" id="weather"></p>
+  </div>
+</header>
+<nav class="tabs" aria-label="Secciones">
+  <div class="wrap">
+    <a href="#clima">Clima y pinta</a><a href="#probador">Probador</a><a href="#outfits">Outfits sugeridos</a><a href="#prendas">Prendas</a><a href="#analisis">Análisis</a><a href="#preguntas">Por confirmar</a>
+  </div>
+</nav>
+
+<main>
+<section id="clima">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Se revisa sola a las 6:50 a. m. y a las 7:50 p. m.</div>
+      <h2>Clima y pinta</h2>
+      <p>El pronóstico de Medellín y la pinta que te sugiero con lo que hay en tu clóset. En la noche mira el día siguiente; en la mañana lo confirma.</p>
+    </div>
+    <div class="wx" id="wx"><p class="empty">Cargando el clima…</p></div>
+  </div>
+</section>
+
+<section id="probador">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Como el clóset de Cher en Clueless</div>
+      <h2>Probador</h2>
+      <p>Desliza el dedo sobre cada prenda para cambiarla, o usa las flechas. El probador revisa la correa contra los zapatos, la formalidad de la mezcla y si los zapatos aguantan la lluvia.</p>
+    </div>
+    <div class="probador">
+      <div class="stage-frame">
+        <div class="stage" id="stage" aria-live="polite">
+          <div class="slot" data-slot="pantalon"><img alt=""></div>
+          <div class="slot" data-slot="camisa"><img alt=""></div>
+          <div class="slot" data-slot="capa"><img alt=""></div>
+          <div class="slot" data-slot="corbata"><img alt=""></div>
+          <div class="slot" data-slot="panuelo"><img alt=""></div>
+          <div class="slot" data-slot="correa"><img alt=""></div>
+          <div class="slot" data-slot="zapatos"><img alt=""></div>
+          <div class="stamp ok" id="stamp">¡Combina!</div>
+        </div>
+        <p class="swipe-hint">Desliza el dedo sobre una prenda para cambiarla</p>
+      </div>
+      <div class="console">
+        <div class="rows" id="rows"></div>
+        <div class="controls">
+          <label class="switch" for="rain"><input type="checkbox" id="rain"> ¿Llueve hoy?</label>
+          <button class="btn ghost" id="shuffle" type="button">Al azar</button>
+        </div>
+        <div class="verdict ok" id="verdict">
+          <div class="big" id="vbig">¡Combina!</div>
+          <ul class="notes" id="vnotes"></ul>
+          <div class="meter">
+            <div class="label">Formalidad</div>
+            <div class="scale" id="scale"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="scale-l"><span>Casa</span><span>Fin de semana</span><span>Agencia</span><span>Reunión</span><span>Formal</span></div>
+          </div>
+          <p class="for" id="vfor"></p>
+        </div>
+        <div class="presets">
+          <div class="label">Cargar un outfit sugerido</div>
+          <div class="chips" id="presets"></div>
+        </div>
+        <div class="save" id="savebox" hidden>
+          <input id="pname" type="text" maxlength="60" placeholder="Nombre de la pinta (opcional)" aria-label="Nombre de la pinta">
+          <button class="btn" id="savebtn" type="button">Guardar esta pinta</button>
+          <span class="msg" id="savemsg" role="status"></span>
+        </div>
+      </div>
+    </div>
+    <div class="saved" id="saved" hidden>
+      <div class="label">Tus pintas guardadas</div>
+      <div class="saved-list" id="savedlist"></div>
+    </div>
+  </div>
+</section>
+
+<section id="outfits">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">12 combinaciones con lo que ya tienes</div>
+      <h2>Outfits sugeridos</h2>
+      <p>Pensados para tus reuniones, la agencia, los viajes y el clima de Medellín. Cada uno se puede abrir en el probador.</p>
+    </div>
+    <div class="looks" id="looks"></div>
+  </div>
+</section>
+
+<section id="prendas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">El inventario completo</div>
+      <h2>Prendas</h2>
+      <p>Cada prenda lleva el código que usan los outfits. La formalidad va de 1 (casa) a 5 (formal). Los zapatos conservan sus hormas de madera, como en la foto.</p>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="rack" id="rack"></div>
+  </div>
+</section>
+
+<section id="analisis">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Lo que hay y lo que no</div>
+      <h2>Análisis</h2>
+    </div>
+    <div class="cols">
+      <div class="col"><h3>Lo que está bien</h3><ul class="pts" id="bien"></ul></div>
+      <div class="col"><h3>Qué cambiar</h3><ul class="pts" id="cambiar"></ul></div>
+    </div>
+    <div class="need">
+      <div class="sec-head" style="margin-bottom:0">
+        <h3 style="font-family:var(--display);font-weight:400;font-size:1.7rem">Lo que falta, en orden de prioridad</h3>
+        <p>El número es el orden en que te recomiendo comprarlo.</p>
+      </div>
+      <ol id="falta"></ol>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Para terminar el inventario</div>
+      <h2>Por confirmar</h2>
+      <p>Respóndeme en el chat con el número de cada pregunta y actualizo las fichas.</p>
+    </div>
+    <ol class="qs" id="qs"></ol>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><span>Clóset de Daniel · fotos del 26 de octubre de 2026 · recortes hechos con IA a partir de tus fotos</span><span>Inspiración: Harvey Specter, Nate Archibald, Chuck Bass</span></div></footer>
+
+<script>
+const DATA={"items": [{"id": "P01", "tipo": "Pantalón de vestir", "marca": "Carlos Nieto (línea LAB)", "color": "Gris medio", "material": "Lana fría o mezcla con microtextura", "detalles": "Frente plano, corte entallado, pretina con forro a rayas", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones, oficina", "estado": "Muy bien", "por_confirmar": "", "cat": "P"}, {"id": "P02", "tipo": "Pantalón de 5 bolsillos", "marca": "Theory", "color": "Gris jaspeado", "material": "Sarga de algodón con elastano", "detalles": "Talla 34, estilo jean pero en tela de vestir", "formalidad": 2, "clima": "Todo el año", "ocasiones": "Agencia, viajes, fin de semana", "estado": "Muy bien", "por_confirmar": "", "cat": "P"}, {"id": "P03", "tipo": "Pantalón casual", "marca": "Carlos Nieto", "color": "Azul grisáceo", "material": "Chambray o mezcla de lino y algodón", "detalles": "Bolsillos laterales, frente plano", "formalidad": 3, "clima": "Días calurosos", "ocasiones": "Agencia, almuerzos, viajes", "estado": "Muy bien", "por_confirmar": "", "cat": "P"}, {"id": "P04", "tipo": "Pantalón de vestir", "marca": "Massimo Dutti", "color": "Azul medio", "material": "Tela liviana con textura y algo de brillo", "detalles": "Frente plano, pretina con lengüeta", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, cenas", "estado": "Bien", "por_confirmar": "", "cat": "P"}, {"id": "P05", "tipo": "Pantalón de vestir", "marca": "Carlos Nieto", "color": "Azul noche", "material": "Lana o mezcla de traje", "detalles": "Frente plano, ribete en zigzag en la pretina; pantalón suelto (no tiene saco)", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones importantes, eventos", "estado": "Muy bien", "por_confirmar": "", "cat": "P"}, {"id": "P06", "tipo": "Pantalón de vestir", "marca": "Carlos Nieto", "color": "Café oscuro", "material": "Tela de vestir con leve brillo", "detalles": "Ajustadores laterales en la pretina: no necesita correa", "formalidad": 4, "clima": "Noches, aire acondicionado", "ocasiones": "Cenas, noches, fin de semana elegante", "estado": "Bien", "por_confirmar": "", "cat": "P"}, {"id": "P07", "tipo": "Chino de vestir", "marca": "Theory", "color": "Azul marino", "material": "Algodón con elastano", "detalles": "Frente plano, liso", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, viajes, fin de semana", "estado": "Muy bien", "por_confirmar": "", "cat": "P"}, {"id": "P08", "tipo": "Pantalón de traje", "marca": "Carlos Nieto", "color": "Gris carbón", "material": "Lana o mezcla con leve brillo", "detalles": "Pantalón del traje gris carbón (falta la foto del saco); pretina con lengüeta y ribete en zigzag", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones importantes, eventos (completo, con el saco)", "estado": "Bien", "por_confirmar": "Falta la foto del saco", "cat": "P"}, {"id": "P09", "tipo": "Pantalón de vestir", "marca": "H&M", "color": "Piedra (greige)", "material": "Tela de vestir liviana", "detalles": "Salió muy arrugado en la foto: vaporizar antes de usar", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, almuerzos, viajes", "estado": "Bien (planchar)", "por_confirmar": "", "cat": "P"}, {"id": "Z01", "tipo": "Slipper tipo belga", "marca": "Belgian Shoes", "color": "Lino natural con ribete café", "material": "Lona de lino y cuero", "detalles": "Lacito en el empeine; talla 10 (plantilla «96 N 10 24»); hormas de cedro Clarks", "formalidad": 2, "clima": "Seco y caluroso", "ocasiones": "Fin de semana, viajes de sol, cenas casuales", "estado": "Muy bien (no usar con lluvia)", "por_confirmar": "", "cat": "Z"}, {"id": "Z02", "tipo": "Oxford con puntera", "marca": "Christian Louboutin", "color": "Negro", "material": "Puntera de cuero liso y cuerpo de gamuza o textil", "detalles": "Cordones, puntera recta (cap toe)", "formalidad": 4, "clima": "Noches, interiores", "ocasiones": "Eventos, cenas formales", "estado": "Muy bien", "por_confirmar": "", "cat": "Z"}, {"id": "Z03", "tipo": "Oxford con puntera", "marca": "Christian Louboutin", "color": "Burdeos (oxblood)", "material": "Cuero liso", "detalles": "Cap toe; hormas de cedro Houndsbay", "formalidad": 5, "clima": "Todo el año", "ocasiones": "Reuniones importantes, eventos de día", "estado": "Excelente", "por_confirmar": "", "cat": "Z"}, {"id": "Z04", "tipo": "Botín Chelsea", "marca": "Christian Louboutin", "color": "Taupe", "material": "Gamuza con elástico café", "detalles": "Punta almendrada", "formalidad": 3, "clima": "Seco", "ocasiones": "Agencia, cenas, viajes", "estado": "Bien (no usar con lluvia)", "por_confirmar": "", "cat": "Z"}, {"id": "Z05", "tipo": "Slipper tipo belga", "marca": "Belgian Shoes", "color": "Azul en gamuza tejida", "material": "Gamuza trenzada con ribete azul marino", "detalles": "Lacito en el empeine; talla 11½ (plantilla «96 N 11½ 22»)", "formalidad": 2, "clima": "Seco", "ocasiones": "Agencia, cenas casuales, fin de semana", "estado": "Muy bien (no usar con lluvia)", "por_confirmar": "", "cat": "Z"}, {"id": "Z06", "tipo": "Botín Chelsea", "marca": "Aldo", "color": "Azul oscuro", "material": "Gamuza", "detalles": "Elástico lateral, suela de cuero", "formalidad": 3, "clima": "Seco", "ocasiones": "Cenas, noches, viajes", "estado": "Bien (no usar con lluvia)", "por_confirmar": "", "cat": "Z"}, {"id": "Z07", "tipo": "Tenis bajos", "marca": "Christian Louboutin", "color": "Blanco", "material": "Cuero granulado", "detalles": "Cordones blancos", "formalidad": 1, "clima": "Todo el año", "ocasiones": "Fin de semana, aeropuerto, agencia relajada", "estado": "Muy bien (limpiar suela)", "por_confirmar": "", "cat": "Z"}, {"id": "C01", "tipo": "Oxford button-down", "marca": "Uniqlo × JW Anderson", "color": "Rayas azules sobre azul claro", "material": "Oxford de algodón", "detalles": "Cuello con botones, bolsillo al pecho", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, viajes, reuniones informales", "estado": "Excelente", "por_confirmar": "", "cat": "C"}, {"id": "C02", "tipo": "Oxford button-down", "marca": "Uniqlo × JW Anderson", "color": "Blanco azulado", "material": "Oxford de algodón", "detalles": "Cuello con botones, bolsillo al pecho", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, reuniones, viajes", "estado": "Excelente", "por_confirmar": "", "cat": "C"}, {"id": "C03", "tipo": "Camisa de rayas", "marca": "Muji", "color": "Rayas gris azuladas y blancas", "material": "Algodón", "detalles": "Cuello en punta, bolsillo; etiqueta negra «Made in Cambodia»", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, oficina", "estado": "Bien", "por_confirmar": "", "cat": "C"}, {"id": "C04", "tipo": "Camisa de punto", "marca": "Lululemon", "color": "Azul medio", "material": "Tela técnica que estira", "detalles": "Cuello clásico, no se arruga; se ve deportiva, poco elegante", "formalidad": 1, "clima": "Calor, viajes", "ocasiones": "Viajes, deporte, fin de semana", "estado": "Solo para viajes y casual", "por_confirmar": "", "cat": "C"}, {"id": "C05", "tipo": "Oxford button-down", "marca": "Uniqlo × JW Anderson", "color": "Verde menta", "material": "Oxford de algodón", "detalles": "Cuello con botones, bolsillo al pecho", "formalidad": 2, "clima": "Todo el año", "ocasiones": "Fin de semana, agencia", "estado": "Muy bien", "por_confirmar": "", "cat": "C"}, {"id": "C06", "tipo": "Oxford button-down", "marca": "Uniqlo × JW Anderson", "color": "Crema con rayas grises", "material": "Oxford de algodón", "detalles": "Cuello con botones, bolsillo al pecho", "formalidad": 2, "clima": "Todo el año", "ocasiones": "Agencia, fin de semana", "estado": "Muy bien", "por_confirmar": "", "cat": "C"}, {"id": "C07", "tipo": "Camisa de vestir", "marca": "Massimo Dutti", "color": "Azul claro", "material": "Algodón «Finest Fabric»", "detalles": "Cuello semiabierto (spread)", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones, eventos", "estado": "Muy bien (planchar)", "por_confirmar": "", "cat": "C"}, {"id": "C08", "tipo": "Camisa de vestir", "marca": "Carlos Nieto", "color": "Rosa pálido", "material": "Algodón popelina", "detalles": "Talla 41, cuello semiabierto", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones, eventos de día", "estado": "Muy bien (planchar)", "por_confirmar": "", "cat": "C"}, {"id": "S01", "tipo": "Cárdigan tipo polo", "marca": "Carolina Herrera", "color": "Camel", "material": "Merino extra fino", "detalles": "Cuello polo, botones, bolsillos de parche, talla L", "formalidad": 3, "clima": "Mañanas frescas, aire acondicionado", "ocasiones": "Agencia, reuniones informales, viajes", "estado": "Excelente", "por_confirmar": "", "cat": "S"}, {"id": "S02", "tipo": "Buzo de cuello redondo", "marca": "Carolina Herrera", "color": "Gris", "material": "Felpa de algodón", "detalles": "Etiqueta roja CH", "formalidad": 1, "clima": "Noches frescas", "ocasiones": "Fin de semana, casa", "estado": "Bien", "por_confirmar": "", "cat": "S"}, {"id": "S03", "tipo": "Suéter de media cremallera", "marca": "Burberry", "color": "Beige", "material": "Algodón", "detalles": "Logo ecuestre bordado, talla M", "formalidad": 3, "clima": "Mañanas frescas, avión", "ocasiones": "Viajes, agencia, fin de semana", "estado": "Muy bien", "por_confirmar": "", "cat": "S"}, {"id": "S04", "tipo": "Suéter de cuello redondo", "marca": "Mango (MNG)", "color": "Gris claro", "material": "Punto de algodón", "detalles": "Liso, sin logo", "formalidad": 3, "clima": "Mañanas frescas", "ocasiones": "Agencia, oficina", "estado": "Muy bien", "por_confirmar": "", "cat": "S"}, {"id": "S05", "tipo": "Cárdigan tipo polo", "marca": "Uniqlo", "color": "Gris jaspeado", "material": "Punto de algodón", "detalles": "Cuello polo, botones, bolsillo, talla L", "formalidad": 3, "clima": "Mañanas frescas", "ocasiones": "Agencia, viajes", "estado": "Muy bien", "por_confirmar": "", "cat": "S"}, {"id": "S06", "tipo": "Buzo de cuello redondo", "marca": "Carolina Herrera", "color": "Azul marino", "material": "Felpa de algodón", "detalles": "Cinta CH en el cuello", "formalidad": 1, "clima": "Noches frescas", "ocasiones": "Fin de semana", "estado": "Bien", "por_confirmar": "", "cat": "S"}, {"id": "S07", "tipo": "Suéter de cuello redondo", "marca": "Moncler", "color": "Azul marino", "material": "Punto texturizado", "detalles": "Parche del logo en la manga", "formalidad": 3, "clima": "Noches frescas, aire acondicionado", "ocasiones": "Cenas, viajes, agencia", "estado": "Muy bien", "por_confirmar": "", "cat": "S"}, {"id": "S08", "tipo": "Chaleco de punto", "marca": "Christian Lacroix", "color": "Gris carbón", "material": "Punto fino", "detalles": "Cuello en V, talla L", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, reuniones informales", "estado": "Muy bien (muy ivy)", "por_confirmar": "", "cat": "S"}, {"id": "S09", "tipo": "Cárdigan de felpa", "marca": "Polo Ralph Lauren", "color": "Azul marino", "material": "Felpa de algodón", "detalles": "Polo Bear bordado, bolsillos, talla L", "formalidad": 2, "clima": "Noches frescas", "ocasiones": "Fin de semana", "estado": "Bien (divertido, solo casual)", "por_confirmar": "", "cat": "S"}, {"id": "S10", "tipo": "Chaqueta deportiva", "marca": "Disney × Tommy Hilfiger", "color": "Azul marino", "material": "Punto con Mickey en relieve", "detalles": "Cremallera completa, cuello alto", "formalidad": 1, "clima": "Noches frescas", "ocasiones": "Casa, deporte", "estado": "Para cambiar o dejar en casa", "por_confirmar": "", "cat": "S"}, {"id": "S11", "tipo": "Suéter de cuello redondo", "marca": "Massimo Dutti", "color": "Camel", "material": "Punto acanalado", "detalles": "Liso", "formalidad": 3, "clima": "Mañanas frescas", "ocasiones": "Agencia, cenas, viajes", "estado": "Excelente", "por_confirmar": "", "cat": "S"}, {"id": "S12", "tipo": "Suéter de cuello redondo", "marca": "seven•seven MAN", "color": "Gris claro", "material": "Punto waffle", "detalles": "Textura de panal", "formalidad": 2, "clima": "Mañanas frescas", "ocasiones": "Fin de semana, agencia", "estado": "Bien", "por_confirmar": "", "cat": "S"}, {"id": "S13", "tipo": "Suéter de cuello redondo", "marca": "Doppelgänger Roma", "color": "Taupe", "material": "Punto fino", "detalles": "Liso, delgado: sirve bajo un blazer", "formalidad": 3, "clima": "Mañanas frescas, aire acondicionado", "ocasiones": "Reuniones, agencia, cenas", "estado": "Muy bien", "por_confirmar": "", "cat": "S"}, {"id": "A01", "tipo": "Correa de cuero", "marca": "Carlos Nieto", "color": "Café", "material": "Cuero liso", "detalles": "Hebilla rectangular de pasador", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Con zapatos café o burdeos", "estado": "Muy bien", "por_confirmar": "", "cat": "A"}, {"id": "A02", "tipo": "Correa trenzada elástica", "marca": "Carlos Nieto", "color": "Gris y azul", "material": "Tejido elástico con puntas de gamuza azul marino", "detalles": "Hebilla de metal oscuro", "formalidad": 2, "clima": "Calor", "ocasiones": "Fin de semana, viajes, con chinos y lino", "estado": "Muy bien", "por_confirmar": "", "cat": "A"}, {"id": "A03", "tipo": "Correa de cuero", "marca": "Montblanc", "color": "Negro", "material": "Cuero liso", "detalles": "Hebilla en herradura", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones, eventos (con zapato negro)", "estado": "Excelente", "por_confirmar": "", "cat": "A"}, {"id": "A03b", "tipo": "Correa de cuero", "marca": "Montblanc", "color": "Café oscuro", "material": "Cuero liso", "detalles": "Hebilla en herradura", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Con el oxford burdeos o zapatos café", "estado": "Excelente", "por_confirmar": "", "cat": "A"}, {"id": "A04", "tipo": "Correa reversible", "marca": "Montblanc", "color": "Negro", "material": "Reversible: cuero Saffiano por un lado y textura ondulada (tipo Epi) por el otro", "detalles": "Hebilla rectangular con bisagra que gira para cambiar de lado", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones, eventos", "estado": "Excelente", "por_confirmar": "", "cat": "A"}, {"id": "K01", "tipo": "Corbata de seda estampada", "marca": "Carlos Nieto", "color": "Azul con raquetas de tenis doradas", "material": "Seda (twill estampado)", "detalles": "Estampado temático de raquetas y pelotas, punta clásica", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Agencia, cenas, eventos con un toque divertido", "estado": "Muy bien", "por_confirmar": "", "cat": "K"}, {"id": "K02", "tipo": "Corbata de seda estampada", "marca": "Carlos Nieto", "color": "Café con flores blancas (foulard)", "material": "Seda", "detalles": "Estampado foulard pequeño, muy ivy", "formalidad": 4, "clima": "Todo el año", "ocasiones": "Reuniones, oficina, con traje gris o azul", "estado": "Muy bien", "por_confirmar": "", "cat": "K"}, {"id": "K03", "tipo": "Pañuelo de bolsillo", "marca": "Carlos Nieto", "color": "Amarillo con paisley azul marino", "material": "Seda", "detalles": "Ribete azul enrollado a mano", "formalidad": 3, "clima": "Todo el año", "ocasiones": "Con blazer azul o traje gris", "estado": "Muy bien", "por_confirmar": "", "cat": "K"}], "outfits": [{"id": "O01", "nombre": "Reunión importante", "insp": "Harvey Specter", "arriba": "C07", "capa": null, "abajo": "P05", "zapatos": "Z03", "correa": "A01", "ocasion": "Reunión con un cliente grande o un proveedor", "por_que": "Azul noche con azul claro es la combinación de negocios más segura que existe. El oxford burdeos le da carácter sin gritar, y la correa café hace juego con él.", "clima": "Sirve todo el día en Medellín (16–28 °C).", "mejora": "Con el blazer azul marino que te falta, y una corbata de seda, queda en modo Harvey completo."}, {"id": "O02", "nombre": "Reunión de día", "insp": "Nate Archibald", "arriba": "C08", "capa": "S11", "abajo": "P01", "zapatos": "Z03", "correa": "A01", "ocasion": "Reunión de mañana o almuerzo de trabajo", "por_que": "Gris, rosa pálido y camel es un trío preppy clásico. El suéter abriga en oficinas con aire acondicionado y se quita en la tarde.", "clima": "Mañanas frescas y oficinas frías.", "mejora": "Un blazer azul marino encima lo sube a reunión formal."}, {"id": "O03", "nombre": "Cena elegante", "insp": "Chuck Bass", "arriba": "C07", "capa": "S07", "abajo": "P08", "zapatos": "Z02", "correa": "A03", "ocasion": "Cena en El Poblado o evento de noche", "por_que": "Todo oscuro con el cuello azul claro asomando. El brillo sutil del pantalón carbón da el toque de noche; correa Montblanc y Louboutin negros, como debe ser.", "clima": "Noches frescas (17–19 °C).", "mejora": "Un pañuelo de bolsillo de seda burdeos o una corbata de punto lo vuelven 100 % Chuck."}, {"id": "O04", "nombre": "Día de agencia", "insp": "Nate Archibald", "arriba": "C01", "capa": "S01", "abajo": "P02", "zapatos": "Z05", "correa": "A02", "ocasion": "Día normal en la agencia, atención a clientes", "por_que": "El uniforme de Nate: oxford de rayas, punto camel y pantalón relajado. Los belgas azules lo mantienen liviano.", "clima": "Solo días secos: los belgas son de gamuza.", "mejora": "Unos chinos caqui le darían otra versión igual de buena."}, {"id": "O05", "nombre": "Agencia con calor", "insp": "Ivy de verano", "arriba": "C05", "capa": null, "abajo": "P07", "zapatos": "Z07", "correa": "A02", "ocasion": "Día caluroso o viernes", "por_que": "Color suave arriba, azul marino abajo y tenis blancos: preppy joven y fresco.", "clima": "Tardes de 26–28 °C. En la mañana puedes llevar el suéter gris claro (S04) sobre los hombros.", "mejora": "Una polo piqué azul marino es la alternativa para los días más calientes."}, {"id": "O06", "nombre": "Ivy clásico", "insp": "Campus de los años 60", "arriba": "C06", "capa": "S08", "abajo": "P03", "zapatos": "Z05", "correa": "A01", "ocasion": "Almuerzo, reunión informal, plan de tarde", "por_que": "Oxford de rayas con chaleco de punto es ivy puro. El chaleco da estructura sin el calor de un suéter completo.", "clima": "Días templados y secos.", "mejora": "Con un blazer azul marino encima pasa a reunión."}, {"id": "O07", "nombre": "Viaje en avión", "insp": "Dickie Greenleaf de viaje", "arriba": "C04", "capa": "S03", "abajo": "P02", "zapatos": "Z07", "correa": "A02", "ocasion": "Vuelos y días de traslado", "por_que": "La camisa Lululemon y el pantalón de 5 bolsillos se estiran y no se arrugan. La media cremallera Burberry resuelve el frío de la cabina.", "clima": "Cabina fría, destino cálido: te quitas la capa al llegar.", "mejora": "Un trench Burberry para la llegada a ciudades con lluvia."}, {"id": "O08", "nombre": "Tierra caliente", "insp": "Dickie Greenleaf", "arriba": "C02", "capa": null, "abajo": "P09", "zapatos": "Z01", "correa": "A02", "ocasion": "Fin de semana en Santa Fe de Antioquia, Cartagena o la costa", "por_que": "Pantalón color piedra, oxford blanco con las mangas recogidas y belgas de lino: el look de Riviera más fácil.", "clima": "28–35 °C.", "mejora": "Una polo piqué blanca o azul marino para la noche."}, {"id": "O09", "nombre": "Noche de fin de semana", "insp": "Chuck Bass relajado", "arriba": "C02", "capa": "S11", "abajo": "P06", "zapatos": "Z04", "correa": null, "ocasion": "Comida con amigos, bar, cine", "por_que": "Café oscuro, camel, taupe y blanco: un look tonal muy elegante. El pantalón tiene ajustadores, así que va sin correa y la cintura se ve limpia.", "clima": "Noches secas. Evítalo si llueve (gamuza).", "mejora": "Un mocasín café oscuro sería la opción para noches con lluvia."}, {"id": "O10", "nombre": "Día lluvioso", "insp": "Harvey en temporada de lluvias", "arriba": "C03", "capa": "S05", "abajo": "P05", "zapatos": "Z03", "correa": "A01", "ocasion": "Oficina en temporada de lluvias (abril–mayo, septiembre–noviembre)", "por_que": "Azul noche disimula salpicaduras y el cárdigan gris abriga. De lo que tienes, el oxford de cuero liso aguanta el agua mejor que la gamuza.", "clima": "Lluvia y 16–20 °C.", "mejora": "Aquí falta un zapato con suela de goma y un trench. Son las dos compras que más usarías en esta temporada."}, {"id": "O11", "nombre": "Sábado relajado", "insp": "Nate en fin de semana", "arriba": "C02", "capa": "S13", "abajo": "P04", "zapatos": "Z04", "correa": "A02", "ocasion": "Sábado de compras, almuerzo familiar", "por_que": "Suéter taupe con botines del mismo tono y pantalón azul medio: un look tonal, sencillo y pulido.", "clima": "Días secos y templados.", "mejora": "Con chinos caqui tendrías otra versión igual de buena."}, {"id": "O12", "nombre": "Domingo de café", "insp": "Ivy de fin de semana", "arriba": null, "capa": "S12", "abajo": "P07", "zapatos": "Z07", "correa": "A02", "ocasion": "Domingo, café o plan tranquilo", "por_que": "Suéter gris claro, chino azul marino y tenis blancos. Tres piezas y nada que pensar.", "clima": "Cualquier día seco.", "mejora": "Una polo piqué blanca debajo si sube el calor."}], "analysis": {"bien": [["Base de pantalones de vestir", "Gris medio (P01), el pantalón del traje gris carbón (P08), dos azules (P04 Massimo Dutti, P05 Carlos Nieto) y uno café oscuro con ajustadores que va sin correa (P06). Con eso cubres casi todas las reuniones."], ["Oxford button-down", "Las cuatro de Uniqlo × JW Anderson (C01, C02, C05, C06) son la prenda ivy por excelencia y combinan con todos tus pantalones."], ["Punto muy bien surtido", "Camel (S01, S11), azul marino (S07), grises (S04, S05, S12), taupe (S13) y la media cremallera Burberry (S03). En Medellín una capa de punto se usa más que una chaqueta."], ["Zapatos para cada ocasión", "Oxford Louboutin negro y burdeos para reuniones (Z02, Z03), Belgian Shoes para lo relajado (Z01, Z05), Chelsea taupe Louboutin y azul oscuro Aldo (Z04, Z06) y tenis Louboutin blancos (Z07)."], ["Correas resueltas", "Negra Montblanc (A03) y la reversible Montblanc (A04) para zapato negro, café Carlos Nieto (A01) y café oscuro (A03b) para el burdeos, y la trenzada Carlos Nieto (A02) para lo casual."], ["Corbatas con personalidad", "Las dos de Carlos Nieto, la de raquetas (K01) y la foulard café (K02), son muy Nate Archibald. El pañuelo amarillo (K03) se ve increíble con blazer azul marino y la corbata café."]], "cambiar": [["Arrugas", "Varias prendas salen arrugadas. Un vaporizador de mano (y uno pequeño para viajes) hace que las oxford y los pantalones luzcan mucho mejor sin planchar."], ["Solo para casa o fin de semana", "La chaqueta Disney × Tommy (S10), los buzos con logo de Carolina Herrera (S02, S06) y el cárdigan de felpa Polo (S09). No los mezcles con pantalón de vestir."], ["Gamuza y lino lejos de la lluvia", "Los belgas (Z01, Z05), los Chelsea (Z04, Z06) y el oxford negro, que tiene el cuerpo en gamuza (Z02), se dañan con agua. En temporada de lluvias usa el oxford burdeos de cuero liso (Z03)."], ["Camisa Lululemon (C04)", "Es de tela técnica que estira: perfecta para viajar, pero no se ve elegante. Déjala para aviones, deporte y fin de semana."]], "falta": [["Blazer azul marino", "La pieza central del estilo ivy, de Nate y de Harvey. Va con todos tus pantalones grises y con el chino.", "Carlos Nieto o Massimo Dutti en El Tesoro; Suitsupply en Bogotá."], ["Segundo traje, azul marino", "Ya tienes el traje gris carbón (P08 con su saco). El siguiente es uno azul marino de lana fría, liviano para el clima de Medellín.", "Carlos Nieto, Suitsupply."], ["Chinos caqui o beige", "El pantalón ivy por excelencia. Tienes el pantalón piedra de H&M (P09), pero no un chino de algodón caqui para todo el año.", "Ralph Lauren, Massimo Dutti."], ["Camisa blanca de vestir lisa", "En popelina, para traje y corbata. Tus blancas son oxford, más informales.", "Carlos Nieto, Massimo Dutti."], ["Mocasín de cuero café oscuro", "Te falta un zapato café de cuero liso que sirva para lo formal y lo casual (penny o tassel loafer).", "La versión en cuero café de Belgian Shoes o Christian Louboutin."], ["Zapato con suela de goma para lluvia", "Derby o botín de cuero. Es lo que más vas a usar entre abril y mayo y entre septiembre y noviembre. Tus dos marcas de zapatos tienen poco para lluvia, así que aquí vale la pena una excepción.", "Cualquier zapatero de calidad con suela de goma tipo Dainite o Commando."], ["Trench Burberry", "Beige o azul marino, para lluvia y viajes. Es la pieza más Burberry que existe.", "Burberry (duty free de El Dorado o en viajes)."], ["Más corbatas y pañuelos", "Ya tienes dos corbatas estampadas (K01 raquetas, K02 foulard café) y un pañuelo amarillo (K03). Faltan las básicas ivy: una corbata de rayas (repp) azul y burdeos, una de punto azul marino, y un pañuelo blanco de lino.", "Ralph Lauren, Carlos Nieto, Massimo Dutti."], ["Polos piqué", "Azul marino y blanca, para tierra caliente y los días de más calor.", "Ralph Lauren."]], "confirmar": ["La foto del saco del traje gris carbón (P08), para sumarlo al clóset.", {"t": "Repetir 9 fotos (camisas y pantalones arrugados, luz oscura, prendas cortadas) y mejorar otras 7. La lista con el motivo de cada una está en la", "link": "página de revisión.", "url": "https://claude.ai/artifact/3fk4QhmWH7Qn7UEQ7DWj6n#repetir"}], "clima": "Medellín: entre 16 y 28 °C todo el año. Temporadas de lluvia de abril a mayo y de septiembre a noviembre (ahora estamos en una)."}};
+const $=s=>document.querySelector(s);
+const INV=Object.fromEntries(DATA.items.map(x=>[x.id,x]));
+const byCat=c=>DATA.items.filter(x=>x.cat===c).map(x=>x.id);
+const LISTS={capa:[null,...byCat('S')],camisa:[...byCat('C'),null],corbata:[null,...byCat('K').filter(i=>/corbata/i.test(INV[i].tipo))],panuelo:[null,...byCat('K').filter(i=>/pañuelo/i.test(INV[i].tipo))],pantalon:byCat('P'),correa:[...byCat('A'),null],zapatos:byCat('Z')};
+const SLOT_LABEL={capa:'Capa',camisa:'Camisa',corbata:'Corbata',panuelo:'Pañuelo',pantalon:'Pantalón',correa:'Correa',zapatos:'Zapatos'};
+const NONE_LABEL={capa:'Sin capa',camisa:'Sin camisa (solo suéter)',corbata:'Sin corbata',panuelo:'Sin pañuelo',correa:'Sin correa'};
+const ORDER=['capa','camisa','corbata','panuelo','pantalon','correa','zapatos'];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const img=id=>`img/${id}.webp`;
+let st={capa:'S11',camisa:'C08',corbata:null,panuelo:null,pantalon:'P01',correa:'A01',zapatos:'Z03',rain:false,preset:'O02'};
+let lastStep=null; // {k,d}: slide direction for the garment just changed
+
+/* stage geometry, in % of the stage box */
+const GEO={
+  layer:{camisa:[3,3,50,50],capa:[47,3,50,48],corbata:[22,9,12,40],panuelo:[33,17,11,11],pantalon:[8,44,42,54],correa:[53,52,44,16],zapatos:[52,70,45,27]},
+  single:{camisa:[6,3,56,49],capa:[6,3,56,49],corbata:[28,9,12,41],panuelo:[41,17,12,12],pantalon:[10,43,43,55],correa:[58,30,38,18],zapatos:[55,54,42,36]}
+};
+function place(){
+  const lay=st.capa&&st.camisa?'layer':'single';
+  document.querySelectorAll('#stage .slot').forEach(el=>{
+    const k=el.dataset.slot; const id=st[k]; const im=el.querySelector('img');
+    if(!id||((k==='corbata'||k==='panuelo')&&!st.camisa&&!st.capa)){el.hidden=true;return}
+    el.hidden=false;
+    const g=GEO[lay][k]; el.style.left=g[0]+'%'; el.style.top=g[1]+'%'; el.style.width=g[2]+'%'; el.style.height=g[3]+'%';
+    const src=img(id);
+    if(im.getAttribute('src')!==src){
+      const dir=lastStep&&lastStep.k===k?lastStep.d:0;
+      if(dir){im.style.transition='none';im.style.transform=`translateX(${-dir*70}%)`;im.style.opacity='0'} else im.classList.add('out');
+      const n=new Image(); n.onload=()=>{im.src=src;im.alt=name(id);
+        if(dir){im.style.transform=`translateX(${dir*70}%)`;void im.offsetWidth;im.style.transition='transform .28s ease, opacity .28s ease';im.style.transform='';im.style.opacity=''}
+        else requestAnimationFrame(()=>im.classList.remove('out'))}; n.src=src;
+    } else {im.style.transform='';im.style.opacity=''}
+  });
+  // stack order: shirt under the layer
+  const z={pantalon:1,camisa:2,capa:3,corbata:4,panuelo:5,correa:6,zapatos:7};
+  document.querySelectorAll('#stage .slot').forEach(el=>el.style.zIndex=z[el.dataset.slot]);
+}
+const name=id=>{const x=INV[id];return `${x.tipo} ${x.color.toLowerCase()}`};
+function rows(){
+  $('#rows').innerHTML=ORDER.map(k=>{
+    const id=st[k]; const x=id?INV[id]:null;
+    const nm=x?`<span class="tagid">${esc(id)}</span>${esc(x.tipo)}`:esc(NONE_LABEL[k]);
+    const sub=x?`${esc(x.color)} · ${esc(x.marca)}`:({capa:'Camisa sola',camisa:'El suéter va directo',corbata:'Cuello abierto',panuelo:'Va con saco',correa:'Para pantalón con ajustadores'}[k]);
+    return `<div class="row" data-k="${k}"><span class="label">${SLOT_LABEL[k]}</span>
+      <button class="arrow" type="button" data-k="${k}" data-d="-1" aria-label="${SLOT_LABEL[k]} anterior">◀</button>
+      <div class="pick"><div class="nm">${nm}</div><div class="sub">${sub}</div></div>
+      <button class="arrow" type="button" data-k="${k}" data-d="1" aria-label="${SLOT_LABEL[k]} siguiente">▶</button></div>`}).join('');
+}
+/* style rules */
+const BLACK_SHOES=['Z02'], BLACK_BELTS=['A03','A04'], BROWN_BELTS=['A01','A03b'];
+const RELAXED_SHOES=['Z01','Z05','Z07'], DRESS_SHOES=['Z02','Z03'];
+const NOT_IN_RAIN=['Z01','Z02','Z04','Z05','Z06'];
+const HOME_ONLY=['S02','S06','S09','S10'];
+function judge(s){
+  const out=[]; const add=(lvl,t)=>out.push({lvl,t});
+  if(!s.capa&&!s.camisa) add('bad','Falta la parte de arriba: escoge una camisa o un suéter.');
+  const sh=s.zapatos, be=s.correa;
+  if(BLACK_BELTS.includes(be)&&sh==='Z03') add('bad','Correa negra con zapato burdeos. Con el burdeos va una correa café (A01 o A03b).');
+  if(!be&&s.pantalon!=='P06') add('warn','Este pantalón lleva correa. Solo el café oscuro (P06) tiene ajustadores.');
+  if(be&&s.pantalon==='P06') add('warn','El pantalón café oscuro (P06) tiene ajustadores: se ve mejor sin correa.');
+  if(BROWN_BELTS.includes(be)&&sh==='Z02') add('bad','El oxford negro pide correa negra (A03 o A04).');
+  if(BLACK_BELTS.includes(be)&&RELAXED_SHOES.includes(sh)) add('warn','Correa negra de vestir con zapato relajado. Queda mejor la trenzada (A02) o la café (A01).');
+  if(BLACK_BELTS.includes(be)&&sh==='Z04') add('warn','Con el botín taupe va mejor la correa café (A01) o la trenzada (A02).');
+  if(be==='A02'&&DRESS_SHOES.includes(sh)) add('warn','La correa trenzada es informal para un oxford de vestir.');
+  const ids=ORDER.map(k=>s[k]).filter(Boolean);
+  const f=ids.map(i=>INV[i].formalidad);
+  const hi=ids[f.indexOf(Math.max(...f))], lo=ids[f.indexOf(Math.min(...f))];
+  if(Math.max(...f)-Math.min(...f)>=3) add('bad',`Mezcla muy formal con muy casual: ${name(hi)} (${hi}) con ${name(lo)} (${lo}).`);
+  const top=[s.capa,s.camisa].find(x=>HOME_ONLY.includes(x));
+  if(top&&INV[s.pantalon].formalidad>=4) add('bad',`${INV[top].tipo} ${INV[top].marca} (${top}) es para la casa o el fin de semana. No va con pantalón de vestir.`);
+  if(s.corbata&&!s.camisa) add('warn','La corbata necesita camisa con cuello. Escoge una camisa.');
+  if(s.corbata&&s.camisa&&INV[s.camisa].formalidad<=2) add('warn',`${name(s.camisa)} (${s.camisa}) es muy casual para corbata. Va mejor con la camisa de vestir o un oxford azul.`);
+  if(s.corbata&&RELAXED_SHOES.includes(sh)) add('warn','Corbata con zapato relajado: para corbata, mejor un oxford de cuero.');
+  if(s.panuelo) add('warn','El pañuelo luce en el bolsillo de un saco. Queda listo para cuando tengas el blazer o el saco del traje.');
+  if(s.rain&&NOT_IN_RAIN.includes(sh)) add('bad',`Con lluvia, ${name(sh)} (${sh}) se daña. Usa el oxford burdeos (Z03) o los tenis de cuero (Z07).`);
+  if(!s.rain&&sh==='Z03'&&f.length&&Math.max(...f)<=3) add('warn','El oxford burdeos es muy formal para el resto. Prueba los belgas o el Chelsea.');
+  return {notes:out,avg:f.reduce((a,b)=>a+b,0)/f.length};
+}
+function occasion(a){
+  if(a<1.75) return 'Para la casa o un plan muy relajado.';
+  if(a<2.5) return 'Para el fin de semana.';
+  if(a<3.25) return 'Para un día normal en la agencia o un almuerzo.';
+  if(a<4.1) return 'Para una reunión.';
+  return 'Para una reunión importante o una cena elegante.';
+}
+function verdict(){
+  const {notes,avg}=judge(st);
+  const lvl=notes.some(n=>n.lvl==='bad')?'bad':notes.length?'warn':'ok';
+  const word={ok:'¡Combina!',warn:'Combina, con un detalle',bad:'No combina'}[lvl];
+  $('#verdict').className='verdict '+lvl; $('#vbig').textContent=word;
+  const stamp=$('#stamp'); stamp.className='stamp '+lvl; stamp.textContent={ok:'¡Combina!',warn:'Casi',bad:'No combina'}[lvl];
+  $('#vnotes').innerHTML=notes.length?notes.map(n=>`<li class="${n.lvl}">${esc(n.t)}</li>`).join(''):'<li class="ok">Correa y zapatos van juntos y la formalidad es pareja.</li>';
+  const r=Math.round(avg);
+  $('#scale').querySelectorAll('span').forEach((sp,i)=>sp.classList.toggle('on',i<r));
+  $('#vfor').textContent=occasion(avg)+(st.preset?` Es el outfit «${DATA.outfits.find(o=>o.id===st.preset).nombre}».`:'');
+}
+function render(){place();rows();verdict();
+  document.querySelectorAll('#presets .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.id===st.preset)));
+  if(window.onRender) window.onRender(st,lastStep);}
+function step(k,d){const L=LISTS[k];let i=L.indexOf(st[k]);i=(i+d+L.length)%L.length;st[k]=L[i];lastStep={k,d};st.preset=matchPreset();render();lastStep=null}
+function matchPreset(){const o=DATA.outfits.find(o=>o.capa===st.capa&&o.arriba===st.camisa&&o.abajo===st.pantalon&&o.zapatos===st.zapatos&&o.correa===st.correa&&!st.corbata&&!st.panuelo);return o?o.id:null}
+function load(o){st.capa=o.capa;st.camisa=o.arriba;st.corbata=o.corbata||null;st.panuelo=o.panuelo||null;st.pantalon=o.abajo;st.correa=o.correa;st.zapatos=o.zapatos;st.preset=o.id;render()}
+$('#rows').addEventListener('click',e=>{const b=e.target.closest('.arrow');if(b)step(b.dataset.k,+b.dataset.d)});
+/* swipe: drag a garment on the stage (or its row) sideways to change it, like Cher's closet */
+function slotAt(x,y){
+  const r=$('#stage').getBoundingClientRect(); const px=(x-r.left)/r.width*100, py=(y-r.top)/r.height*100;
+  const lay=st.capa&&st.camisa?'layer':'single'; let best=null, bd=1e9;
+  for(const k of ['panuelo','corbata','zapatos','correa','capa','camisa','pantalon']){
+    const el=document.querySelector(`#stage .slot[data-slot="${k}"]`); if(!el||el.hidden) continue;
+    const g=GEO[lay][k]; const inside=px>=g[0]&&px<=g[0]+g[2]&&py>=g[1]&&py<=g[1]+g[3];
+    if(inside) return k;
+    const d=Math.hypot(px-(g[0]+g[2]/2),py-(g[1]+g[3]/2)); if(d<bd){bd=d;best=k}
+  }
+  return best;
+}
+function swipe(area,getK){
+  let s0=null;
+  area.addEventListener('pointerdown',e=>{if(e.button>0||e.target.closest('button'))return;const k=getK(e);if(!k)return;
+    s0={x:e.clientX,y:e.clientY,k,id:e.pointerId,img:document.querySelector(`#stage .slot[data-slot="${k}"] img`),lock:null}});
+  area.addEventListener('pointermove',e=>{if(!s0||e.pointerId!==s0.id)return;const dx=e.clientX-s0.x,dy=e.clientY-s0.y;
+    if(!s0.lock&&Math.hypot(dx,dy)>8){s0.lock=Math.abs(dx)>Math.abs(dy)?'x':'y';if(s0.lock==='x'){try{area.setPointerCapture(e.pointerId)}catch(_){}$('#stage').classList.add('dragging')}}
+    if(s0.lock==='x'&&s0.img){s0.img.style.transition='none';s0.img.style.transform=`translateX(${dx}px) rotate(${dx/40}deg)`;s0.img.style.opacity=String(Math.max(.35,1-Math.abs(dx)/320))}});
+  const end=e=>{if(!s0||e.pointerId!==s0.id)return;const dx=e.clientX-s0.x;const {k,img,lock}=s0;s0=null;$('#stage').classList.remove('dragging');
+    if(lock==='x'&&Math.abs(dx)>40){step(k,dx<0?1:-1);if(navigator.vibrate)try{navigator.vibrate(8)}catch(_){}}
+    else if(img){img.style.transition='transform .2s ease, opacity .2s ease';img.style.transform='';img.style.opacity=''}};
+  area.addEventListener('pointerup',end);area.addEventListener('pointercancel',end);
+}
+swipe($('#stage'),e=>slotAt(e.clientX,e.clientY));
+swipe($('#rows'),e=>{const r=e.target.closest('.row');return r?r.dataset.k:null});
+$('#rain').addEventListener('change',e=>{st.rain=e.target.checked;verdict()});
+$('#shuffle').addEventListener('click',()=>{
+  const pick=L=>L[Math.floor(Math.random()*L.length)];
+  for(let t=0;t<400;t++){
+    const c={capa:Math.random()<.5?null:pick(LISTS.capa.filter(Boolean)),camisa:pick(LISTS.camisa),corbata:null,panuelo:null,pantalon:pick(LISTS.pantalon),correa:pick(LISTS.correa),zapatos:pick(LISTS.zapatos),rain:st.rain};
+    if(!c.camisa&&!c.capa) continue;
+    const j=judge(c); if(j.notes.length===0){Object.assign(st,c);st.preset=matchPreset();render();return}
+  }
+});
+$('#presets').innerHTML=DATA.outfits.map(o=>`<button class="chip" type="button" data-id="${o.id}" aria-pressed="false">${esc(o.nombre)}</button>`).join('');
+$('#presets').addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)load(DATA.outfits.find(o=>o.id===c.dataset.id))});
+
+/* header */
+const CATS=[['P','Pantalones'],['C','Camisas'],['S','Sacos y suéteres'],['Z','Zapatos'],['A','Correas'],['K','Corbatas y pañuelos']];
+$('#counts').innerHTML=`<span class="count"><b>${DATA.items.length}</b> prendas</span>`+CATS.map(([c,l])=>`<span class="count"><b>${byCat(c).length}</b> ${l.toLowerCase()}</span>`).join('');
+$('#weather').textContent=DATA.analysis.clima;
+
+/* outfits */
+$('#looks').innerHTML=DATA.outfits.map(o=>{
+  const ids=[o.arriba,o.capa,o.abajo,o.zapatos,o.correa].filter(Boolean).join(' · ');
+  return `<article class="look"><img src="outfits/${o.id}.jpg" alt="${esc(o.nombre)}: ${esc(ids)}" loading="lazy" width="900" height="1125">
+  <div class="body"><div class="kicker"><span class="label">${o.id} · ${esc(o.insp)}</span></div><h3>${esc(o.nombre)}</h3>
+  <dl><div><dt>Para</dt><dd>${esc(o.ocasion)}</dd></div><div><dt>Por qué funciona</dt><dd>${esc(o.por_que)}</dd></div>
+  <div><dt>Clima</dt><dd>${esc(o.clima)}</dd></div><div><dt>Para subirlo de nivel</dt><dd>${esc(o.mejora)}</dd></div>
+  <div><dt>Prendas</dt><dd style="font-family:var(--mono);font-size:.82rem">${esc(ids)}</dd></div></dl>
+  <button class="btn ghost" type="button" data-try="${o.id}">Abrir en el probador</button></div></article>`}).join('');
+$('#looks').addEventListener('click',e=>{const b=e.target.closest('[data-try]');if(!b)return;load(DATA.outfits.find(o=>o.id===b.dataset.try));$('#probador').scrollIntoView()});
+
+/* rack */
+let filt='all';
+const SLOT_OF={P:'pantalon',C:'camisa',S:'capa',Z:'zapatos',A:'correa'};
+function rack(){
+  const items=DATA.items.filter(x=>filt==='all'||x.cat===filt);
+  $('#rack').innerHTML=items.map(x=>`<article class="item"><div class="tile"><img src="${img(x.id)}" alt="${esc(name(x.id))}" loading="lazy"></div>
+   <span class="hang">${x.id}</span>
+   <div class="info"><div class="t">${esc(x.tipo)}</div><div class="b">${esc(x.marca)}</div>
+   <div class="m">${esc(x.color)} · ${esc(x.material)}</div>
+   <div class="dots" title="Formalidad ${x.formalidad} de 5"><i>${'●'.repeat(x.formalidad)}</i>${'○'.repeat(5-x.formalidad)} formalidad</div>
+   <div class="m">${esc(x.estado)}</div>
+   ${x.por_confirmar?`<div class="q">${esc(x.por_confirmar)}</div>`:''}
+   ${SLOT_OF[x.cat]?`<button class="try" type="button" data-id="${x.id}">Probar</button>`:''}</div></article>`).join('');
+}
+$('#filters').innerHTML=[['all','Todo']].concat(CATS).map(([c,l])=>`<button class="chip" type="button" data-f="${c}" aria-pressed="${c==='all'}">${l}</button>`).join('');
+$('#filters').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;filt=c.dataset.f;
+  document.querySelectorAll('#filters .chip').forEach(b=>b.setAttribute('aria-pressed',String(b===c)));rack()});
+$('#rack').addEventListener('click',e=>{const b=e.target.closest('.try');if(!b)return;const id=b.dataset.id;const k=SLOT_OF[INV[id].cat];
+  st[k]=id;if(k==='capa'&&!st.camisa)st.camisa='C02';st.preset=matchPreset();render();$('#probador').scrollIntoView()});
+
+/* analysis */
+const A=DATA.analysis;
+$('#bien').innerHTML=A.bien.map(([t,d])=>`<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join('');
+$('#cambiar').innerHTML=A.cambiar.map(([t,d])=>`<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join('');
+$('#falta').innerHTML=A.falta.map(([t,d,w])=>`<li><b>${esc(t)}</b><span>${esc(d)}</span><span class="where">Dónde: ${esc(w)}</span></li>`).join('');
+$('#qs').innerHTML=A.confirmar.map(q=>typeof q==='string'?`<li>${esc(q)}</li>`:`<li>${esc(q.t)} <a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.link)}</a></li>`).join('');
+
+rack(); render();
+
+/* weather + suggested outfit, written to db doc clima/medellin by the scheduled check */
+const fmtT=iso=>{const d=new Date(iso);return isNaN(d)?'':d.toLocaleString('es-CO',{weekday:'long',day:'numeric',month:'long',hour:'numeric',minute:'2-digit',timeZone:'America/Bogota'})};
+const ago=iso=>{const m=Math.round((Date.now()-new Date(iso))/60000);if(isNaN(m))return'';if(m<2)return'hace un momento';if(m<60)return`hace ${m} min`;const h=Math.round(m/60);return h<36?`hace ${h} h`:`hace ${Math.round(h/24)} días`};
+function wxRender(w){
+  const box=$('#wx');
+  if(!w){box.innerHTML='<p class="empty">Todavía no hay revisión del clima. La primera llega en la próxima revisión programada.</p>';return}
+  const num=v=>typeof v==='number'&&isFinite(v)?Math.round(v):'–';
+  const fr=Array.isArray(w.franjas)?w.franjas.slice(0,3):[];
+  const p=w.pinta&&typeof w.pinta==='object'?w.pinta:null;
+  const ids=p?ORDER.map(k=>p[k]).filter(id=>id&&INV[id]):[];
+  box.innerHTML=`<div class="wxcard">
+    <div class="when">${esc(w.etiqueta||'Pronóstico')} · ${esc(w.ciudad||'Medellín')}</div>
+    <div class="sum">${esc(w.resumen||'')}</div>
+    <div class="temps"><div><b>${num(w.tmax)}°</b> <span>máx</span></div><div><b>${num(w.tmin)}°</b> <span>mín</span></div><div><b>${typeof w.lluvia_mm==='number'?w.lluvia_mm.toFixed(1):'–'}</b> <span>mm de lluvia</span></div></div>
+    ${fr.length?`<ul class="franjas">${fr.map(f=>`<li class="${f&&f.lluvia?'wet':''}"><span class="fn">${esc(f&&f.nombre)}</span><span class="fe">${esc(f&&f.estado)}</span></li>`).join('')}</ul>`:''}
+    ${w.consejo?`<div class="tip">${esc(w.consejo)}</div>`:''}
+    ${Array.isArray(w.agenda)?`<div class="agenda"><div class="label">Tu agenda</div>${w.agenda.length?`<ul>${w.agenda.slice(0,6).map(e=>`<li><b>${esc(e.hora||'')}</b> ${esc(e.titulo||'')}</li>`).join('')}</ul>`:'<p class="empty">Nada agendado.</p>'}</div>`:''}
+    <div class="stamp-t">Última revisión: ${esc(fmtT(w.revisado))} (${esc(ago(w.revisado))})${w.proxima?`<br>Próxima revisión: ${esc(fmtT(w.proxima))}`:''}${w.fuente?`<br>Fuente: ${esc(w.fuente)}`:''}</div>
+  </div>
+  <div class="wxpick">${p&&ids.length?`
+    <div class="label">Pinta sugerida</div>
+    <h3>${esc(p.nombre||'Tu pinta')}</h3>
+    <div class="pz">${ids.map(i=>`<figure><div><img src="${img(i)}" alt=""></div><figcaption>${esc(name(i))}</figcaption></figure>`).join('')}</div>
+    ${p.por_que?`<p class="why">${esc(p.por_que)}</p>`:''}
+    <button class="btn" type="button" id="wxtry">Abrir en el probador</button>`:'<p class="empty">Sin pinta sugerida en esta revisión.</p>'}</div>`;
+  const t=$('#wxtry'); if(t) t.addEventListener('click',()=>{ORDER.forEach(k=>st[k]=p[k]&&INV[p[k]]?p[k]:null);if(!st.pantalon)st.pantalon=LISTS.pantalon[0];if(!st.zapatos)st.zapatos=LISTS.zapatos[0];st.rain=!!w.llueve;$('#rain').checked=st.rain;st.preset=matchPreset();render();$('#probador').scrollIntoView()});
+}
+</script>
+<script src="app.js"></script>
+<script type="module" src="avatar-wire.js"></script>
+<script>if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));</script>
+</body>
+</html>
