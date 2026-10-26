@@ -486,6 +486,54 @@
       pins: [['Belgian Shoes con traje', pin('belgian shoes loafers suit')]] },
   ];
 
+  // Valet stands ("galán de noche"): Ralph Lauren Home, vintage and design pieces.
+  const RLH = id => `https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-${id}_lifestyle?$rl_4x5_zoom$`;
+  const D1 = 'https://a.1stdibscdn.com/';
+  const VALET = [
+    { t: 'Ralph Lauren Brennan', sw: ['#4a2f1e', '#c9a24a'],
+      why: 'El de Ralph Lauren Home: cuero y bronce macizo, delgado y alto. Para el saco, el pantalón y la corbata del día siguiente.',
+      ref: 'Ralph Lauren Home · Brennan Valet', det: 'Cuero, herrajes de bronce macizo. 108 cm de alto, 37 de ancho y 13 de fondo. 2.595 USD.',
+      url: 'https://www.ralphlauren.com/home-furniture-dressers/brennan-valet/505613.html',
+      f: [['La pieza', [RLH('1348224')]]],
+      pins: [['Valet de cuero', pin('leather valet stand dressing room')]] },
+    { t: 'Ralph Lauren Colton', sw: ['#c9c9c9', '#3a2a1c'],
+      why: 'En forma de caballete, de níquel pulido y cuero. Trae bandeja para el reloj y las llaves, y una cajita de viaje para las mancuernas.',
+      ref: 'Ralph Lauren Home · Colton Valet', det: 'Níquel pulido, gancho y barra forrados en cuero. 99 cm de alto. 2.595 USD.',
+      url: 'https://www.ralphlauren.com/home-furniture-dressers/colton-valet/161314.html',
+      f: [['La pieza', [RLH('1031785')]]],
+      pins: [['Galán de noche elegante', pin('valet stand suit bedroom luxury')]] },
+    { t: 'Inglés antiguo de roble', sw: ['#8a6a3e'],
+      why: 'El más ivy de todos: victoriano, de hacia 1850, con cajón, barra curva para el pantalón y bandeja para las monedas. Una pieza con historia.',
+      ref: 'Gentleman\'s valet victoriano, roble inglés', det: '140 cm de alto. En 1stDibs, sin precio publicado: los de este tipo van de unos 625 a 3.085 USD.',
+      url: 'https://www.1stdibs.com/furniture/more-furniture-collectibles/bedroom-furniture/night-stands/antique-gentlemens-valet-clothes-stand-english-victorian-oak-fine-quality/id-f_7839923/',
+      f: [['La pieza', [D1 + 'archivesE/upload/1121189/f_78399231498482146417/7839923_master.jpg']],
+          ['Detalle', [D1 + 'archivesE/upload/f_26453/f_78399231498332689540/3377_9_master.jpg']],
+          ['Detalle', [D1 + 'archivesE/upload/f_26453/f_78399231498332715824/3377_8_master.jpg']]],
+      pins: [['Valet antiguo', pin('antique english gentleman valet stand oak')]] },
+    { t: 'Italiano de los sesenta', sw: ['#c49a6c', '#c9a24a'],
+      why: 'De Fratelli Reguitti, en haya, con ganchos de bronce para las corbatas, bandeja y ruedas. Muy de época, tipo Mad Men.',
+      ref: 'Fratelli Reguitti · valet de los años sesenta', det: 'Haya con acabado original, 110 cm de alto, se desarma para transportarlo. En 1stDibs, precio a consultar.',
+      url: 'https://www.1stdibs.com/furniture/more-furniture-collectibles/racks-stands/coat-racks-stands/italian-mid-century-modern-clothes-valet-fratelli-reguitti-c1960s/id-f_28671442/',
+      f: [['La pieza', [D1 + 'italian-mid-century-modern-clothes-valet-by-fratelli-reguitti-c1960s-for-sale/f_8202/f_286714421652664343592/f_28671442_1652664344758_bg_processed.jpg']],
+          ['Detalle', [D1 + 'italian-mid-century-modern-clothes-valet-by-fratelli-reguitti-c1960s-for-sale-picture-4/f_8202/f_286714421652664501206/IMG_6962_2_master.JPG']]],
+      pins: [['Valet de los sesenta', pin('mid century valet stand reguitti')]] },
+    { t: 'La silla valet de Wegner', sw: ['#d8c3a0', '#3a2a1c'],
+      why: 'El valet más famoso del mundo, de 1953: el espaldar es el gancho del saco y el asiento se levanta para guardar cosas. El rey Federico IX de Dinamarca encargó diez.',
+      ref: 'Hans J. Wegner para PP Møbler · PP250 Valet Chair', det: 'Madera maciza (roble, cerezo o arce) con detalles de wengué y bisagras de bronce. Hecha a pedido. Unos 12.025 USD.',
+      url: 'https://danishdesignstore.com/products/wegner-pp250-valet-chair-pp-mobler',
+      f: [['La pieza', ['https://www.danishdesignstore.com/cdn/shop/files/pp250_maple_soap_wenge_bg_black_ahb-1.jpg?v=1788278593&width=1200']],
+          ['En casa', ['https://www.danishdesignstore.com/cdn/shop/files/pp250_2024_carlsberg_byen_lifestyle_valet_chair_clr_arr-1.jpg?v=1788278593&width=1200']],
+          ['Abierta', ['https://www.danishdesignstore.com/cdn/shop/files/pp250_maple_soap_wenge_bg_black_ahb-2.jpg?v=1788278593&width=1200']]],
+      pins: [['Wegner valet chair', pin('wegner valet chair pp250')]] },
+    { t: 'Hermès, solo para soñar', sw: ['#6b4328', '#e07a2e'],
+      why: 'El "groom" de Hermès: nogal Canaletto, espejo giratorio y cuero taurillon. No es para comprar, es para saber hasta dónde llega esto.',
+      ref: 'Les Nécessaires d\'Hermès · Groom valet stand, de Philippe Nigro', det: 'Nogal, acero y cuero, 192 cm de alto. Hecho en Francia, a pedido. 92.300 USD.',
+      url: 'https://www.hermes.com/us/en/product/les-necessaires-d-hermes-groom-valet-stand-H960139Mv01/',
+      f: [['La pieza', ['https://assets.hermes.com/is/image/hermesproduct/960139M%2001_front_wm_102?$product_default_bg$']],
+          ['Detalle', ['https://assets.hermes.com/is/image/hermesproduct/960139M%2001_front_wm_109?$product_default_bg$']]],
+      pins: [] },
+  ];
+
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const card = (b, i) => `
     <article class="buy">
@@ -510,6 +558,7 @@
     ['lujo', 'Tier 3 · Bolsos', 'Bolsos de Bottega Veneta, Loewe, Louis Vuitton y Hermès, como referencia. Empieza por el tote de oficina.', LUJO],
     ['gafas', 'Tier 3 · Gafas de sol', 'Elegidas para tu cara. Por tu foto: cara redondeada, mejillas llenas, mandíbula suave con barba y cejas oscuras y marcadas. Te van las monturas con ángulos (cuadradas, rectangulares o en D), con la ceja recta y del ancho de tu cara o un poco más; en carey, havana o metal. Evita las redondas pequeñas y las angostas.', GAFAS],
     ['marinella', 'Accesorios · E. Marinella', 'Corbatas, corbatines y pañuelos de E. Marinella, la casa de Nápoles que las hace a mano desde 1914. Ya tienes de Carlos Nieto la corbata azul de raquetas (K01), la café de foulard (K02) y el pañuelo amarillo (K03): esto es lo que les falta. Empieza por la de florecitas y la grenadine.', MARINELLA],
+    ['valet', 'Valet stand · el galán de noche', 'Para dejar listo el saco, el pantalón y la corbata del día siguiente, y vaciar los bolsillos en la bandeja. Ralph Lauren Home tiene dos; los vintage de 1stDibs son los más ivy. Otra idea: con estas fotos, un ebanista de Medellín te hace uno en nogal o cedro por mucho menos.', VALET],
   ];
 
   const sec = document.createElement('section');
