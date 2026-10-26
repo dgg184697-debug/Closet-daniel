@@ -160,6 +160,24 @@
   });
   showSaved();
 
+  /* ---------- style: follow the phone, classic, brighter or dark ---------- */
+  const ESTILOS = [['auto', 'Auto'], ['clasico', 'Clásico'], ['claro', 'Claro'], ['oscuro', 'Oscuro']];
+  const PAPER = { clasico: '#EDF1F6', claro: '#FBFCFD', oscuro: '#0E1524' };
+  const est = document.createElement('div'); est.className = 'estilo';
+  est.innerHTML = `<span class="label">Estilo</span><div class="seg" role="group" aria-label="Estilo de la app">${ESTILOS.map(([k, t]) => `<button type="button" data-e="${k}">${t}</button>`).join('')}</div>`;
+  document.querySelector('.mast .wrap').appendChild(est);
+  function setEstilo(e) {
+    const r = document.documentElement;
+    if (e === 'oscuro') r.dataset.theme = 'dark'; else if (e === 'clasico' || e === 'claro') r.dataset.theme = 'light'; else delete r.dataset.theme;
+    if (e === 'claro') r.dataset.tono = 'claro'; else delete r.dataset.tono;
+    const dark = e === 'oscuro' || (e === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.querySelector('meta[name="theme-color"]').content = PAPER[e] || (dark ? PAPER.oscuro : PAPER.clasico);
+    est.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.e === e)));
+    store.set('estilo', e);
+  }
+  est.addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) setEstilo(b.dataset.e); });
+  setEstilo(store.get('estilo', 'auto'));
+
   /* ---------- avatar / photos toggle in the probador ---------- */
   const frame = document.querySelector('.stage-frame');
   const tog = document.createElement('div'); tog.className = 'seg viewseg'; tog.setAttribute('role', 'group');

@@ -11,6 +11,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<script>/* chosen style, applied before first paint */try{var e=JSON.parse(localStorage.getItem('estilo')),r=document.documentElement;if(e==='oscuro')r.dataset.theme='dark';else if(e==='clasico'||e==='claro')r.dataset.theme='light';if(e==='claro')r.dataset.tono='claro'}catch(_){}</script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}</style>
 <title>Clóset de Daniel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -249,6 +250,10 @@ footer .wrap{padding-block:22px 40px;font-family:var(--mono);font-size:.78rem;co
 .agdlg label{display:grid;gap:6px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
 .agdlg input{font-family:var(--serif);font-size:1rem;text-transform:none;letter-spacing:0;padding:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:2px}
 .agdlg .row2{display:flex;gap:10px;justify-content:flex-end}
+/* "Claro": a brighter take on the light theme, picked from the style selector */
+:root[data-tono="claro"]{--paper:#FBFCFD;--card:#FFFFFF;--stage:#EEF2F7;--line:#DDE3EB;--muted:#5E6A83;--shadow:rgba(26,38,64,.10);--ok-bg:#E6F3EC;--warn-bg:#F8EFDF;--bad-bg:#F9E6E9}
+.estilo{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.estilo .seg button{padding:7px 11px 6px;font-size:.74rem}
 
 </style>
 
