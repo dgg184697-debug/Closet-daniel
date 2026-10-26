@@ -127,7 +127,32 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
   const skull = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR, 48, 32), skinM)); skull.scale.set(1.04, 0.98, 0.96); head.add(skull);
   for (const sx of [-1, 1]) { const ear = new THREE.Mesh(new THREE.SphereGeometry(0.12, 20, 16), skinM); ear.position.set(sx * 0.56, -0.02, 0); ear.scale.set(0.6, 1, 0.8); head.add(ear); }
   const hairM = mat(look.hair, { rough: 0.5 });
-  if (look.hairStyle === 'swept') {
+  if (look.hairStyle === 'curlyBack') {
+    // curly hair combed back: a dark cap under many small curl clumps, hairline set back from the forehead
+    const capM = mat(shade(look.hair, -0.04), { rough: 0.8 });
+    const cap = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.03, 40, 20, 0, TAU, 0, Math.PI * 0.5), capM)); cap.rotation.x = -0.62; cap.position.set(0, 0.03, -0.05); head.add(cap);
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const pts = [];
+    for (let i = 0; i < 3000 && pts.length < 340; i++) {
+      const y = 1 - 2 * rnd(), r = Math.sqrt(1 - y * y), th = rnd() * TAU, x = Math.cos(th) * r, z = Math.sin(th) * r;
+      // hairline: high on the forehead, above the ears on the sides, down to the nape at the back
+      const lim = z > 0 ? 0.14 + 0.5 * z : 0.14 + 0.5 * z;
+      if (y < lim) continue;
+      if (Math.abs(x) > 0.8 && y < 0.1 && z > -0.3) continue; // keep the ears clear
+      pts.push([x, y, z]);
+    }
+    const curl = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 2), mat('#ffffff', { rough: 0.55 }), pts.length); curl.castShadow = true;
+    const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), v = new THREE.Vector3(), sc = new THREE.Vector3();
+    pts.forEach(([x, y, z], i) => {
+      const lift = 1.02 + 0.19 * Math.max(0, y) + 0.04 * Math.max(0, -z); // volume on top and towards the back
+      v.set(x * B.headR * 1.04 * lift, y * B.headR * lift + 0.04, z * B.headR * lift - 0.04 * Math.max(0, y));
+      // clumps stretched front-to-back and tipped up at the front, so the curls read as combed back
+      const rr = 0.06 + rnd() * 0.035; sc.set(rr * (0.95 + rnd() * 0.2), rr * 0.8, rr * (1.5 + rnd() * 0.4));
+      e.set(-0.5 * z * Math.max(0, y) - 0.15, Math.atan2(x, z) * 0.25, (rnd() - 0.5) * 0.6); q.setFromEuler(e); m4.compose(v, q, sc); curl.setMatrixAt(i, m4);
+      curl.setColorAt(i, new THREE.Color(look.hair).multiplyScalar(0.8 + rnd() * 0.45));
+    });
+    head.add(curl);
+  } else if (look.hairStyle === 'swept') {
     // longish hair combed back with volume on top, covering the top of the ears
     const cap = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.07, 48, 24, 0, TAU, 0, Math.PI * 0.56), hairM)); cap.rotation.x = -0.42; cap.position.set(0, 0.06, -0.04); cap.scale.set(1.06, 1.08, 1.04); head.add(cap);
     const top = cast(new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 20), hairM)); top.scale.set(1.28, 0.62, 1.08); top.position.set(0.03, 0.42, 0.04); top.rotation.z = -0.08; head.add(top);
@@ -159,10 +184,23 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
     const mouth = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.018, 8, 24, Math.PI * 0.8), mat('#8a3b33')); mouth.rotation.z = Math.PI * 1.1; mouth.position.set(0, -0.2, 0.5); head.add(mouth);
   }
   if (look.beard) {
-    // short beard on the front of the jaw, plus moustache
-    const bm = mat(look.beard, { rough: 0.95 }); bm.transparent = true; bm.opacity = 0.82;
-    const bd = new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.005, 40, 20, Math.PI / 2 - 1.25, 2.5, Math.PI * 0.69, Math.PI * 0.23), bm); bd.scale.set(1.03, 1, 0.98); head.add(bd);
-    for (const sx of [-1, 1]) { const m = new THREE.Mesh(new THREE.CapsuleGeometry(0.016, 0.08, 4, 8), bm); m.rotation.z = Math.PI / 2 + sx * 0.25; m.position.set(sx * 0.06, -0.14, 0.555); head.add(m); }
+    // stubble: dots on a shell over jaw, chin and upper lip, denser on the chin and moustache
+    const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d');
+    let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    g.fillStyle = look.beard;
+    for (let i = 0; i < 26000; i++) {
+      const u = rnd(), w = rnd(), cu = Math.abs(u - 0.5) * 2; // 0 centre .. 1 sides
+      let d;
+      if (w < 0.13) d = cu < 0.2 ? 0.75 : (cu > 0.85 ? 0.35 : 0);            // moustache, sideburns
+      else if (w < 0.3) d = cu < 0.12 ? 0.15 : (cu > 0.6 ? 0.25 + 0.4 * cu : 0.08); // cheeks next to the mouth
+      else d = 0.35 + 0.45 * Math.min(1, (w - 0.3) / 0.4);                      // jaw and chin
+      if (rnd() > d * 0.55) continue;
+      g.globalAlpha = 0.55 + rnd() * 0.4; g.beginPath(); g.arc(u * 512, w * 512, 1.1 + rnd() * 1.3, 0, TAU); g.fill();
+    }
+    const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+    const bm = new THREE.MeshStandardMaterial({ map: tex, transparent: true, depthWrite: false, roughness: 1 });
+    const bd = new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.012, 48, 24, Math.PI / 2 - 1.3, 2.6, Math.PI * 0.56, Math.PI * 0.36), bm);
+    bd.scale.set(1.04, 0.98, 0.965); head.add(bd);
   }
   if (look.glasses) { const gm = mat('#222', { rough: 0.3 }); for (const sx of [-1, 1]) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 8, 28), gm); r.position.set(sx * 0.19, 0.04, 0.53); head.add(r); } const br = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 0.16, 6), gm); br.rotation.z = Math.PI / 2; br.position.set(0, 0.06, 0.56); head.add(br); }
   const neck = cast(new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.16, 0.3, 20), skinM)); neck.position.y = B.neckY; body.add(neck);
