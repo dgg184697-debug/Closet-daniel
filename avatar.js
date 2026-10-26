@@ -127,7 +127,30 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
   const skull = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR, 48, 32), skinM)); skull.scale.set(1.04, 0.98, 0.96); head.add(skull);
   for (const sx of [-1, 1]) { const ear = new THREE.Mesh(new THREE.SphereGeometry(0.12, 20, 16), skinM); ear.position.set(sx * 0.56, -0.02, 0); ear.scale.set(0.6, 1, 0.8); head.add(ear); }
   const hairM = mat(look.hair, { rough: 0.5 });
-  if (look.hairStyle === 'curlyBack') {
+  if (look.hairStyle === 'wavyBack') {
+    // medium-long wavy hair combed back: thick locks running from the hairline over the top to the nape
+    const capM = mat(shade(look.hair, -0.02), { rough: 0.7 });
+    const cap = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.03, 40, 20, 0, TAU, 0, Math.PI * 0.5), capM)); cap.rotation.x = -0.8; cap.position.set(0, 0.03, -0.05); head.add(cap);
+    const lockM = mat(look.hair, { rough: 0.45 });
+    let seed = 5; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const R = B.headR, pt = (th, a, r) => { const y = Math.sin(th) * r, z = Math.cos(th) * r; return new THREE.Vector3(-Math.sin(a) * y, Math.cos(a) * y + 0.02, z - 0.02); };
+    const N = 37;
+    for (let i = 0; i < N; i++) {
+      const a0 = -1.5 + 3 * i / (N - 1) + (rnd() - 0.5) * 0.05, side = Math.abs(a0) / 1.5, ph = rnd() * TAU;
+      const th0 = Math.PI * (0.29 + 0.25 * side * side), th1 = Math.PI * (1.17 - 0.06 * side);
+      const P = [];
+      for (let k = 0; k <= 24; k++) {
+        const t = k / 24, th = th0 + (th1 - th0) * t;
+        const wave = Math.sin(t * 5.5 * Math.PI + ph);                       // the waves
+        const a = a0 * (1 + 0.08 * Math.sin(Math.PI * t)) + 0.05 * wave;    // locks spread a little over the crown
+        const lift = 0.09 * Math.exp(-t * 6) * (1 - side) + 0.1 * Math.sin(Math.PI * Math.min(1, t * 1.6)) + 0.04 * Math.max(0, t - 0.75) * 4; // quiff, volume, flick at the ends
+        P.push(pt(th, a, R * (1.04 + lift) + 0.015 * wave));
+      }
+      const tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(P), 60, 0.085 + rnd() * 0.02, 10, false), lockM);
+      tube.castShadow = true; head.add(tube);
+      for (const q of [P[0], P[P.length - 1]]) { const end = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 10), lockM); end.position.copy(q); head.add(end); }
+    }
+  } else if (look.hairStyle === 'curlyBack') {
     // curly hair combed back: a dark cap under many small curl clumps, hairline set back from the forehead
     const capM = mat(shade(look.hair, -0.04), { rough: 0.8 });
     const cap = cast(new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.03, 40, 20, 0, TAU, 0, Math.PI * 0.5), capM)); cap.rotation.x = -0.62; cap.position.set(0, 0.03, -0.05); head.add(cap);
