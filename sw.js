@@ -1,5 +1,5 @@
 // Offline-friendly: the page and scripts come from the network when possible, photos from cache.
-const V = 'closet-v7';
+const V = 'closet-v9';
 const SHELL = ['/', '/app.js', '/avatar.js', '/avatar-wire.js', '/garments.js', '/vendor/three.module.min.js', '/manifest.json', '/icon-192.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
