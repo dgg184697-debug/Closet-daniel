@@ -184,13 +184,6 @@
       f: [['La pieza', ['https://www.borsheims.com/mm5/graphics/00000001/62/1CRTR0461A_670x670.jpg', 'https://www.borsheims.com/mm5/graphics/00000001/62/1CRTR0461A.jpg']],
           ['Detalle', ['https://www.borsheims.com/mm5/graphics/00000001/62/1CRTR0461E.jpg']]],
       pins: [['Cartier Tank con traje', pin('cartier tank men suit wrist')]] },
-    { t: 'Gafas Persol 714 plegables', sw: ['#5a3b22'],
-      why: 'Las de Steve McQueen. Se doblan y caben en el bolsillo del saco: ideales para viajar.',
-      ref: 'Persol · 714, Havana', det: 'Montura plegable de acetato con la flecha de Persol. Unos 280 USD.',
-      url: 'https://www.superdrug.com/fashion/menswear/mens-accessories/persol-714-brown-men-sunglasses/p/mp-00486545',
-      f: [['La pieza', ['https://media.superdrug.com//medias/prd-front-mp-00486545-600x600?context=bWFzdGVyfHByZC1pbWFnZXN8MTc5NTR8aW1hZ2UvanBlZ3xhREEzTDJnNVpDOHhOREExTmpnM01URTVPRGMxTUM5d2NtUXRabkp2Ym5RdGJYQXRNREEwT0RZMU5EVmZOakF3ZURZd01BfGM2MmQyOTM4OGE4NDI0NzdiZjU5YzM4NGQ1ODMxN2E0MDhkNGQ3M2M5NDBhZGMwYTQ4MWIxN2Y0NGY2OGI4ZDE']],
-          ['De lado', ['https://media.superdrug.com//medias/prd-side-mp-00486545-600x600?context=bWFzdGVyfHByZC1pbWFnZXN8MTQ4NjB8aW1hZ2UvanBlZ3xhR0V5TDJobU5TOHhOREExTmpnM01EQTRORFl6T0M5d2NtUXRjMmxrWlMxdGNDMHdNRFE0TmpVME5WODJNREI0TmpBd3wxNGZhYmYxYmY5MzcxY2VjZWVkNzExMzFmNTg5YzlhNTI3NGViMWRmZDEwOWY0ODQwYzZiZmVkZGJkNGNhODIx']]],
-      pins: [['Persol 714 puestas', pin('persol 714 steve mcqueen men')]] },
     { t: 'Mocasín Louboutin de noche', sw: ['#111111'],
       why: 'El antojo Chuck Bass: con el esmoquin o con jean oscuro y blazer de noche.',
       ref: 'Christian Louboutin · Dandelion Spikes Flat, veau velours negro', det: 'Mocasín de gamuza con tachas en la punta. 1.490 USD.',
@@ -298,8 +291,12 @@
       url: 'https://www.mrporter.com/en-ae/mens/product/bottega-veneta/accessories/totes/intrecciato-cabat-large-leather-tote-bag/1647597337379516',
       f: [['La pieza', [YNAP('mrporter', '1647597337379516', 'in')]], ['Puesto', [YNAP('mrporter', '1647597337379516', 'ou')]], ['Detalle', [YNAP('mrporter', '1647597337379516', 'cu')]]],
       pins: [['Cabat de Bottega', pin('bottega veneta cabat men')]] },
+  ];
+
+  // Sunglasses, picked for Daniel's face (rounded, full cheeks, strong dark brows)
+  const GAFAS = [
     { t: 'Gafas Jacques Marie Mage Dealan', sw: ['#6b4328', '#e08a3c'],
-      why: 'El modelo insignia de la marca: carey grueso, de mucho carácter. Con el lino y el Panamá es pura Riviera.',
+      why: 'La que mejor te va: forma de D con la ceja recta y acetato grueso, que le dan ángulo a tu cara. Con el lino y el Panamá es pura Riviera.',
       ref: 'Jacques Marie Mage · Dealan, color Tokyo', det: 'Acetato de 10 mm color carey con lentes naranja, bisagra y pines de plata esterlina. Edición de 450 piezas. 985 USD.',
       url: 'https://solefeed.com/shop/jacques-marie-mage/jacques-marie-mage-dealan-sunglasses-in-tokyo-edosvt',
       alt: 'También en Walnut, Obscure o Black Mirror, mismo precio.',
@@ -308,7 +305,7 @@
           ['Detalle', ['https://cdn.shopify.com/s/files/1/0225/2478/8810/files/370444-56854-DEALAN-SUNGLASSES-IN-TOKYO-4_3264b11cdd0647f891bfb48a1a2f613b.jpg?v=1792837719&width=900&format=webp&quality=68']]],
       pins: [['Dealan puestas', pin('jacques marie mage dealan men')]] },
     { t: 'Gafas Jacques Marie Mage Kennedy', sw: ['#4a1f2a', '#c9c9c9'],
-      why: 'Inspiradas en JFK, el ícono ivy por excelencia: cuadradas, clásicas, con la ceja un poco levantada.',
+      why: 'Inspiradas en JFK, el ícono ivy. Te sirven: cuadradas y con la ceja marcada. La Hyannis, más ancha, todavía mejor para tu cara.',
       ref: 'Jacques Marie Mage · Kennedy, Bordeaux Empire', det: 'Frente de acetato vinotinto, varillas de titanio con paladio, lentes café oscuro. Edición de 200 piezas. 1.155 USD.',
       url: 'https://solefeed.com/shop/jacques-marie-mage/jacques-marie-mage-kennedy-sunglasses-in-bordeaux-empire-vpcq1i',
       alt: 'El Hyannis (por la casa de verano de los Kennedy) es más ancho y rectangular: 985 USD.',
@@ -316,6 +313,29 @@
           ['De lado', ['https://cdn.shopify.com/s/files/1/0225/2478/8810/files/370535-56945-KENNEDY-SUNGLASSES-BORDEAUX-EMPIRE-2_a8f9b6a373e6415d9524e8a2b3e37da6.jpg?v=1792831573&width=900&format=webp&quality=68']],
           ['Hyannis', ['https://cdn.shopify.com/s/files/1/0225/2478/8810/files/370469-56879-Jacques-Marie-Mage-Hyannis-Sunglasses-in-Tenace-1_ebc8a54a31c3470d87a021a469c8bdf7.jpg?v=1792827391&width=900&format=webp&quality=68']]],
       pins: [['JFK con gafas de sol', pin('JFK sunglasses style')]] },
+    { t: 'Mykita × Rimowa MR002, cuadradas', sw: ['#8a8d91', '#111111'],
+      why: 'De la colección de Mykita con Rimowa, la que más te va: cuadrada y en metal, para el día a día con traje. Livianas (25 g) y ajustables.',
+      ref: 'Mykita × Rimowa · Heritage MR002 Square, Titanium & Black', det: 'Acero inoxidable con aros de aluminio anodizado, como las maletas Rimowa; lentes café. 140 mm de ancho, buena talla para ti. 790 USD.',
+      url: 'https://www.rimowa.com/tw/en/accessories/eyewear/sunglasses/mr002-square-sunglasses/51900035.html',
+      alt: 'También en Clay Green, plateado o negro.',
+      f: [['La pieza', ['https://www.rimowa.com/on/demandware.static/-/Sites-rimowa-master-catalog-final/default/dwa648758c/images/large/51900035_1.png']],
+          ['En negro', ['https://thewebster.com/cdn/shop/files/01_05d7275e-2727-403d-9895-e68c65552225.jpg?v=1786905752']],
+          ['De lado', ['https://thewebster.com/cdn/shop/files/04_4326873f-dfd7-47d7-a1df-6ecdc932b2a1.jpg?v=1786905752']]],
+      pins: [['Mykita Rimowa puestas', pin('mykita rimowa sunglasses men')]] },
+    { t: 'Mykita × Rimowa MR006, aviador', sw: ['#111111'],
+      why: 'Aviador con la línea de arriba recta, que le da estructura a una cara redondeada. Para viajes y fin de semana.',
+      ref: 'Mykita × Rimowa · Heritage MR006 Aviator, Black & Black', det: 'Acero y aluminio anodizado, lentes negros polarizados. Unos 840 USD.',
+      url: 'https://www.rimowa.com/tw/en/accessories/eyewear/sunglasses/mr006-aviator-sunglasses/51900053.html',
+      alt: 'De esta colección no te recomiendo la MR007 redonda ni la MR001 panto: te redondean la cara. La MR003 navegador también te sirve.',
+      f: [['La pieza', ['https://www.rimowa.com/on/demandware.static/-/Sites-rimowa-master-catalog-final/default/dw2a877bbf/images/large/51900053_1.png']]],
+      pins: [['Aviador con traje', pin('men aviator sunglasses suit')]] },
+    { t: 'Gafas Persol 714 plegables', sw: ['#5a3b22'],
+      why: 'Las de Steve McQueen. Te sirven, aunque son las más suaves de la lista. Se doblan y caben en el bolsillo del saco: ideales para viajar.',
+      ref: 'Persol · 714, Havana', det: 'Montura plegable de acetato con la flecha de Persol. Unos 280 USD. Pídelas en talla 54: la 52 te quedaría angosta.',
+      url: 'https://www.superdrug.com/fashion/menswear/mens-accessories/persol-714-brown-men-sunglasses/p/mp-00486545',
+      f: [['La pieza', ['https://media.superdrug.com//medias/prd-front-mp-00486545-600x600?context=bWFzdGVyfHByZC1pbWFnZXN8MTc5NTR8aW1hZ2UvanBlZ3xhREEzTDJnNVpDOHhOREExTmpnM01URTVPRGMxTUM5d2NtUXRabkp2Ym5RdGJYQXRNREEwT0RZMU5EVmZOakF3ZURZd01BfGM2MmQyOTM4OGE4NDI0NzdiZjU5YzM4NGQ1ODMxN2E0MDhkNGQ3M2M5NDBhZGMwYTQ4MWIxN2Y0NGY2OGI4ZDE']],
+          ['De lado', ['https://media.superdrug.com//medias/prd-side-mp-00486545-600x600?context=bWFzdGVyfHByZC1pbWFnZXN8MTQ4NjB8aW1hZ2UvanBlZ3xhR0V5TDJobU5TOHhOREExTmpnM01EQTRORFl6T0M5d2NtUXRjMmxrWlMxdGNDMHdNRFE0TmpVME5WODJNREI0TmpBd3wxNGZhYmYxYmY5MzcxY2VjZWVkNzExMzFmNTg5YzlhNTI3NGViMWRmZDEwOWY0ODQwYzZiZmVkZGJkNGNhODIx']]],
+      pins: [['Persol 714 puestas', pin('persol 714 steve mcqueen men')]] },
   ];
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -337,7 +357,8 @@
     ['tier1', 'Tier 1 · Lo que falta', 'Lo primero, en orden de prioridad: con esto tu clóset queda completo.', BUYS],
     ['tier2', 'Tier 2 · Lo siguiente', 'Para redondear: más color, tierra caliente y viajes.', TIER2],
     ['tier3', 'Tier 3 · Antojos', 'Todo lo que se me ocurre, de lo grande a lo pequeño. Para anotarse.', TIER3],
-    ['lujo', 'Tier 3 · Bolsos y lujo', 'Bolsos de Bottega Veneta, Loewe, Louis Vuitton y Hermès, y gafas de Jacques Marie Mage, como referencia. Empieza por el tote de oficina.', LUJO],
+    ['lujo', 'Tier 3 · Bolsos', 'Bolsos de Bottega Veneta, Loewe, Louis Vuitton y Hermès, como referencia. Empieza por el tote de oficina.', LUJO],
+    ['gafas', 'Tier 3 · Gafas de sol', 'Elegidas para tu cara. Por tu foto: cara redondeada, mejillas llenas, mandíbula suave con barba y cejas oscuras y marcadas. Te van las monturas con ángulos (cuadradas, rectangulares o en D), con la ceja recta y del ancho de tu cara o un poco más; en carey, havana o metal. Evita las redondas pequeñas y las angostas.', GAFAS],
   ];
 
   const sec = document.createElement('section');
