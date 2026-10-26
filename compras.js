@@ -338,6 +338,75 @@
       pins: [['Persol 714 puestas', pin('persol 714 steve mcqueen men')]] },
   ];
 
+  // E. Marinella (Naples) ties, bow ties and pocket squares. Prices are EUR converted at 1.122.
+  const EM = f => `https://cdn.shopify.com/s/files/1/0800/7319/5840/files/${f}&width=900`;
+  const EMU = h => 'https://www.emarinella.eu/products/' + h;
+  const COC = id => [`https://www.careofcarl.com/bilder/artiklar/zoom/${id}_1.jpg`, `https://www.careofcarl.com/bilder/artiklar/600x600_grey_4_5/${id}.jpg`];
+  const MARINELLA = [
+    { t: 'Corbata de siete pliegues', sw: ['#1c2740'],
+      why: 'La joya de Marinella: un cuadro de seda doblado siete veces, sin forro, que cae pesado y hace un nudo perfecto. Con el traje azul y la camisa blanca es la corbata de las reuniones grandes.',
+      ref: 'E. Marinella · 7 Fold Sartorial Silk Tie, Dark Blue', det: 'Seda, hecha a mano en Nápoles. 250 € (unos 280 USD).',
+      url: EMU('dark-blue-7-fold-sartorial-silk-tie-54'),
+      f: [['La pieza', [EM('CRAVATTA_7_PIEGHE_CR7P944_20020_3_00_3954040c-7c24-4e02-85aa-b8ae30ac0dd8.jpg?v=1758902291')]]],
+      pins: [['Corbata de siete pliegues', pin('seven fold tie navy suit')]] },
+    { t: 'Corbata napolitana de florecitas', sw: ['#1c2740', '#8a1c2b'],
+      why: 'El estampado por el que se conoce a Marinella: dibujitos pequeños sobre fondo oscuro. Va con todo y es la que más vas a usar. Complementa tu K01 de raquetas, que es más divertida.',
+      ref: 'E. Marinella · Sartorial Printed Silk Tie, Dark Blue, small flower', det: 'Seda estampada a mano, tres pliegues, forro de lana, 8,5 cm de ancho. 160 € (unos 180 USD).',
+      url: EMU('dark-blue-classic-silk-tie-14'),
+      alt: 'En Care of Carl la venden en azul marino y vinotinto por 180 € (unos 200 USD).',
+      f: [['La pieza', [EM('CR7449_53105_1_00.jpg?v=1792591801')]], ['Otro dibujo', [EM('CRAVATTA_CLASSICA_CR7458_53109_5_00.jpg?v=1745829071')]],
+          ['Azul marino', COC('31927410')], ['Vinotinto', COC('31928410')]],
+      pins: [['Corbatas Marinella puestas', pin('e marinella tie navy blazer')]] },
+    { t: 'Grenadine azul oscuro', sw: ['#1a2238'],
+      why: 'La corbata de Harvey Specter: lisa, con textura de tejido abierto. Sirve con cualquier camisa y cualquier traje.',
+      ref: 'E. Marinella · Sartorial Granadine Silk Tie, Dark Blue', det: 'Seda grenadine, tres pliegues. 160 € (unos 180 USD).',
+      url: EMU('midnight-blue-sartorial-granadine-silk-tie'),
+      alt: 'También en vinotinto o bluette, mismo precio.',
+      f: [['La pieza', [EM('GRZ3502_GZL01_1_00.jpg?v=1782485661')]]],
+      pins: [['Grenadine con traje', pin('navy grenadine tie suit harvey specter')]] },
+    { t: 'Regimental azul con rayas rojas', sw: ['#1c2740', '#8a1c2b'],
+      why: 'La de rayas, la más ivy de todas. Con blazer azul y oxford. Es la versión napolitana de la Polo del Tier 1: compra una de las dos.',
+      ref: 'E. Marinella · Regimental Jacquard Silk Tie, Dark Blue / Red', det: 'Seda jacquard. 160 € (unos 180 USD).',
+      url: EMU('dark-blue-sartorial-striped-silk-tie-reg141'),
+      f: [['La pieza', [EM('REG141_3362_1_00.jpg?v=1792157461')]]],
+      pins: [['Regimental con blazer', pin('regimental tie navy blazer oxford ivy')]] },
+    { t: 'Corbata tejida', sw: ['#1c2740'],
+      why: 'De punta recta y tejido de punto. Para los viernes con blazer, chinos y oxford, o con el saco de lino.',
+      ref: 'E. Marinella · Silk Knitted Tie, Dark Blue', det: 'Seda tejida. 130 € (unos 145 USD).',
+      url: EMU('dark-blue-silk-knitted-tie-2'),
+      alt: 'También azul con puntos celestes o beige con puntos.',
+      f: [['La pieza', [EM('CRAVATTA_TRICOT_TRICOT046_1001_20_00.jpg?v=1752068441')]]],
+      pins: [['Corbata tejida con blazer', pin('navy knit tie blazer oxford shirt')]] },
+    { t: 'Corbatín estampado para anudar', sw: ['#1c2740'],
+      why: 'Para bodas de día y eventos en jardín, como la de tu foto. El de anudar se ve mejor que el ya hecho, porque queda un poco imperfecto. Muy Chuck Bass.',
+      ref: 'E. Marinella · Self-Tie Printed Silk Bowtie, Dark Blue', det: 'Seda estampada, hecho a mano y ajustable. 150 € (unos 170 USD).',
+      url: EMU('dark-blue-self-tie-printed-silk-bowtie'),
+      f: [['La pieza', [EM('PPL351_161-2026_00.jpg?v=1785485303')]]],
+      pins: [['Corbatín de día', pin('chuck bass bow tie')]] },
+    { t: 'Corbatín de satín para el esmoquin', sw: ['#111111', '#1c2740'],
+      why: 'Si compras el esmoquin azul del Tier 3, este es el corbatín. El negro es el clásico; el azul oscuro de satín, a juego con el esmoquin, es más moderno.',
+      ref: 'E. Marinella · Self-Tie Silk Satin Bowtie, negro o azul oscuro', det: 'Satín de seda, para anudar. 150 € cada uno (unos 170 USD). La faja de satín negro: 250 € (unos 280).',
+      url: EMU('black-silk-satin-bowtie-to-self-tie-solid-color'),
+      alt: 'Para una fiesta en diciembre, el vinotinto de satín, mismo precio.',
+      f: [['Negro', [EM('PAPILLON_DA_ANNODARE_PPL123_00_1b4c584f-a9c8-4a78-9c8c-d62bd7ac3e53.jpg?v=1754495130')]],
+          ['Azul oscuro', [EM('PAPILLON_DA_ANNODARE_PPL314_01.jpg?v=1765183136')]],
+          ['Vinotinto', [EM('PAPILLON_DA_ANNODARE_PPL237_00_1c7de07e-2af4-4ae1-a67c-8c2323b8dfab.jpg?v=1753956034')]]],
+      pins: [['Corbatín negro con esmoquin', pin('black satin bow tie tuxedo self tied')]] },
+    { t: 'Pañuelo de seda estampado', sw: ['#1c2740', '#2c4a8c'],
+      why: 'Con el blazer sin corbata, en pico y suelto. Si llevas corbata, que el pañuelo no repita su estampado. Tu amarillo (K03) es el de verano; este es para el resto del año.',
+      ref: 'E. Marinella · Hand-Printed Silk Pocket Square', det: 'Seda estampada a mano con borde de otro color y dobladillo a mano. 90 € (unos 100 USD).',
+      url: EMU('dark-blue-hand-printed-silk-pocket-square-41'),
+      f: [['Azul oscuro', [EM('POCHETTE_PCH721_56501_2_00_33ad1429-9193-42e8-a9a3-1f6e68625510.jpg?v=1772189837')]],
+          ['Azul', [EM('POCHETTE_PCH616_DH2064_4_01_d80b0cdb-2a39-4000-bc81-db7a4bb0c975.jpg?v=1778142995')]]],
+      pins: [['Pañuelo en pico', pin('silk pocket square puff fold navy blazer')]] },
+    { t: 'Pañuelo blanco con borde de satín', sw: ['#ffffff'],
+      why: 'El de Don Draper y Harvey: doblado recto, asomando un dedo. Para traje con corbata y para el esmoquin.',
+      ref: 'E. Marinella · White Ceremonial Pocket Square', det: 'Algodón fino con borde de satín, dobladillo a mano. 45 € (unos 50 USD).',
+      url: 'https://www.emarinella.eu/collections/pagina-uomo-3/products/white-ceremonial-pocket-square-1',
+      f: [['La pieza', [EM('POCHETTE_CERIMONIA_PCHCER_00_58125f53-897d-4c8b-9146-1b09ebdf846f.jpg?v=1753188668')]]],
+      pins: [['Pañuelo blanco recto', pin('white pocket square tv fold suit')]] },
+  ];
+
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const card = (b, i) => `
     <article class="buy">
@@ -359,6 +428,7 @@
     ['tier3', 'Tier 3 · Antojos', 'Todo lo que se me ocurre, de lo grande a lo pequeño. Para anotarse.', TIER3],
     ['lujo', 'Tier 3 · Bolsos', 'Bolsos de Bottega Veneta, Loewe, Louis Vuitton y Hermès, como referencia. Empieza por el tote de oficina.', LUJO],
     ['gafas', 'Tier 3 · Gafas de sol', 'Elegidas para tu cara. Por tu foto: cara redondeada, mejillas llenas, mandíbula suave con barba y cejas oscuras y marcadas. Te van las monturas con ángulos (cuadradas, rectangulares o en D), con la ceja recta y del ancho de tu cara o un poco más; en carey, havana o metal. Evita las redondas pequeñas y las angostas.', GAFAS],
+    ['marinella', 'Accesorios · E. Marinella', 'Corbatas, corbatines y pañuelos de E. Marinella, la casa de Nápoles que las hace a mano desde 1914. Ya tienes de Carlos Nieto la corbata azul de raquetas (K01), la café de foulard (K02) y el pañuelo amarillo (K03): esto es lo que les falta. Empieza por la de florecitas y la grenadine.', MARINELLA],
   ];
 
   const sec = document.createElement('section');
