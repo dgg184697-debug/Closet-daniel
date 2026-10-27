@@ -193,6 +193,8 @@
     const { w, kind, best } = ctx;
     const pinta = ds.c ? { nombre: ds.nombre, ...ds.c, por_que: ds.por_que }
       : best ? { nombre: best.o.nombre + (best.why.length ? ' (ajustado al clima)' : ''), ...best.c, por_que: porQue(best, w, kind) } : null;
+    // shirt in or out depends on the day: weekends and relaxed plans can go untucked
+    if (pinta) pinta.finde = ['fin de semana', 'plan relajado'].includes(kind.label) || (isFinde(ctx.day) && !kind.evening && kind.label !== 'reuniones');
     wxRender({ ...ctx.base, pinta: pinta || undefined });
     const box = document.querySelector('.wxpick'); if (!box) return;
     ctx.cur = pinta;

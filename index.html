@@ -225,6 +225,8 @@ footer .wrap{padding-block:22px 40px;font-family:var(--mono);font-size:.78rem;co
 .wxpick figcaption{font-size:.78rem;line-height:1.25;color:var(--muted)}
 .wxpick .why{max-width:62ch}
 .whyc{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:10px}
+.faja{margin:0;font-size:.93rem;line-height:1.4;max-width:68ch;padding-left:10px;border-left:3px solid var(--line)}
+.faja b{font-weight:700}.faja.out{border-left-color:var(--ok)}
 .whyc ul{list-style:none;padding:0;margin:0;display:grid;gap:5px}
 .whyc li{padding-left:14px;position:relative;font-size:.93rem;max-width:68ch}
 .whyc li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--ok)}
@@ -373,6 +375,7 @@ footer .wrap{padding-block:22px 40px;font-family:var(--mono);font-size:.78rem;co
             <div class="scale-l"><span>Casa</span><span>Fin de semana</span><span>Agencia</span><span>Reunión</span><span>Formal</span></div>
           </div>
           <p class="for" id="vfor"></p>
+          <p class="faja" id="vfaja"></p>
           <div class="whyc" id="vwhy" hidden><div class="label">Por qué combina</div><ul id="vwhyl"></ul></div>
         </div>
         <div class="presets">
@@ -617,6 +620,30 @@ function explain(s){
   if(s.capa!==TUX&&hi-lo<=2) out.push(lo===hi?`Formalidad pareja: todas las prendas están en ${lo} de 5, ninguna se ve fuera de lugar.`:`Formalidad pareja: todo está entre ${lo} y ${hi} de 5, así ninguna prenda se ve fuera de lugar.`);
   return {good:out,bad:c.bad,score:c.score};
 }
+/* shirt in or out: on weekdays always in (Daniel's rule); at the weekend out when the shirt and the trousers are casual */
+const FINDE_G=['Fin de semana','Calor y tierra caliente','Viaje'];
+const isFinde=day=>['Sat','Sun'].includes((day?new Date(day+'T12:00:00-05:00'):new Date()).toLocaleDateString('en-US',{weekday:'short',timeZone:'America/Bogota'}));
+function fajar(s,finde){
+  const c=s.camisa; if(!c||!INV[c]) return null;
+  const C=INV[c], P=s.pantalon&&INV[s.pantalon]?INV[s.pantalon]:null, tipo=C.tipo.toLowerCase();
+  const IN=t=>({fuera:false,head:'Camisa por dentro',t}), OUT=t=>({fuera:true,head:'Camisa por fuera',t});
+  if(s.capa===TUX) return IN('con esmoquin, siempre.');
+  if(s.corbata) return IN('con corbata va siempre por dentro.');
+  if(SUIT[s.capa]) return IN('con traje, siempre.');
+  if(!finde) return {...IN('entre semana va siempre por dentro.'),def:true};
+  if(C.formalidad>=4) return IN('es camisa de vestir, de faldón largo: por fuera se ve descuidada, aunque sea fin de semana.');
+  if(P&&P.formalidad>=4) return IN('el pantalón de vestir la pide adentro, aunque sea fin de semana.');
+  if(/rugby/.test(tipo)) return OUT('la rugby tiene el ruedo recto, hecha para ir por fuera.');
+  if(/polo/.test(tipo)) return OUT('el polo tiene el ruedo corto y recto, hecho para ir por fuera.');
+  if(/punto/.test(tipo)) return OUT('la camisa de punto tiene el ruedo corto, hecha para ir por fuera.');
+  if(TN(c).tela==='lino') return OUT('el lino suelto se ve fresco y relajado.');
+  return OUT('una oxford suelta con pantalón casual es el ivy relajado. Si el faldón te pasa del bolsillo de atrás, mejor por dentro.');
+}
+const fajaHTML=f=>f?`<b>${f.head}:</b> ${esc(f.t)}`:'';
+function fajaProbador(s){
+  const f=fajar(s,true); if(!f) return '';
+  return f.fuera?`<b>Camisa:</b> entre semana, por dentro. El fin de semana puede ir por fuera: ${esc(f.t)}`:fajaHTML(f);
+}
 function verdict(){
   const {notes,avg}=judge(st);
   const lvl=notes.some(n=>n.lvl==='bad')?'bad':notes.length?'warn':'ok';
@@ -627,6 +654,7 @@ function verdict(){
   const r=Math.round(avg);
   $('#scale').querySelectorAll('span').forEach((sp,i)=>sp.classList.toggle('on',i<r));
   $('#vfor').textContent=occasion(avg)+(st.preset?` Es el outfit «${DATA.outfits.find(o=>o.id===st.preset).nombre}».`:'');
+  $('#vfaja').innerHTML=fajaProbador(st); $('#vfaja').hidden=!st.camisa;
   const ex=lvl==='bad'?null:explain(st);
   $('#vwhy').hidden=!ex;
   if(ex) $('#vwhyl').innerHTML=ex.good.map(t=>`<li>${esc(t)}</li>`).concat(ex.bad.map(t=>`<li class="ojo">Ojo con el color: ${esc(t)}</li>`)).join('');
@@ -690,6 +718,7 @@ const lookCard=o=>{
   return `<article class="look"><img src="outfits/${o.id}.jpg${OUTV[o.id]||''}" alt="${esc(o.nombre)}: ${esc(ids)}" loading="lazy" width="900" height="1125">
   <div class="body"><div class="kicker"><span class="label">${o.id} · ${esc(o.insp)}</span></div><h3>${esc(o.nombre)}</h3>
   <dl><div><dt>Para</dt><dd>${esc(o.ocasion)}</dd></div><div><dt>Por qué funciona</dt><dd>${esc(o.por_que)}</dd></div>
+  ${(()=>{const f=fajar({capa:o.capa,camisa:o.arriba,corbata:o.corbata,pantalon:o.abajo},FINDE_G.includes(o.grupo));return f?`<div><dt>Camisa</dt><dd>${f.fuera?'<b>Por fuera.</b> '+esc(f.t[0].toUpperCase()+f.t.slice(1)):f.def?'Por dentro.':'Por dentro: '+esc(f.t)}</dd></div>`:''})()}
   <div><dt>Clima</dt><dd>${esc(o.clima)}</dd></div><div><dt>Para subirlo de nivel</dt><dd>${esc(o.mejora)}</dd></div>
   <div><dt>Prendas</dt><dd style="font-family:var(--mono);font-size:.82rem">${esc(ids)}</dd></div></dl>
   <button class="btn ghost" type="button" data-try="${o.id}">Abrir en el probador</button></div></article>`};
@@ -755,6 +784,7 @@ function wxRender(w){
     <div class="label">Pinta sugerida</div>
     <h3>${esc(p.nombre||'Tu pinta')}</h3>
     <div class="pz">${ks.map(k=>`<figure data-k="${k}" data-id="${p[k]}"><div><img src="${img(p[k])}" alt=""></div><figcaption>${esc(name(p[k]))}</figcaption></figure>`).join('')}</div>
+    ${(()=>{const f=fajar(p,typeof p.finde==='boolean'?p.finde:isFinde());return f?`<p class="faja${f.fuera?' out':''}">${fajaHTML(f)}</p>`:''})()}
     <div class="pctl" id="pctl"></div>
     ${p.por_que?`<p class="why">${esc(p.por_que)}</p>`:''}
     ${(()=>{const s0={rain:!!w.llueve};ORDER.forEach(k=>s0[k]=p[k]&&INV[p[k]]?p[k]:null);if(!s0.pantalon&&s0.capa!==TUX)return'';const ex=explain(s0);return ex.good.length?`<div class="whyc"><div class="label">Por qué combina</div><ul>${ex.good.map(t=>`<li>${esc(t)}</li>`).join('')}${ex.bad.map(t=>`<li class="ojo">Ojo con el color: ${esc(t)}</li>`).join('')}</ul></div>`:''})()}
