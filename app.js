@@ -55,8 +55,8 @@
   }
 
   /* ---------- outfit of the day ---------- */
-  const RAIN_OK = ['Z03', 'Z07'];
-  const BELT_FOR = { Z02: ['A03', 'A04'], Z03: ['A01', 'A03b'], Z04: ['A01', 'A02'], Z06: ['A01', 'A03b'], Z01: ['A02', 'A01'], Z05: ['A02', 'A01'], Z07: ['A02', 'A01'] };
+  const RAIN_OK = ['Z03', 'Z07', 'Z16', 'Z18'];
+  const BELT_FOR = { Z02: ['A03', 'A04'], Z03: ['A01', 'A03b'], Z04: ['A01', 'A02'], Z06: ['A01', 'A03b'], Z01: ['A02', 'A01'], Z05: ['A02', 'A01'], Z07: ['A02', 'A01'], Z08: ['A02', 'A01'], Z09: ['A02', 'A01'], Z10: ['A02', 'A01'], Z11: ['A02'], Z12: ['A02'], Z13: ['A02'], Z14: ['A02'], Z15: ['A02', 'A03b'], Z16: ['A02', 'A01'], Z17: ['A02'], Z18: ['A02', 'A01'] };
   const LAYERS = ['S11', 'S07', 'S04', 'S13', 'S01', 'S05', 'S12', 'S08', 'S03'];
   function dayKind(events, day) {
     const txt = (events || []).map(e => (e.titulo + ' ' + e.categoria + ' ' + e.lugar).toLowerCase()).join(' | ');

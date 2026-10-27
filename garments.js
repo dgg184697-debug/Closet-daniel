@@ -32,6 +32,7 @@ export const STYLE = {
   C22: { base: '#cfe7d9', polo: true, knit: true },
   C23: { base: '#a8794a', polo: true, pique: true },
   C24: { base: '#6a6a44', polo: true, waffle: true },
+  C25: { base: '#f4f1e8', stripe: '#1f2c52', stripeH: true, collar: 'rugby' },
   // layers: kind decides neckline, sleeves and front details
   S01: { base: '#b88a57', kind: 'polo', buttons: '#e9dfcf', pockets: true },
   S02: { base: '#9b9ea4', kind: 'crew', fleece: true },
@@ -79,4 +80,15 @@ export const STYLE = {
   Z05: { base: '#6f87a9', kind: 'loafer', trim: '#1f2a4a' },
   Z06: { base: '#1f2638', kind: 'chelsea', elastic: '#141824' },
   Z07: { base: '#f4f4f1', kind: 'sneaker' },
+  Z08: { base: '#a08f78', kind: 'loafer', trim: '#c9ccd1', sole: '#f2f0ea' },
+  Z09: { base: '#7f9cbf', kind: 'loafer', trim: '#c9ccd1', sole: '#f2f0ea' },
+  Z10: { base: '#cdb9a0', kind: 'sneaker', laces: '#c4b09a', sole: '#e9dfcf', suede: true },
+  Z11: { base: '#a9bfd6', kind: 'sneaker', laces: '#a3b5c8', sole: '#d4dde8', suede: true },
+  Z12: { base: '#5d82c4', kind: 'sneaker', laces: '#ece6d8', sole: '#efe9dc', jacquard: true },
+  Z13: { base: '#cfc4d6', kind: 'sneaker', laces: '#a596c9', sole: '#c9c0dc', suede: true },
+  Z14: { base: '#8fa3b3', kind: 'sneaker', high: true, laces: '#4f7fae', sole: '#5d8cc0', suede: true },
+  Z15: { base: '#232c45', kind: 'sneaker', laces: '#1d2438', sole: '#1c2234', suede: true },
+  Z16: { base: '#f1f0ec', kind: 'sneaker', heel: '#b9d6e6' },
+  Z17: { base: '#f3f3f1', kind: 'sneaker', runner: true },
+  Z18: { base: '#f6f6f4', kind: 'sneaker' },
 };

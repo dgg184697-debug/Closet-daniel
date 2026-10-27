@@ -19,7 +19,8 @@ function canvasTex(w, h, draw) {
 // ---------- 2D drawing of the torso front (shirt, tie, layer) ----------
 function drawStripes(g, x0, y0, w, h, s, scale = 1) {
   if (s.heather || s.waffle) drawKnit(g, x0, y0, w, h, s); else { g.fillStyle = s.base; g.fillRect(x0, y0, w, h); }
-  if (s.stripe) { g.fillStyle = s.stripe; const step = 34 * scale, sw = (s.stripeW ? 12 : 6) * scale; for (let x = x0; x < x0 + w; x += step) g.fillRect(x, y0, sw, h); }
+  if (s.stripe && s.stripeH) { g.fillStyle = s.stripe; const step = 120 * scale; for (let y = y0 + 60 * scale; y < y0 + h; y += step) g.fillRect(x0, y, w, step / 2); }
+  else if (s.stripe) { g.fillStyle = s.stripe; const step = 34 * scale, sw = (s.stripeW ? 12 : 6) * scale; for (let x = x0; x < x0 + w; x += step) g.fillRect(x, y0, sw, h); }
   if (s.weave) { g.fillStyle = 'rgba(0,0,0,0.035)'; for (let y = y0; y < y0 + h; y += 4) g.fillRect(x0, y, w, 1); }
   if (s.knit) { g.fillStyle = 'rgba(255,255,255,0.06)'; for (let y = y0; y < y0 + h; y += 6) g.fillRect(x0, y, w, 2); }
   if (s.linen) for (let i = 0; i < 0.6 * w * h / 300; i++) { g.fillStyle = Math.random() < .5 ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.06)'; g.fillRect(x0 + Math.random() * w, y0 + Math.random() * h, (8 + Math.random() * 30) * scale, 1.5); }
@@ -315,7 +316,7 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
     }
     // collar
     if (sh && !(cp && (cp.kind === 'zip' || cp.kind === 'jacket'))) {
-      const spread = sh.collar === 'spread' ? 0.75 : sh.collar === 'camp' ? 0.95 : sh.polo ? 0.65 : sh.collar === 'bd' ? 0.45 : 0.55;
+      const spread = sh.collar === 'spread' || sh.collar === 'rugby' ? 0.75 : sh.collar === 'camp' ? 0.95 : sh.polo ? 0.65 : sh.collar === 'bd' ? 0.45 : 0.55;
       for (const sx of [-1, 1]) {
         const shape = new THREE.Shape(); shape.moveTo(0, 0); shape.lineTo(0.19, 0.02); shape.lineTo(0.03, -0.2); shape.closePath();
         const flap = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.02, bevelEnabled: false }), mat(sh.base, { side: THREE.DoubleSide })), 'camisa');
@@ -375,14 +376,17 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
     const s = STYLE[o.zapatos] || { base: '#333', kind: 'oxford' };
     for (const sx of [-1, 1]) {
       const sh = new THREE.Group(); sh.position.set(sx * B.legX, 0, 0.06); g.add(sh);
-      const main = mat(s.base, { rough: s.kind === 'oxford' ? 0.32 : s.kind === 'sneaker' ? 0.6 : 0.9 });
+      const main = mat(s.base, { rough: s.kind === 'oxford' ? 0.32 : s.suede || s.jacquard ? 0.92 : s.kind === 'sneaker' ? 0.6 : 0.9 });
       const foot = tag(new THREE.Mesh(new THREE.SphereGeometry(0.15, 28, 18), main), 'zapatos');
       foot.scale.set(1, s.kind === 'loafer' ? 0.6 : 0.72, 1.75); foot.position.set(0, 0.085, 0.07); sh.add(foot);
-      const sole = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, s.kind === 'sneaker' ? 0.06 : 0.035, 28), mat(s.kind === 'sneaker' ? '#ffffff' : shade(s.base, -0.18), { rough: 0.8 })), 'zapatos');
-      sole.scale.set(1.02, 1, 1.78); sole.position.set(0, s.kind === 'sneaker' ? 0.03 : 0.018, 0.07); sh.add(sole);
+      const sh0 = s.kind === 'sneaker' || s.sole ? (s.runner ? 0.085 : 0.06) : 0.035;
+      const sole = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, sh0, 28), mat(s.sole || (s.kind === 'sneaker' ? '#ffffff' : shade(s.base, -0.18)), { rough: 0.8 })), 'zapatos');
+      sole.scale.set(1.02, 1, 1.78); sole.position.set(0, sh0 / 2, 0.07); sh.add(sole);
+      if (s.high) { const shaft = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.155, 0.2, 24), main), 'zapatos'); shaft.position.set(0, 0.2, -0.04); sh.add(shaft); }
+      if (s.heel) { const hp = tag(new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.08, 0.03), mat(s.heel, { rough: 0.6 })), 'zapatos'); hp.position.set(0, 0.13, -0.19); sh.add(hp); }
       if (s.kind === 'chelsea') { const shaft = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.16, 0.22, 24), main), 'zapatos'); shaft.position.set(0, 0.2, -0.04); sh.add(shaft);
         const el = tag(new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.17, 0.09), mat(s.elastic, { rough: 0.95 })), 'zapatos'); el.position.set(sx * 0.155, 0.22, -0.04); sh.add(el); }
-      if (s.kind === 'oxford' || s.kind === 'sneaker') { const lace = tag(new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.02, 0.14), mat(s.kind === 'sneaker' ? '#d9d9d6' : shade(s.base, -0.12), { rough: 0.7 })), 'zapatos'); lace.position.set(0, 0.17, 0.07); lace.rotation.x = -0.35; sh.add(lace);
+      if (s.kind === 'oxford' || s.kind === 'sneaker') { const lace = tag(new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.02, 0.14), mat(s.laces || (s.kind === 'sneaker' ? '#d9d9d6' : shade(s.base, -0.12)), { rough: 0.7 })), 'zapatos'); lace.position.set(0, 0.17, 0.07); lace.rotation.x = -0.35; sh.add(lace);
         if (s.kind === 'oxford') { const cap = tag(new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.008, 6, 24, Math.PI), mat(shade(s.base, -0.15))), 'zapatos'); cap.rotation.x = -Math.PI / 2 + 0.3; cap.position.set(0, 0.11, 0.2); cap.scale.set(1, 0.9, 1); sh.add(cap); } }
       if (s.kind === 'loafer') { const pip = tag(new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.014, 8, 30), mat(s.trim, { rough: 0.6 })), 'zapatos'); pip.rotation.x = -Math.PI / 2; pip.scale.set(0.95, 1.5, 1); pip.position.set(0, 0.13, 0.0); sh.add(pip);
         const bow = tag(new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.018, 0.03), mat(s.trim)), 'zapatos'); bow.position.set(0, 0.145, 0.2); sh.add(bow); }
