@@ -56,7 +56,7 @@
 
   /* ---------- outfit of the day ---------- */
   const RAIN_OK = ['Z03', 'Z07', 'Z16', 'Z18'];
-  const BELT_FOR = { Z02: ['A03', 'A04'], Z03: ['A01', 'A03b'], Z04: ['A01', 'A02'], Z06: ['A01', 'A03b'], Z01: ['A02', 'A01'], Z05: ['A02', 'A01'], Z07: ['A02', 'A01'], Z08: ['A02', 'A01'], Z09: ['A02', 'A01'], Z10: ['A02', 'A01'], Z11: ['A02'], Z12: ['A02'], Z13: ['A02'], Z14: ['A02'], Z15: ['A02', 'A03b'], Z16: ['A02', 'A01'], Z17: ['A02'], Z18: ['A02', 'A01'] };
+  const BELT_FOR = { Z02: ['A03', 'A04'], Z03: ['A03b'], Z04: ['A02', 'A03b'], Z06: ['A03b'], Z01: ['A02', 'A03b'], Z05: ['A02', 'A03b'], Z07: ['A02', 'A03b'], Z08: ['A02', 'A03b'], Z09: ['A02', 'A03b'], Z10: ['A02', 'A03b'], Z11: ['A02'], Z12: ['A02'], Z13: ['A02'], Z14: ['A02'], Z15: ['A02', 'A03b'], Z16: ['A02', 'A03b'], Z17: ['A02'], Z18: ['A02', 'A03b'] };
   const LAYERS = ['S11', 'S07', 'S04', 'S13', 'S01', 'S05', 'S12', 'S08', 'S03'];
   function dayKind(events, day) {
     const txt = (events || []).map(e => (e.titulo + ' ' + e.categoria + ' ' + e.lugar).toLowerCase()).join(' | ');
@@ -73,7 +73,7 @@
     const why = [];
     if (o.capa === TUX) return { c, why }; // black tie is fixed, and it is indoors
     if (w.llueve && !RAIN_OK.includes(c.zapatos)) { c.zapatos = INV[c.pantalon].formalidad >= 3 ? 'Z03' : 'Z07'; why.push(c.zapatos === 'Z03' ? 'oxford burdeos de cuero que aguantan el agua' : 'tenis de cuero, que no se dañan con la lluvia'); }
-    if (!NO_BELT.includes(c.pantalon) && !(BELT_FOR[c.zapatos] || []).includes(c.correa)) c.correa = (BELT_FOR[c.zapatos] || ['A01'])[0];
+    if (!NO_BELT.includes(c.pantalon) && !(BELT_FOR[c.zapatos] || []).includes(c.correa)) c.correa = (BELT_FOR[c.zapatos] || ['A03b'])[0];
     if (NO_BELT.includes(c.pantalon)) c.correa = null;
     const cool = w.tmin <= 17 || w.fog || w.mananaLluvia;
     if (cool && !c.capa) { c.capa = LAYERS.find(s => INV[s] && s !== c.capa && INV[s].color !== INV[c.pantalon].color) || null; if (c.capa) why.push('una capa para la mañana fresca'); }
@@ -124,7 +124,7 @@
       c.camisa = 'camisa' in locks ? locks.camisa : (c.capa && !SUIT[c.capa] && casual && Math.random() < .08 ? null : pick(P.camisa));
       c.zapatos = 'zapatos' in locks ? locks.zapatos : pick(P.zapatos);
       if (!c.camisa && !c.capa) continue;
-      const belts = NO_BELT.includes(c.pantalon) ? [null] : (BELT_FOR[c.zapatos] || ['A01']).filter(free);
+      const belts = NO_BELT.includes(c.pantalon) ? [null] : (BELT_FOR[c.zapatos] || ['A03b']).filter(free);
       const ties = SUIT[c.capa] && kind.target >= 3.8 ? ['K02', 'K01', null] : [null];
       let ok = null;
       for (const be of belts) { for (const ti of ties) { const x = { ...c, correa: be, corbata: ti }; const j = judge(x); if (j.notes.length) continue; const col = colorCheck(x, j.avg); if (col.bad.length) continue; ok = { c: x, j, col }; break; } if (ok) break; }
