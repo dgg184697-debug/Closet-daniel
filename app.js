@@ -61,6 +61,7 @@
   function dayKind(events, day) {
     const txt = (events || []).map(e => (e.titulo + ' ' + e.categoria + ' ' + e.lugar).toLowerCase()).join(' | ');
     const dow = new Date(day + 'T12:00:00-05:00').getUTCDay(); const weekend = dow === 0 || dow === 6;
+    if (/etiqueta|esmoquin|black tie|gala/.test(txt)) return { target: 4.6, label: 'evento de etiqueta', evening: true, tux: true };
     if (/cena|gala|boda|matrimonio|evento|cóctel|coctel/.test(txt)) return { target: 4, label: 'cena o evento', evening: true };
     if (/reuni|cliente|junta|presentaci|cita con|comit|negocia/.test(txt)) return { target: 3.8, label: 'reuniones' };
     if (/vuelo|aeropuerto|viaje/.test(txt)) return { target: 2.4, label: 'viaje', travel: true };
@@ -68,14 +69,16 @@
     return weekend ? { target: 2.2, label: 'fin de semana' } : { target: 3, label: 'día de agencia' };
   }
   function adapt(o, w) {
-    const c = { capa: o.capa, camisa: o.arriba, corbata: null, panuelo: null, pantalon: o.abajo, correa: o.correa, zapatos: o.zapatos, rain: w.llueve };
+    const c = { capa: o.capa, camisa: o.arriba, corbata: o.corbata || null, panuelo: o.panuelo || null, pantalon: o.abajo, correa: o.correa, zapatos: o.zapatos, rain: w.llueve };
     const why = [];
+    if (o.capa === TUX) return { c, why }; // black tie is fixed, and it is indoors
     if (w.llueve && !RAIN_OK.includes(c.zapatos)) { c.zapatos = INV[c.pantalon].formalidad >= 3 ? 'Z03' : 'Z07'; why.push(c.zapatos === 'Z03' ? 'oxford burdeos de cuero que aguantan el agua' : 'tenis de cuero, que no se dañan con la lluvia'); }
-    if (c.pantalon !== 'P06' && !(BELT_FOR[c.zapatos] || []).includes(c.correa)) c.correa = (BELT_FOR[c.zapatos] || ['A01'])[0];
-    if (c.pantalon === 'P06') c.correa = null;
+    if (!NO_BELT.includes(c.pantalon) && !(BELT_FOR[c.zapatos] || []).includes(c.correa)) c.correa = (BELT_FOR[c.zapatos] || ['A01'])[0];
+    if (NO_BELT.includes(c.pantalon)) c.correa = null;
     const cool = w.tmin <= 17 || w.fog || w.mananaLluvia;
     if (cool && !c.capa) { c.capa = LAYERS.find(s => INV[s] && s !== c.capa && INV[s].color !== INV[c.pantalon].color) || null; if (c.capa) why.push('una capa para la mañana fresca'); }
-    if (w.tmax >= 27 && c.capa) { c.capa = null; why.push('sin capa, porque hace calor'); }
+    if (w.tmax >= 27 && c.capa && !SUIT[c.capa]) { c.capa = null; why.push('sin capa, porque hace calor'); }
+    if (w.llueve && !c.capa && INV.S20 && INV[c.pantalon].formalidad <= 4) { c.capa = 'S20'; why.push('la Harrington de Burberry encima, para la lluvia'); }
     if (!c.camisa && !c.capa) c.camisa = 'C02';
     return { c, why };
   }
@@ -83,6 +86,7 @@
   function pickOutfit(w, kind, day) {
     let best = null;
     for (const o of DATA.outfits) {
+      if ((o.capa === TUX) !== !!kind.tux) continue; // the tuxedo only for black-tie days, and only it
       const { c, why } = adapt(o, w); const j = judge(c);
       let score = -Math.abs(j.avg - kind.target) * 3 - j.notes.filter(n => n.lvl === 'bad').length * 10 - j.notes.length * 1.5;
       if (kind.evening && o.id === 'O03') score += 2; if (kind.travel && o.id === 'O07') score += 3;

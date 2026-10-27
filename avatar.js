@@ -18,11 +18,21 @@ function canvasTex(w, h, draw) {
 
 // ---------- 2D drawing of the torso front (shirt, tie, layer) ----------
 function drawStripes(g, x0, y0, w, h, s, scale = 1) {
-  g.fillStyle = s.base; g.fillRect(x0, y0, w, h);
+  if (s.heather || s.waffle) drawKnit(g, x0, y0, w, h, s); else { g.fillStyle = s.base; g.fillRect(x0, y0, w, h); }
   if (s.stripe) { g.fillStyle = s.stripe; const step = 34 * scale, sw = (s.stripeW ? 12 : 6) * scale; for (let x = x0; x < x0 + w; x += step) g.fillRect(x, y0, sw, h); }
   if (s.weave) { g.fillStyle = 'rgba(0,0,0,0.035)'; for (let y = y0; y < y0 + h; y += 4) g.fillRect(x0, y, w, 1); }
   if (s.knit) { g.fillStyle = 'rgba(255,255,255,0.06)'; for (let y = y0; y < y0 + h; y += 6) g.fillRect(x0, y, w, 2); }
+  if (s.linen) for (let i = 0; i < 0.6 * w * h / 300; i++) { g.fillStyle = Math.random() < .5 ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.06)'; g.fillRect(x0 + Math.random() * w, y0 + Math.random() * h, (8 + Math.random() * 30) * scale, 1.5); }
+  if (s.pique) { g.fillStyle = 'rgba(0,0,0,.07)'; for (let y = y0; y < y0 + h; y += 5) for (let x = x0 + ((y - y0) / 5 % 2) * 2.5; x < x0 + w; x += 5) g.fillRect(x, y, 2, 2); }
 }
+// woven outer layers: tailoring sheen, diamond quilting, puffer baffles
+function drawCloth(g, x0, y0, w, h, s) {
+  g.fillStyle = s.base; g.fillRect(x0, y0, w, h);
+  if (s.sheen) for (let x = x0; x < x0 + w; x += 5) { g.fillStyle = `rgba(255,255,255,${0.02 + 0.03 * Math.abs(Math.sin(x / 37))})`; g.fillRect(x, y0, 2, h); }
+  if (s.quilt) { g.strokeStyle = shade(s.base, -0.12); g.lineWidth = 2; for (let k = -h; k < w + h; k += 44) { g.beginPath(); g.moveTo(x0 + k, y0); g.lineTo(x0 + k + h, y0 + h); g.stroke(); g.beginPath(); g.moveTo(x0 + k, y0); g.lineTo(x0 + k - h, y0 + h); g.stroke(); } }
+  if (s.baffles) for (let y = y0; y < y0 + h; y += 64) { const gr = g.createLinearGradient(0, y, 0, y + 64); gr.addColorStop(0, 'rgba(0,0,0,.22)'); gr.addColorStop(0.35, 'rgba(255,255,255,.10)'); gr.addColorStop(1, 'rgba(0,0,0,.16)'); g.fillStyle = gr; g.fillRect(x0, y, w, 64); }
+}
+const CLOTH = ['blazer', 'jacket', 'gilet'];
 function drawKnit(g, x0, y0, w, h, s) {
   g.fillStyle = s.base; g.fillRect(x0, y0, w, h);
   if (s.heather) { for (let i = 0; i < 2600; i++) { g.fillStyle = Math.random() < .5 ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.07)'; g.fillRect(x0 + Math.random() * w, y0 + Math.random() * h, 2, 2); } }
@@ -46,18 +56,25 @@ function drawTie(g, cx, top, len, s) {
 }
 
 function torsoTexture(o, skin) {
-  const sh = o.camisa && STYLE[o.camisa], cp = o.capa && STYLE[o.capa], tie = o.corbata && sh && STYLE[o.corbata];
+  const cp = o.capa && STYLE[o.capa], sh = (o.camisa && STYLE[o.camisa]) || (cp && cp.shirt) || null, tie = o.corbata && sh && STYLE[o.corbata];
+  const tailored = !!(cp && cp.kind === 'blazer');
   return canvasTex(1024, 512, (g, W, H) => {
     const cx = W / 2; // front centre (u = 0.5)
     // base layer: shirt, or skin when the sweater goes on bare skin
     if (sh) {
       drawStripes(g, 0, 0, W, H, sh);
-      g.fillStyle = shade(sh.base, -0.06); g.fillRect(cx - 3, 0, 6, H); // placket
-      g.fillStyle = shade(sh.base, 0.12); for (let y = 60; y < H; y += 70) { g.beginPath(); g.arc(cx, y, 4.5, 0, TAU); g.fill(); }
-      if (sh.pocket) { g.strokeStyle = shade(sh.base, -0.14); g.lineWidth = 2.5; g.strokeRect(cx + 60, 120, 70, 80); }
-      if (tie) drawTie(g, cx, 6, 330, tie);
+      if (sh.polo) { // short placket with two buttons
+        g.strokeStyle = shade(sh.base, -0.12); g.lineWidth = 2.5; g.strokeRect(cx - 14, -2, 28, 150);
+        g.fillStyle = shade(sh.base, 0.14); for (const y of [50, 108]) { g.beginPath(); g.arc(cx, y, 5, 0, TAU); g.fill(); }
+        if (sh.bear) { g.fillStyle = '#e9e2cf'; g.beginPath(); g.arc(cx + 130, 132, 13, 0, TAU); g.fill(); g.fillRect(cx + 119, 144, 22, 24); }
+      } else {
+        g.fillStyle = shade(sh.base, -0.06); g.fillRect(cx - 3, 0, 6, H); // placket
+        g.fillStyle = shade(sh.base, 0.12); for (let y = 60; y < H; y += 70) { g.beginPath(); g.arc(cx, y, 4.5, 0, TAU); g.fill(); }
+        if (sh.pocket) { g.strokeStyle = shade(sh.base, -0.14); g.lineWidth = 2.5; g.strokeRect(cx + 60, 120, 70, 80); }
+      }
+      if (tie && !tie.bow) drawTie(g, cx, 6, 330, tie);
     } else { g.fillStyle = skin; g.fillRect(0, 0, W, H); }
-    const square = () => { if (o.panuelo && STYLE[o.panuelo]) { const p = STYLE[o.panuelo]; g.fillStyle = p.base; g.beginPath(); g.moveTo(cx + 56, 132); g.lineTo(cx + 150, 132); g.lineTo(cx + 128, 72); g.lineTo(cx + 100, 94); g.lineTo(cx + 74, 70); g.closePath(); g.fill(); g.fillStyle = p.dot; for (const [dx, dy] of [[86, 108], [104, 100], [118, 112]]) { g.beginPath(); g.arc(cx + dx, dy, 3, 0, TAU); g.fill(); } } };
+    const square = () => { if (o.panuelo && STYLE[o.panuelo]) { const p = STYLE[o.panuelo], ox = cx + (tailored ? 80 : 0), oy = tailored ? 100 : 0; g.fillStyle = p.base; g.beginPath(); g.moveTo(ox + 56, oy + 132); g.lineTo(ox + 150, oy + 132); g.lineTo(ox + 128, oy + 72); g.lineTo(ox + 100, oy + 94); g.lineTo(ox + 74, oy + 70); g.closePath(); g.fill(); g.fillStyle = p.dot; for (const [dx, dy] of [[86, 108], [104, 100], [118, 112]]) { g.beginPath(); g.arc(ox + dx, oy + dy, 3, 0, TAU); g.fill(); } } };
     if (!cp) { square(); return; }
     // layer on top, with its neckline cut out
     g.save();
@@ -66,12 +83,31 @@ function torsoTexture(o, skin) {
     else if (cp.kind === 'vest' || cp.kind === 'cardigan') { g.moveTo(cx - 80, 0); g.lineTo(cx, cp.kind === 'vest' ? 230 : 250); g.lineTo(cx + 80, 0); }
     else if (cp.kind === 'polo') { g.moveTo(cx - 60, 0); g.lineTo(cx, 150); g.lineTo(cx + 60, 0); }
     else if (cp.kind === 'halfzip') { g.moveTo(cx - 40, 0); g.lineTo(cx - 6, 120); g.lineTo(cx + 6, 120); g.lineTo(cx + 40, 0); }
+    else if (tailored && cp.shawl) { g.moveTo(cx - 95, 0); g.quadraticCurveTo(cx - 80, 230, cx, 320); g.quadraticCurveTo(cx + 80, 230, cx + 95, 0); }
+    else if (tailored) { g.moveTo(cx - 95, 0); g.lineTo(cx, 310); g.lineTo(cx + 95, 0); }
+    else if (cp.kind === 'gilet') { g.moveTo(cx - 50, 0); g.lineTo(cx, 36); g.lineTo(cx + 50, 0); }
     g.clip('evenodd');
-    drawKnit(g, 0, 0, W, H, cp);
-    // ribbed hem and neckline trim
-    g.fillStyle = shade(cp.base, -0.07); g.fillRect(0, H - 54, W, 54);
-    g.fillStyle = 'rgba(0,0,0,.08)'; for (let x = 0; x < W; x += 8) g.fillRect(x, H - 54, 3, 54);
+    if (CLOTH.includes(cp.kind)) drawCloth(g, 0, 0, W, H, cp); else drawKnit(g, 0, 0, W, H, cp);
+    if (tailored) { // lapels along the opening, drawn inside the clip so they sit on the jacket side
+      g.strokeStyle = cp.lapel; g.lineWidth = 92; g.beginPath();
+      if (cp.shawl) { g.moveTo(cx - 95, 0); g.quadraticCurveTo(cx - 80, 230, cx, 320); g.quadraticCurveTo(cx + 80, 230, cx + 95, 0); }
+      else { g.moveTo(cx - 95, 0); g.lineTo(cx, 310); g.lineTo(cx + 95, 0); }
+      g.stroke();
+    }
+    // ribbed hem on knits; jackets carry on below the waist and get their hem there
+    if (!CLOTH.includes(cp.kind)) {
+      g.fillStyle = shade(cp.base, -0.07); g.fillRect(0, H - 54, W, 54);
+      g.fillStyle = 'rgba(0,0,0,.08)'; for (let x = 0; x < W; x += 8) g.fillRect(x, H - 54, 3, 54);
+    }
     g.restore();
+    if (tailored) {
+      g.strokeStyle = shade(cp.base, -0.22); g.lineWidth = 2.5; g.beginPath(); // outer lapel edge
+      if (cp.shawl) { g.moveTo(cx - 139, 0); g.quadraticCurveTo(cx - 122, 250, cx - 6, 362); g.moveTo(cx + 139, 0); g.quadraticCurveTo(cx + 122, 250, cx + 6, 362); }
+      else { g.moveTo(cx - 137, 13); g.lineTo(cx - 42, 323); g.moveTo(cx + 137, 13); g.lineTo(cx + 42, 323); g.moveTo(cx - 128, 70); g.lineTo(cx - 98, 84); g.moveTo(cx + 128, 70); g.lineTo(cx + 98, 84); }
+      g.stroke();
+      g.fillStyle = cp.buttons; for (const y of cp.oneButton ? [372] : [360, 440]) { g.beginPath(); g.arc(cx, y, 9, 0, TAU); g.fill(); }
+      if (!o.panuelo) { g.fillStyle = shade(cp.base, -0.1); g.fillRect(cx + 130, 228, 104, 8); } // breast pocket welt
+    }
     g.strokeStyle = shade(cp.base, -0.1); g.lineWidth = 12;
     if (cp.kind === 'crew') { g.beginPath(); g.moveTo(cx - 76, 0); g.quadraticCurveTo(cx, 54, cx + 76, 0); g.stroke(); }
     if (cp.kind === 'vest' || cp.kind === 'cardigan') { g.beginPath(); g.moveTo(cx - 86, 0); g.lineTo(cx, cp.kind === 'vest' ? 240 : 260); g.lineTo(cx + 86, 0); g.stroke(); }
@@ -79,7 +115,8 @@ function torsoTexture(o, skin) {
     if (cp.tape) { g.fillStyle = cp.tape; g.fillRect(cx - 74, 0, 148, 5); }
     // closures
     if (cp.kind === 'cardigan' || cp.kind === 'polo') { g.fillStyle = shade(cp.base, -0.1); g.fillRect(cx - 9, cp.kind === 'polo' ? 150 : 250, 18, H); g.fillStyle = cp.buttons; for (let y = (cp.kind === 'polo' ? 185 : 285); y < H - 60; y += 58) { g.beginPath(); g.arc(cx, y, 7, 0, TAU); g.fill(); } }
-    if (cp.kind === 'zip') { g.fillStyle = '#9aa0a8'; g.fillRect(cx - 3, 0, 6, H - 10); g.fillRect(cx - 7, 30, 14, 26); }
+    if (cp.kind === 'zip' || ((cp.kind === 'jacket' || cp.kind === 'gilet') && !cp.snaps)) { g.fillStyle = cp.kind === 'zip' ? '#9aa0a8' : shade(cp.base, -0.2); g.fillRect(cx - 3, 0, 6, H - 10); g.fillStyle = '#9aa0a8'; g.fillRect(cx - 7, 30, 14, 26); }
+    if (cp.snaps) { g.fillStyle = shade(cp.base, -0.15); g.fillRect(cx - 2, 0, 4, H); g.fillStyle = '#b9bcc2'; for (let y = 50; y < H - 40; y += 80) { g.beginPath(); g.arc(cx + 14, y, 7, 0, TAU); g.fill(); } }
     if (cp.kind === 'halfzip') { g.fillStyle = '#7d6a4f'; g.fillRect(cx - 3, 0, 6, 120); g.fillStyle = '#c9b089'; g.fillRect(cx - 7, 96, 14, 22); }
     if (cp.pockets) { g.fillStyle = shade(cp.base, -0.06); g.fillRect(cx - 230, 300, 120, 110); g.fillRect(cx + 110, 300, 120, 110); }
     if (cp.logo) { g.fillStyle = cp.logo; g.beginPath(); g.ellipse(cx + 120, 150, 14, 10, 0, 0, TAU); g.fill(); }
@@ -89,10 +126,16 @@ function torsoTexture(o, skin) {
   });
 }
 function sleeveTexture(s, layer) {
-  return canvasTex(256, 256, (g, W, H) => { if (layer) { drawKnit(g, 0, 0, W, H, s); g.fillStyle = shade(s.base, -0.07); g.fillRect(0, H - 34, W, 34); } else drawStripes(g, 0, 0, W, H, s, 0.6); });
+  return canvasTex(256, 256, (g, W, H) => {
+    if (layer && CLOTH.includes(s.kind)) { drawCloth(g, 0, 0, W, H, s); if (s.harrington || s.baffles) { g.fillStyle = shade(s.base, -0.07); g.fillRect(0, H - 30, W, 30); } }
+    else if (layer) { drawKnit(g, 0, 0, W, H, s); g.fillStyle = shade(s.base, -0.07); g.fillRect(0, H - 34, W, 34); }
+    else drawStripes(g, 0, 0, W, H, s, 0.6);
+  });
 }
 function pantsTexture(s) {
   return canvasTex(256, 512, (g, W, H) => { g.fillStyle = s.base; g.fillRect(0, 0, W, H); if (s.heather) for (let i = 0; i < 1500; i++) { g.fillStyle = Math.random() < .5 ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.06)'; g.fillRect(Math.random() * W, Math.random() * H, 2, 2); }
+    if (s.linen) for (let i = 0; i < 260; i++) { g.fillStyle = Math.random() < .5 ? 'rgba(255,255,255,.10)' : 'rgba(0,0,0,.07)'; g.fillRect(Math.random() * W, Math.random() * H, 6 + Math.random() * 18, 1.5); }
+    if (s.satin) { g.fillStyle = s.satin; g.fillRect(W * 0.25 - 5, 0, 10, H); g.fillRect(W * 0.75 - 5, 0, 10, H); } // tuxedo side stripes
     g.fillStyle = shade(s.base, 0.06); g.fillRect(W / 2 - 2, 0, 4, H); /* crease at the front (u=.5) */ });
 }
 
@@ -238,25 +281,41 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
 
   function buildTop(o) {
     const g = clear('top');
-    const sh = o.camisa && STYLE[o.camisa], cp = o.capa && STYLE[o.capa];
+    const cp = o.capa && STYLE[o.capa], sh = (o.camisa && STYLE[o.camisa]) || (cp && cp.shirt) || null;
     const slotTorso = cp ? 'capa' : 'camisa';
     const tex = torsoTexture(o, look.skin);
     const h = B.torsoTop - B.torsoBot;
-    const torso = tag(new THREE.Mesh(new THREE.CylinderGeometry(B.torsoR[0] + (cp ? 0.02 : 0), B.torsoR[1] + (cp ? 0.02 : 0), h, 48, 1, true, Math.PI, TAU), mat('#fff', { map: tex, rough: cp ? 0.9 : 0.7 })), slotTorso);
+    const cloth = !!(cp && CLOTH.includes(cp.kind));
+    const ex = cp ? (cp.baffles ? 0.07 : cloth ? 0.035 : 0.02) : 0, rough = cp ? (cp.gloss ? 0.35 : cp.sheen ? 0.55 : 0.9) : 0.7;
+    const torso = tag(new THREE.Mesh(new THREE.CylinderGeometry(B.torsoR[0] + ex, B.torsoR[1] + ex, h, 48, 1, true, Math.PI, TAU), mat('#fff', { map: tex, rough })), slotTorso);
     torso.scale.z = B.depth; torso.position.y = B.torsoBot + h / 2; g.add(torso);
-    const shoulders = tag(new THREE.Mesh(new THREE.SphereGeometry(B.torsoR[0] + (cp ? 0.02 : 0), 48, 16, 0, TAU, 0, Math.PI / 2), mat(cp ? cp.base : sh.base, { rough: cp ? 0.9 : 0.7 })), slotTorso);
+    const shoulders = tag(new THREE.Mesh(new THREE.SphereGeometry(B.torsoR[0] + ex, 48, 16, 0, TAU, 0, Math.PI / 2), mat(cp ? cp.base : sh.base, { rough })), slotTorso);
     shoulders.scale.set(1.1, 0.2, B.depth); shoulders.position.y = B.torsoTop - 0.01; g.add(shoulders);
-    // sleeves: layer's sleeves if it has them, else the shirt's
-    const sleeveS = cp && cp.kind !== 'vest' ? cp : sh || cp; const layerSleeve = !!(cp && cp.kind !== 'vest');
+    // jackets carry on below the waist: hip length for outerwear, longer for tailoring
+    if (cloth) {
+      const bot = cp.kind === 'blazer' ? 0.6 : cp.kind === 'gilet' ? 0.8 : 0.77, eh = B.torsoBot - bot;
+      const etex = canvasTex(1024, 128, (c, W, H) => { drawCloth(c, 0, 0, W, H, cp);
+        if (cp.kind === 'blazer') { c.fillStyle = shade(cp.base, -0.25); c.fillRect(W / 2 - 1, 0, 3, H); c.fillStyle = shade(cp.base, -0.1); c.fillRect(W / 2 - 250, 28, 130, 10); c.fillRect(W / 2 + 120, 28, 130, 10); }
+        else { c.fillStyle = shade(cp.base, -0.07); c.fillRect(0, H - 30, W, 30); if (cp.harrington) { c.fillStyle = 'rgba(0,0,0,.08)'; for (let x = 0; x < W; x += 8) c.fillRect(x, H - 30, 3, 30); }
+          c.fillStyle = cp.snaps ? shade(cp.base, -0.15) : shade(cp.base, -0.2); c.fillRect(W / 2 - 3, 0, 6, H); } });
+      const skirt = tag(new THREE.Mesh(new THREE.CylinderGeometry(B.torsoR[1] + ex + 0.005, B.torsoR[1] + ex + (cp.kind === 'blazer' ? 0.05 : 0.03), eh, 48, 1, true, Math.PI, TAU), mat('#fff', { map: etex, rough })), 'capa');
+      skirt.scale.z = B.depth + 0.05; skirt.position.y = bot + eh / 2; g.add(skirt);
+    }
+    // sleeves: layer's sleeves if it has them, else the shirt's (short on polos, bare arms when there is no shirt under a sleeveless layer)
+    const noSleeve = !!(cp && (cp.kind === 'vest' || cp.kind === 'gilet')), layerSleeve = !!(cp && !noSleeve);
+    const sleeveS = layerSleeve ? cp : sh || null, short = !layerSleeve && sh && sh.polo;
+    const sr = cp && cp.baffles ? [0.15, 0.165] : cloth ? [0.125, 0.14] : [0.115, 0.13];
     for (const sx of [-1, 1]) {
-      const sl = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.13, 0.72, 20), mat('#fff', { map: sleeveTexture(sleeveS, layerSleeve), rough: layerSleeve ? 0.9 : 0.7 })), layerSleeve ? 'capa' : 'camisa');
-      sl.position.set(sx * 0.545, 1.24, 0); sl.rotation.z = sx * 0.17; g.add(sl);
-      const sho = tag(new THREE.Mesh(new THREE.SphereGeometry(0.128, 20, 16), mat(sleeveS.base, { rough: 0.85 })), sl.userData.slot); sho.position.set(sx * 0.47, 1.545, 0); g.add(sho);
-      if (layerSleeve && sh) { const cuff = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.108, 0.108, 0.05, 18), mat(sh.base)), 'camisa'); cuff.position.set(sx * 0.605, 0.905, 0); cuff.rotation.z = sx * 0.17; g.add(cuff); }
+      if (!sleeveS) { const arm = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.095, 0.72, 16), skinM), 'camisa'); arm.position.set(sx * 0.545, 1.24, 0); arm.rotation.z = sx * 0.17; g.add(arm); continue; }
+      const len = short ? 0.3 : 0.72, sl = tag(new THREE.Mesh(new THREE.CylinderGeometry(sr[0], short ? 0.125 : sr[1], len, 20), mat('#fff', { map: sleeveTexture(sleeveS, layerSleeve), rough: layerSleeve ? rough : 0.7 })), layerSleeve ? 'capa' : 'camisa');
+      sl.position.set(sx * (short ? 0.509 : 0.545), short ? 1.447 : 1.24, 0); sl.rotation.z = sx * 0.17; g.add(sl);
+      if (short) { const arm = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.082, 0.09, 0.48, 16), skinM), 'camisa'); arm.position.set(sx * 0.574, 1.08, 0); arm.rotation.z = sx * 0.17; g.add(arm); }
+      const sho = tag(new THREE.Mesh(new THREE.SphereGeometry(sr[0] + 0.013, 20, 16), mat(sleeveS.base, { rough: 0.85 })), sl.userData.slot); sho.position.set(sx * 0.47, 1.545, 0); g.add(sho);
+      if (layerSleeve && sh && !sh.polo) { const cuff = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.108, 0.108, 0.05, 18), mat(sh.base)), 'camisa'); cuff.position.set(sx * 0.605, 0.905, 0); cuff.rotation.z = sx * 0.17; g.add(cuff); }
     }
     // collar
-    if (sh && !(cp && cp.kind === 'zip')) {
-      const spread = sh.collar === 'spread' ? 0.75 : sh.collar === 'bd' ? 0.45 : 0.55;
+    if (sh && !(cp && (cp.kind === 'zip' || cp.kind === 'jacket'))) {
+      const spread = sh.collar === 'spread' ? 0.75 : sh.collar === 'camp' ? 0.95 : sh.polo ? 0.65 : sh.collar === 'bd' ? 0.45 : 0.55;
       for (const sx of [-1, 1]) {
         const shape = new THREE.Shape(); shape.moveTo(0, 0); shape.lineTo(0.19, 0.02); shape.lineTo(0.03, -0.2); shape.closePath();
         const flap = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.02, bevelEnabled: false }), mat(sh.base, { side: THREE.DoubleSide })), 'camisa');
@@ -267,16 +326,26 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
     }
     if (cp && cp.kind === 'crew') { const r = tag(new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.035, 10, 32), mat(shade(cp.base, -0.08), { rough: 0.95 })), 'capa'); r.rotation.x = Math.PI / 2 - 0.25; r.position.set(0, B.torsoTop + 0.06, 0.03); r.scale.set(1.15, 1, 1); g.add(r); }
     if (cp && cp.kind === 'zip') { const c = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.22, 0.2, 28, 1, true), mat(cp.base, { rough: 0.9, side: THREE.DoubleSide })), 'capa'); c.position.y = B.torsoTop + 0.08; g.add(c); }
+    if (cp && (cp.kind === 'jacket' || cp.kind === 'gilet')) { // stand collar, lined
+      const ch = cp.kind === 'gilet' ? 0.11 : cp.harrington ? 0.12 : cp.baffles ? 0.2 : 0.16, r0 = cp.baffles ? 0.23 : 0.21;
+      const c = tag(new THREE.Mesh(new THREE.CylinderGeometry(r0, r0 + 0.02, ch, 28, 1, true), mat(cp.collarColor || cp.base, { rough: cp.collarColor ? 0.95 : rough, side: THREE.FrontSide })), 'capa'); c.position.y = B.torsoTop + 0.04 + ch / 2; g.add(c);
+      const lin = tag(new THREE.Mesh(new THREE.CylinderGeometry(r0 - 0.004, r0 + 0.016, ch, 28, 1, true), mat(cp.lining || shade(cp.base, -0.1), { side: THREE.BackSide })), 'capa'); lin.position.copy(c.position); g.add(lin);
+    }
     if (cp && cp.kind === 'polo') for (const sx of [-1, 1]) { const shape = new THREE.Shape(); shape.moveTo(0, 0); shape.lineTo(0.2, 0); shape.lineTo(0.03, -0.2); shape.closePath(); const flap = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth: 0.025, bevelEnabled: false }), mat(shade(cp.base, -0.05), { rough: 0.95 })), 'capa'); flap.position.set(sx * 0.02, B.torsoTop + 0.08, 0.17); flap.rotation.set(-0.5, sx > 0 ? 0.2 : Math.PI - 0.2, sx > 0 ? -0.35 : 0.35); g.add(flap); }
     if (cp && cp.patch) { const p = tag(new THREE.Mesh(new THREE.CircleGeometry(0.05, 20), mat('#f2f2f2')), 'capa'); p.position.set(-0.6, 1.33, 0.06); p.rotation.y = -0.6; g.add(p); }
     // a 3D tie tip so it reads in profile too
-    if (o.corbata && sh && STYLE[o.corbata] && !(cp && ['crew', 'zip'].includes(cp.kind))) {
+    if (o.corbata && sh && STYLE[o.corbata] && STYLE[o.corbata].bow && !(cp && ['crew', 'zip', 'jacket'].includes(cp.kind))) { // bow tie
+      const t = STYLE[o.corbata], bm = mat(t.base, { rough: 0.4 });
+      for (const sx of [-1, 1]) { const w = tag(new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.11, 14), bm), 'corbata'); w.rotation.z = sx * Math.PI / 2; w.scale.set(1, 1, 0.45); w.position.set(sx * 0.058, B.torsoTop + 0.03, 0.27); g.add(w); }
+      const k = tag(new THREE.Mesh(new THREE.SphereGeometry(0.026, 12, 10), bm), 'corbata'); k.scale.set(1, 1.1, 0.7); k.position.set(0, B.torsoTop + 0.03, 0.28); g.add(k);
+    } else if (o.corbata && sh && STYLE[o.corbata] && !(cp && ['crew', 'zip', 'jacket'].includes(cp.kind))) {
       const t = STYLE[o.corbata]; const knot = tag(new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 10), mat(shade(t.base, -0.05))), 'corbata'); knot.scale.set(1, 1.1, 0.7); knot.position.set(0, B.torsoTop - 0.02, 0.27); g.add(knot);
     }
   }
   function buildBottom(o) {
     const g = clear('bottom');
-    const s = STYLE[o.pantalon] || { base: '#555' };
+    const tux = o.capa && STYLE[o.capa] && STYLE[o.capa].pants; // the tuxedo brings its own trousers
+    const s = tux || STYLE[o.pantalon] || { base: '#555' };
     const tex = pantsTexture(s);
     const hip = tag(new THREE.Mesh(new THREE.CylinderGeometry(B.torsoR[1] + 0.015, 0.36, 0.3, 40, 1, false, Math.PI, TAU), mat(s.base, { rough: s.sheen ? 0.45 : 0.75 })), 'pantalon');
     hip.scale.z = B.depth; hip.position.y = B.hipY - 0.12; g.add(hip);
@@ -284,10 +353,12 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
       const leg = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.135, B.hipY - 0.12 - B.ankleY, 24, 1, false, Math.PI, TAU), mat('#fff', { map: tex, rough: s.sheen ? 0.45 : 0.75 })), 'pantalon');
       leg.position.set(sx * B.legX, (B.hipY - 0.12 + B.ankleY) / 2, 0); g.add(leg);
     }
+    if (s.drawstring) { const cm = mat('#efe9dc', { rough: 0.9 }); for (const sx of [-1, 1]) { const c = tag(new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.16, 6), cm), 'pantalon'); c.position.set(sx * 0.03, B.hipY - 0.12, (B.torsoR[1] + 0.02) * B.depth + 0.01); c.rotation.z = sx * 0.12; g.add(c); } }
     if (s.adjusters) for (const sx of [-1, 1]) { const a = tag(new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.05, 0.03), mat(shade(s.base, -0.08))), 'pantalon'); a.position.set(sx * 0.33, B.hipY - 0.02, 0.14); a.rotation.y = sx * 0.9; g.add(a); }
     // belt
     const gb = clear('belt');
-    if (o.correa && STYLE[o.correa]) {
+    const closed = o.capa && STYLE[o.capa] && CLOTH.includes(STYLE[o.capa].kind); // a jacket hides the belt
+    if (o.correa && STYLE[o.correa] && !tux && !closed) {
       const b = STYLE[o.correa];
       const band = tag(new THREE.Mesh(new THREE.CylinderGeometry(B.torsoR[1] + 0.03, B.torsoR[1] + 0.03, 0.075, 40, 1, true), mat(b.base, { rough: b.woven ? 0.95 : 0.4, side: THREE.DoubleSide })), 'correa');
       band.scale.z = B.depth + 0.02; band.position.y = B.hipY - 0.03; gb.add(band);
@@ -324,7 +395,7 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
     const prev = outfit; outfit = { ...o };
     const diff = k => changed ? changed === k : prev[k] !== o[k];
     if (!parts.top || ['camisa', 'capa', 'corbata', 'panuelo'].some(diff)) buildTop(outfit);
-    if (!parts.bottom || ['pantalon', 'correa'].some(diff)) buildBottom(outfit);
+    if (!parts.bottom || ['pantalon', 'correa', 'capa'].some(diff)) buildBottom(outfit);
     if (!parts.shoes || diff('zapatos')) buildShoes(outfit);
     if (changed) { pop[{ camisa: 'top', capa: 'top', corbata: 'top', panuelo: 'top', pantalon: 'bottom', correa: 'belt', zapatos: 'shoes' }[changed]] = 1; hop = 1; }
   }
