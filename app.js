@@ -83,18 +83,62 @@
     return { c, why };
   }
   function hash(s) { let h = 0; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) | 0; return Math.abs(h); }
-  function pickOutfit(w, kind, day) {
+  const KIND_GROUP = { 'evento de etiqueta': ['Etiqueta'], 'cena o evento': ['Cena elegante'], reuniones: ['Reunión importante', 'Reunión de día'], viaje: ['Viaje'], 'plan relajado': ['Fin de semana'], 'fin de semana': ['Fin de semana'], 'día de agencia': ['Día de agencia'] };
+  function pickOutfit(w, kind, day, ban) {
     let best = null;
     for (const o of DATA.outfits) {
       if ((o.capa === TUX) !== !!kind.tux) continue; // the tuxedo only for black-tie days, and only it
       const { c, why } = adapt(o, w); const j = judge(c);
-      let score = -Math.abs(j.avg - kind.target) * 3 - j.notes.filter(n => n.lvl === 'bad').length * 10 - j.notes.length * 1.5;
-      if (kind.evening && o.id === 'O03') score += 2; if (kind.travel && o.id === 'O07') score += 3;
-      if (w.llueve && o.id === 'O10') score += 1.5;
+      if (ORDER.some(k => c[k] && ban.includes(c[k]))) continue; // something is in the wash
+      const col = colorCheck(c, j.avg);
+      let score = -Math.abs(j.avg - kind.target) * 3 - j.notes.filter(n => n.lvl === 'bad').length * 10 - j.notes.length * 1.5 - col.bad.length * 5 + col.score * .3;
+      if ((KIND_GROUP[kind.label] || []).includes(o.grupo)) score += 2;
+      if (w.llueve && o.grupo === 'Lluvia') score += 1; if (w.tmax >= 28 && o.grupo === 'Calor y tierra caliente') score += 1;
       score += (hash(day + o.id) % 100) / 100; // a little variety between days
       if (!best || score > best.score) best = { o, c, why, score };
     }
     return best;
+  }
+  /* another outfit at random: keeps what Daniel left fixed, skips what is in the wash, and still has to pass every rule */
+  const FIXABLE = ['capa', 'camisa', 'pantalon', 'zapatos'];
+  const HEAVY = ['S16', 'S17', 'S18'];
+  const keyOf = c => ORDER.map(k => c[k] || '-').join('|');
+  function generate(w, kind, locks, ban, avoid) {
+    const casual = kind.target <= 2.4, hot = w.tmax >= 27, cool = w.tmin <= 17 || w.fog || w.mananaLluvia;
+    const free = id => id && !ban.includes(id);
+    const P = {
+      camisa: LISTS.camisa.filter(free).filter(id => casual || !HOME_ONLY.includes(id)),
+      capa: LISTS.capa.filter(free).filter(id => id !== TUX && (casual || !HOME_ONLY.includes(id)) && (w.tmin <= 14 || !HEAVY.includes(id)) && (!SUIT[id] || kind.target >= 3.6)),
+      pantalon: LISTS.pantalon.filter(free).filter(id => !Object.values(SUIT).includes(id) || kind.target >= 3.6),
+      zapatos: LISTS.zapatos.filter(free).filter(id => !w.llueve || RAIN_OK.includes(id)),
+    };
+    const pick = L => L[Math.floor(Math.random() * L.length)];
+    const seen = new Map();
+    for (let t = 0; t < 3000 && seen.size < 400; t++) {
+      const c = { capa: null, camisa: null, corbata: null, panuelo: null, pantalon: null, correa: null, zapatos: null, rain: w.llueve };
+      if ('capa' in locks) c.capa = locks.capa;
+      else if ('pantalon' in locks && Object.entries(SUIT).some(([j, pt]) => pt === locks.pantalon) && kind.target >= 3.6 && Math.random() < .5) c.capa = Object.keys(SUIT).find(j => SUIT[j] === locks.pantalon);
+      else { const pc = hot ? (kind.target >= 3.8 ? .2 : 0) : cool ? .75 : .4; if (Math.random() < pc) c.capa = pick(P.capa.filter(x => !hot || SUIT[x])) || null; }
+      c.pantalon = 'pantalon' in locks ? locks.pantalon : (SUIT[c.capa] || pick(P.pantalon));
+      if (SUIT[c.capa] && c.pantalon !== SUIT[c.capa]) continue;
+      c.camisa = 'camisa' in locks ? locks.camisa : (c.capa && !SUIT[c.capa] && casual && Math.random() < .08 ? null : pick(P.camisa));
+      c.zapatos = 'zapatos' in locks ? locks.zapatos : pick(P.zapatos);
+      if (!c.camisa && !c.capa) continue;
+      const belts = NO_BELT.includes(c.pantalon) ? [null] : (BELT_FOR[c.zapatos] || ['A01']).filter(free);
+      const ties = SUIT[c.capa] && kind.target >= 3.8 ? ['K02', 'K01', null] : [null];
+      let ok = null;
+      for (const be of belts) { for (const ti of ties) { const x = { ...c, correa: be, corbata: ti }; const j = judge(x); if (j.notes.length) continue; const col = colorCheck(x, j.avg); if (col.bad.length) continue; ok = { c: x, j, col }; break; } if (ok) break; }
+      if (!ok) continue;
+      const key = keyOf(ok.c); if (key === avoid || seen.has(key)) continue;
+      let sc = -Math.abs(ok.j.avg - kind.target) * 3 + ok.col.score;
+      if (hot && ok.c.capa && !SUIT[ok.c.capa]) sc -= 3;
+      if (hot && [ok.c.camisa, ok.c.pantalon].some(i => i && INV[i].tono.tela === 'lino')) sc += 1;
+      if (cool && !ok.c.capa) sc -= 1;
+      if (w.llueve && ok.c.capa === 'S20') sc += 1;
+      seen.set(key, { ...ok, sc });
+    }
+    const all = [...seen.values()].sort((a, b) => b.sc - a.sc);
+    return all.length ? pick(all.slice(0, 12)) : null;
   }
   function porQue(best, w, kind) {
     const o = best.o, bits = [];
@@ -131,16 +175,73 @@
     try { events = await agendaFor(day); } catch (e) { agErr = e.message === 'clave' ? 'La clave de la agenda no funcionó.' : 'No pude leer la agenda.'; }
     $('#agbtn').textContent = store.get('agenda_clave', '') ? 'Agenda conectada' : 'Conectar agenda';
     const kind = dayKind(events, day);
-    const best = pickOutfit(w, kind, day);
+    ds = loadDay(day);
+    const best = pickOutfit(w, kind, day, ds.ban);
     const fecha = new Date(day + 'T12:00:00-05:00').toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', timeZone: 'America/Bogota' });
     const consejo = w.llueve ? 'Nada de gamuza ni Belgian: zapatos de cuero y paraguas a la mano.' : w.tmax >= 27 ? 'Telas livianas y colores claros; el suéter sobra.' : w.tmin <= 16 ? 'Mañana fría: lleva una capa que puedas quitarte al mediodía.' : '';
-    wxRender({
+    ctx = { w, kind, day, best, base: {
       revisado: new Date(fcAt).toISOString(), fuente: 'Open-Meteo', ciudad: 'Medellín',
       etiqueta: (sel === 'hoy' ? 'Hoy, ' : 'Mañana, ') + fecha, resumen: resumen(w), tmin: w.tmin, tmax: w.tmax, lluvia_mm: w.lluvia_mm, llueve: w.llueve,
-      franjas: w.franjas, consejo: agErr ? (consejo ? consejo + ' ' : '') + agErr : consejo, agenda: events || undefined,
-      pinta: { nombre: best.o.nombre + (best.why.length ? ' (ajustado al clima)' : ''), ...best.c, por_que: porQue(best, w, kind) },
-    });
+      franjas: w.franjas, consejo: agErr ? (consejo ? consejo + ' ' : '') + agErr : consejo, agenda: events || undefined } };
+    showDay();
   }
+  /* the day's outfit: the suggested one, or the one Daniel asked for with «Otra pinta», kept for the rest of the day */
+  let ctx = null, ds = null;
+  function loadDay(day) { const d = store.get('pinta_dia', null); return d && d.day === day ? { locks: {}, ban: [], ...d } : { day, locks: {}, ban: [], c: null }; }
+  const saveDay = () => store.set('pinta_dia', ds);
+  function showDay(msg) {
+    const { w, kind, best } = ctx;
+    const pinta = ds.c ? { nombre: ds.nombre, ...ds.c, por_que: ds.por_que }
+      : best ? { nombre: best.o.nombre + (best.why.length ? ' (ajustado al clima)' : ''), ...best.c, por_que: porQue(best, w, kind) } : null;
+    wxRender({ ...ctx.base, pinta: pinta || undefined });
+    const box = document.querySelector('.wxpick'); if (!box) return;
+    ctx.cur = pinta;
+    box.querySelectorAll('.pz figure').forEach(f => {
+      const k = f.dataset.k, id = f.dataset.id; if (!FIXABLE.includes(k)) return;
+      const on = ds.locks[k] === id; f.classList.toggle('fija', on);
+      const b = document.createElement('span'); b.className = 'fbtns';
+      b.innerHTML = `<button type="button" class="fb" data-a="fijar" aria-pressed="${on}">${on ? 'Se queda' : 'Dejar'}</button><button type="button" class="fb" data-a="lavando">No hoy</button>`;
+      f.appendChild(b);
+    });
+    const ctl = $('#pctl'); if (!ctl) return;
+    const changed = ds.c || ds.ban.length || Object.keys(ds.locks).length;
+    ctl.innerHTML = `<p class="hint">Toca «Dejar» en la prenda que quieres conservar y pide otra: cambio el resto y sigue combinando. «No hoy» la saca por hoy, por ejemplo si está lavando.</p>
+      <div class="acts"><button class="btn" type="button" data-a="otra">Otra pinta al azar</button>${changed ? '<button class="btn ghost" type="button" data-a="volver">Volver a la sugerida</button>' : ''}</div>
+      ${ds.ban.length ? `<p class="hint">Fuera por hoy: ${ds.ban.map(i => esc(name(i)) + ' (' + i + ')').join(', ')}.</p>` : ''}
+      <p class="msg" role="status">${esc(msg || '')}</p>`;
+  }
+  function another(locks, avoid, how) {
+    const { w, kind } = ctx;
+    const r = generate(w, kind, locks, ds.ban, avoid);
+    if (!r) {
+      const z = locks.zapatos; const rainy = w.llueve && z && !RAIN_OK.includes(z);
+      showDay(rainy ? `Con lluvia, ${name(z)} (${z}) se daña: no encontré una pinta que combine con ellos hoy.` : 'Con lo que dejaste fijo no encontré otra pinta que combine para hoy. Suelta una prenda e intenta otra vez.');
+      return false;
+    }
+    const kept = Object.values(locks).filter(Boolean);
+    ds.c = r.c; ds.nombre = `Otra opción para ${kind.label === 'reuniones' ? 'tus reuniones' : 'tu ' + kind.label}`;
+    ds.por_que = `Armada al azar con tu clóset, para un ${kind.label}${w.llueve ? ' con lluvia' : ''}${how || ''}${kept.length && !how ? ', dejando ' + kept.map(i => name(i) + ' (' + i + ')').join(' y ') : ''}.`;
+    saveDay(); showDay(); return true;
+  }
+  $('#wx').addEventListener('click', e => {
+    const b = e.target.closest('[data-a]'); if (!b || !ctx || !ctx.cur) return;
+    const a = b.dataset.a, p = ctx.cur;
+    if (a === 'fijar') { const f = b.closest('figure'), k = f.dataset.k, id = f.dataset.id; if (ds.locks[k] === id) delete ds.locks[k]; else ds.locks[k] = id; saveDay(); showDay(); return; }
+    if (a === 'lavando') {
+      const f = b.closest('figure'), k = f.dataset.k, id = f.dataset.id;
+      if (!ds.ban.includes(id)) ds.ban.push(id); delete ds.locks[k];
+      // keep everything else of this outfit and change only what is in the wash; if that cannot combine, keep only what was left fixed
+      const keep = {}; FIXABLE.forEach(s => { if (s !== k) keep[s] = p[s] || null; });
+      if (k === 'pantalon' && SUIT[p.capa]) delete keep.capa;
+      if (k === 'capa' && SUIT[id]) delete keep.pantalon;
+      if (!keep.camisa) delete keep.camisa;
+      saveDay();
+      if (!another(keep, null, `, sin ${name(id)} (${id}), que hoy no está disponible`)) another({ ...ds.locks }, null, `, sin ${name(id)} (${id}), que hoy no está disponible`);
+      return;
+    }
+    if (a === 'otra') { another({ ...ds.locks }, keyOf(p)); return; }
+    if (a === 'volver') { ds = { day: ctx.day, locks: {}, ban: [], c: null }; saveDay(); ctx.best = pickOutfit(ctx.w, ctx.kind, ctx.day, []); showDay(); }
+  });
   refresh();
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
 

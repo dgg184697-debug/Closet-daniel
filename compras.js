@@ -22,6 +22,32 @@
           ['Botones dorados', [YNAP('mrporter', '11813139151031275', 'cu')]],
           ['Clásico de los 70', ['https://i0.wp.com/journal.styleforum.net/wp-content/uploads/2020/10/1970s-Blazer..jpg?resize=533%2C799&ssl=1']]],
       pins: [['Blazer navy con pantalón gris', pin('navy blazer grey trousers loafers ivy style')], ['Nate Archibald', pin('Nate Archibald blazer')], ['Botones dorados', pin('navy blazer brass buttons')]] },
+    { t: 'Zapato con suela de goma para lluvia', sw: ['#4a3122'],
+      why: 'Estamos en temporada de lluvias y para lo formal solo el oxford burdeos (Z03) aguanta el agua; tus tenis de cuero (Z07, Z16, Z18) sirven para lo casual. Suela de goma con el cuero sellado. Si prefieres quedarte en tus marcas, mira el Louboutin Chambeliboat en la sección de zapatos.',
+      ref: 'Crockett & Jones · Pembroke, Dark Brown Grained Calf', det: 'Derby brogue en cuero de grano con suela de goma Storm Welt, Goodyear. Unos 870 USD.',
+      url: 'https://www.careofcarl.co.uk/en/crockett-jones-pembroke-derbys-dark-brown-grained-calf',
+      f: [['La prenda', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_1.jpg?m=1672759890']],
+          ['La prenda', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_2.jpg?m=1672760032']],
+          ['Suela', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_4.jpg?m=1672760032']]],
+      pins: [['Derby café con pantalón gris', pin('dark brown country derby brogue grey trousers')]] },
+    { t: 'Mocasín de cuero café oscuro', sw: ['#6b4328'],
+      why: 'Te falta un zapato café de cuero liso que sirva para lo formal y lo casual.',
+      ref: 'Christian Louboutin · Chambelimoc, Havane', det: 'Becerro café trenzado y patinado a mano, pasador plateado. Ref. 3260281BWI3. Unos 1.760 USD.',
+      url: 'https://apac.christianlouboutin.com/sg_en/chambelimoc-havane-3260281BWI3.html',
+      alt: 'Belgian Shoes Mr. Casual "All Calf", unos 675 USD, solo en su tienda de Nueva York. No es para lluvia.',
+      f: [['La prenda', [CL('6a63b1ec-5173-4346-a310-41d2e6cfcdd0')]],
+          ['La prenda', [CL('5ac7276c-0303-47ec-a955-e88cf3333cc6')]],
+          ['Detalle', [CL('19f03833-f253-4b37-8411-a58ce6063542')]]],
+      pins: [['Mocasín café con chinos', pin('brown penny loafers chinos navy blazer')], ['Belgian Shoes puestos', pin('belgian shoes loafers men outfit')]] },
+    { t: 'Corbatas y pañuelo básicos', sw: ['#1f2a44', '#8a1c2b', '#f4f1ea'],
+      why: 'Ya tienes las estampadas (K01 y K02), el pañuelo amarillo (K03) y el corbatín del esmoquin (K04). Faltan las básicas ivy: una de rayas, una de punto y un pañuelo blanco de lino.',
+      ref: 'Polo Ralph Lauren · Striped Silk Repp Tie, Navy/Red', det: 'Seda de morera. 125 USD en Ralph Lauren EE. UU. Faltan también una de punto y un pañuelo blanco de lino.',
+      url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/eng-repp-stripe-bar-university_32429384/226848255',
+      alt: 'Harvey usa grenadine navy lisa de 8 a 9 cm y pañuelo blanco en doblez recto.',
+      f: [['Puesta', [BZ('raf712883559_cnavyred_v10418892wp1_10', 'ea021162bbbecd7b5036665025832217')]],
+          ['La prenda', [BZ('raf712883559_cnavyred_v10418892wp1')]],
+          ['Detalle', [BZ('raf712883559_cnavyred_v10418892wp1_90', '0f559299a3d35a7cc5914555d9e63fff')]]],
+      pins: [['Corbata repp', pin('navy red repp tie oxford shirt navy blazer')], ['Pañuelo blanco recto', pin('white pocket square TV fold navy suit')]] },
     { t: 'Segundo traje, azul marino', sw: ['#1c2740'],
       why: 'No es urgente: ya tienes el gris carbón (P08). Atajo: pregunta en Carlos Nieto si tienen la chaqueta en la misma tela de tu pantalón azul (P05); si la tienen, ahí está tu traje azul.',
       ref: 'Suitsupply · Navy Perennial Tailored Fit Havana Suit', det: 'Lana tropical de Vitale Barberis Canonico, una fila. Ref. C9669-S. 548 USD (saco 399 y pantalón 149).',
@@ -32,42 +58,8 @@
           ['Puesta', [SS_M + 'Mix_Match/default/Summer/C9669-S_105.jpg']],
           ['La prenda', [SS + 'b_rgb:efefef,bo_500px_solid_rgb:efefef,c_pad,w_2600/b_rgb:efefef,c_pad,dpr_1,w_850,h_1176,f_auto,q_auto,fl_progressive/products/Mix_Match/default/C9669-S_25.jpg']]],
       pins: [['Guía de los trajes de Harvey', 'https://www.gentlemansgazette.com/suits-harvey-specter-hair-style/'], ['Harvey de navy', pin('Harvey Specter navy suit white shirt')]] },
-    { t: 'Chinos caqui', sw: ['#c8b48e'],
-      why: 'El pantalón ivy por excelencia. Tu P09 es piedra; falta un chino de algodón caqui para todo el año.',
-      ref: 'Polo Ralph Lauren · Stretch Slim Fit Chino, Classic Khaki', det: '97 % algodón y 3 % elastano, slim de pierna recta. 138 USD en Ralph Lauren EE. UU.',
-      url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/stretch-slim-fit-cotton-chino_16740767/16740796',
-      f: [['Puesta', [BZ('raf710644988_cclassickhaki_v10576901117_10', '615789e48533e1df8d02ebc49bd58a53')]],
-          ['La prenda', [BZ('raf710644988_cclassickhaki_v10576901117', '3058cfb3ca0c9bf4a0cd12437b4893b2')]],
-          ['Detalle', [BZ('raf710644988_cclassickhaki_v10576901117_90', 'ee79fc9dbf0fcee3375a9194bfeffc79')]]],
-      pins: [['Chino caqui con blazer navy', pin('khaki chinos navy blazer oxford shirt')]] },
-    { t: 'Camisa blanca de vestir lisa', sw: ['#ffffff'],
-      why: 'Para traje y corbata. Tus blancas son oxford, más informales.',
-      ref: 'Massimo Dutti · Camisa stretch slim fit, blanca', det: 'Unos 135 USD; la tienen en El Tesoro. Pídela en popelina o twill fino.',
-      url: 'https://www.massimodutti.com/co/hombre/camisas/blancas-n1357',
-      alt: 'La tienda de Massimo Dutti no deja ver sus fotos desde fuera. Las fotos son de la parecida de Polo Ralph Lauren (Slim Fit Poplin, unos 130 USD).',
-      f: [['Puesta · Polo RL', [BZ('raf712827064_cwhite_v10577242wcf_10', 'b710a2c7521e8dc8d9ffc3d4715bd713')]],
-          ['La prenda · Polo RL', [BZ('raf712827064_cwhite_v10577242wcf', '52afd23ca7f1f28f87264ae028aeba87')]],
-          ['Puesta · Polo RL', [BZ('raf712827064_cwhite_v10577242wcf_11', 'db4fd797e8ac3df70b09492cfd2cf09c')]]],
-      pins: [['Camisa blanca con traje navy', pin('white dress shirt navy suit navy tie')]] },
-    { t: 'Mocasín de cuero café oscuro', sw: ['#6b4328'],
-      why: 'Te falta un zapato café de cuero liso que sirva para lo formal y lo casual.',
-      ref: 'Christian Louboutin · Chambelimoc, Havane', det: 'Becerro café trenzado y patinado a mano, pasador plateado. Ref. 3260281BWI3. Unos 1.760 USD.',
-      url: 'https://apac.christianlouboutin.com/sg_en/chambelimoc-havane-3260281BWI3.html',
-      alt: 'Belgian Shoes Mr. Casual "All Calf", unos 675 USD, solo en su tienda de Nueva York. No es para lluvia.',
-      f: [['La prenda', [CL('6a63b1ec-5173-4346-a310-41d2e6cfcdd0')]],
-          ['La prenda', [CL('5ac7276c-0303-47ec-a955-e88cf3333cc6')]],
-          ['Detalle', [CL('19f03833-f253-4b37-8411-a58ce6063542')]]],
-      pins: [['Mocasín café con chinos', pin('brown penny loafers chinos navy blazer')], ['Belgian Shoes puestos', pin('belgian shoes loafers men outfit')]] },
-    { t: 'Zapato con suela de goma para lluvia', sw: ['#4a3122'],
-      why: 'Lo que más vas a usar en temporada de lluvias: suela de goma con el cuero sellado. Si prefieres quedarte en tus marcas, mira el Louboutin Chambeliboat en la sección de zapatos.',
-      ref: 'Crockett & Jones · Pembroke, Dark Brown Grained Calf', det: 'Derby brogue en cuero de grano con suela de goma Storm Welt, Goodyear. Unos 870 USD.',
-      url: 'https://www.careofcarl.co.uk/en/crockett-jones-pembroke-derbys-dark-brown-grained-calf',
-      f: [['La prenda', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_1.jpg?m=1672759890']],
-          ['La prenda', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_2.jpg?m=1672760032']],
-          ['Suela', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_4.jpg?m=1672760032']]],
-      pins: [['Derby café con pantalón gris', pin('dark brown country derby brogue grey trousers')]] },
     { t: 'Gabardina Burberry', sw: ['#c9a86f', '#2c3a52'],
-      why: 'Para la lluvia de la tarde y los viajes. Es la pieza más Burberry que existe.',
+      why: 'La Harrington (S20) ya resuelve la llovizna. La gabardina es para el aguacero, los viajes y para ir encima del traje. Es la pieza más Burberry que existe.',
       ref: 'Burberry · Short Kensington Heritage Trench', det: 'Corte clásico, honey beige o coal blue. La corta es la mejor sobre el traje. Unos 2.540 USD.',
       url: 'https://ca.burberry.com/short-kensington-heritage-trench-coat-p81172341',
       alt: 'En Colombia no hay tienda Burberry: duty free de El Dorado o un viaje.',
@@ -76,16 +68,24 @@
           ['Puesta', [BB('61C88704-58DB-4155-9C49-7E69DC429010')]],
           ['La prenda', [BB('4B8A4BD2-5F7B-4C6C-85DF-96B052C979B7').replace('ML_1', 'SL_1')]]],
       pins: [['Trench sobre traje', pin('men burberry trench coat over suit')]] },
-    { t: 'Corbatas y pañuelo básicos', sw: ['#1f2a44', '#8a1c2b', '#f4f1ea'],
-      why: 'Ya tienes las estampadas (K01 y K02) y el pañuelo amarillo (K03). Faltan las básicas ivy.',
-      ref: 'Polo Ralph Lauren · Striped Silk Repp Tie, Navy/Red', det: 'Seda de morera. 125 USD en Ralph Lauren EE. UU. Faltan también una de punto y un pañuelo blanco de lino.',
-      url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/eng-repp-stripe-bar-university_32429384/226848255',
-      alt: 'Harvey usa grenadine navy lisa de 8 a 9 cm y pañuelo blanco en doblez recto.',
-      f: [['Puesta', [BZ('raf712883559_cnavyred_v10418892wp1_10', 'ea021162bbbecd7b5036665025832217')]],
-          ['La prenda', [BZ('raf712883559_cnavyred_v10418892wp1')]],
-          ['Detalle', [BZ('raf712883559_cnavyred_v10418892wp1_90', '0f559299a3d35a7cc5914555d9e63fff')]]],
-      pins: [['Corbata repp', pin('navy red repp tie oxford shirt navy blazer')], ['Pañuelo blanco recto', pin('white pocket square TV fold navy suit')]] },
-    { t: 'Polos piqué', sw: ['#1f2a44', '#ffffff'],
+    { t: 'Chinos caqui', tengo: 'el chino de Lululemon (P11) y el piedra de H&M (P09). Si algún día quieres otro, que sea este caqui, un tono más oscuro.', sw: ['#c8b48e'],
+      why: 'El pantalón ivy por excelencia. Tu P09 es piedra; falta un chino de algodón caqui para todo el año.',
+      ref: 'Polo Ralph Lauren · Stretch Slim Fit Chino, Classic Khaki', det: '97 % algodón y 3 % elastano, slim de pierna recta. 138 USD en Ralph Lauren EE. UU.',
+      url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/stretch-slim-fit-cotton-chino_16740767/16740796',
+      f: [['Puesta', [BZ('raf710644988_cclassickhaki_v10576901117_10', '615789e48533e1df8d02ebc49bd58a53')]],
+          ['La prenda', [BZ('raf710644988_cclassickhaki_v10576901117', '3058cfb3ca0c9bf4a0cd12437b4893b2')]],
+          ['Detalle', [BZ('raf710644988_cclassickhaki_v10576901117_90', 'ee79fc9dbf0fcee3375a9194bfeffc79')]]],
+      pins: [['Chino caqui con blazer navy', pin('khaki chinos navy blazer oxford shirt')]] },
+    { t: 'Camisa blanca de vestir lisa', tengo: 'dos blancas de vestir de Carlos Nieto, la C12 y la Platino (C13), y la de lino de cuello abierto (C11).', sw: ['#ffffff'],
+      why: 'Para traje y corbata. Tus blancas son oxford, más informales.',
+      ref: 'Massimo Dutti · Camisa stretch slim fit, blanca', det: 'Unos 135 USD; la tienen en El Tesoro. Pídela en popelina o twill fino.',
+      url: 'https://www.massimodutti.com/co/hombre/camisas/blancas-n1357',
+      alt: 'La tienda de Massimo Dutti no deja ver sus fotos desde fuera. Las fotos son de la parecida de Polo Ralph Lauren (Slim Fit Poplin, unos 130 USD).',
+      f: [['Puesta · Polo RL', [BZ('raf712827064_cwhite_v10577242wcf_10', 'b710a2c7521e8dc8d9ffc3d4715bd713')]],
+          ['La prenda · Polo RL', [BZ('raf712827064_cwhite_v10577242wcf', '52afd23ca7f1f28f87264ae028aeba87')]],
+          ['Puesta · Polo RL', [BZ('raf712827064_cwhite_v10577242wcf_11', 'db4fd797e8ac3df70b09492cfd2cf09c')]]],
+      pins: [['Camisa blanca con traje navy', pin('white dress shirt navy suit navy tie')]] },
+    { t: 'Polos piqué', tengo: 'nueve polos: la Ralph Lauren azul rey (C16), seis Theory (entre ellas la blanca C17 y la azul marino C21), la menta de Massimo Dutti (C22) y la gris de Uniqlo (C19).', sw: ['#1f2a44', '#ffffff'],
       why: 'Azul marino y blanca, para tierra caliente y los días de más calor.',
       ref: 'Polo Ralph Lauren · The Iconic Custom Slim Fit Mesh Polo', det: 'Piqué de algodón con el caballito bordado. Unos 150 USD.',
       url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/custom-slim-fit-cotton-mesh-polo_17160349',
@@ -128,7 +128,7 @@
           ['Tela', [SS_M + 'Jackets/default/C3768_23.jpg']]],
       pins: [['Blazer de lino arena', pin('sand linen blazer white shirt summer men')], ['Dickie Greenleaf', pin('Dickie Greenleaf style')]] },
     { t: 'Pantalón de lino', sw: ['#c8b48e', '#2a3550', '#f1eee6'],
-      why: 'Para el calor y los viajes de playa. Tu P09 no es de lino; este sí.',
+      tengo: 'tres: el azul marino y el crudo de Massimo Dutti (P10 y P12) y el beige con cordón de Theory (P13).', why: 'Para el calor y los viajes de playa.',
       ref: 'Polo Ralph Lauren · Linen Trousers, slim tapered', det: '100 % lino. Classic Khaki, Newport Navy, New Olive o Ceramic White. Unos 310 USD.',
       url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/linen-ltfsltprpstr_33017438/231747382',
       f: [['Puesto', [BZ('raf710940611_cclassickhaki_v10004482wqo_10', 'ecf4aae272ec6f11edbacfc48b93558e')]],
@@ -136,7 +136,7 @@
           ['Puesto', [BZ('raf710940611_cclassickhaki_v10004482wqo_11', 'a87898bab3793cf5a7855291264444d0')]]],
       pins: [['Pantalón de lino con camisa', pin('linen trousers men white shirt loafers riviera')]] },
     { t: 'Camisa rugby', sw: ['#8c3b2c', '#efe6d2'],
-      why: 'Lo más preppy de fin de semana: con chinos y mocasines, o sobre una oxford.',
+      why: 'Ya tienes la de Disney (C25), pero esa es para la casa. Esta de Ralph Lauren es la que sirve para salir: con chinos y mocasines, o sobre una oxford.',
       ref: 'Polo Ralph Lauren · The Iconic Rugby Shirt', det: '100 % algodón, a rayas, cuello de polo. Unos 210 USD (en rebaja, unos 165). Hay unos diez colores.',
       url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/yd-ultw-rustic-ut-j-lsl-knt_18267207',
       f: [['Puesta', [BZ('raf710717116_cpalerussettroph_v105782546vg_10', '4a4600beb12bc96f1bf008fb8bbf1563')]],
@@ -152,7 +152,7 @@
           ['Puesto', [BZ('raf710974165_chunternavy_v10623102wnp_11', '12d174de71fa17a06ff80106e46d3588')]]],
       pins: [['Cable navy con oxford', pin('navy cable knit sweater oxford shirt grey trousers')]] },
     { t: 'Mocasín de gamuza', sw: ['#b88b5a'],
-      why: 'Para los días secos con chinos y lino. Gamuza: no para lluvia.',
+      tengo: 'los mocasines Louboutin con barra, taupe y azul claro (Z08 y Z09), cumplen ese papel.', why: 'Para los días secos con chinos y lino. Gamuza: no para lluvia.',
       ref: 'Christian Louboutin · The Harold I Flat, gamuza Saharienne', det: 'Mocasín plano de gamuza café claro. 990 USD.',
       url: 'https://www.selfridges.com/US/en/product/christian-louboutin-the-harold-i-flat-suede-loafers_R04643387/#colour=SAHARIENNE',
       alt: 'Belgian Shoes Mr. Casual en gamuza (navy, café o verde), en su tienda de Nueva York.',
@@ -171,7 +171,7 @@
   // Tier 3: the cravings, big and small
   const TIER3 = [
     { t: 'Esmoquin azul marino', sw: ['#1a2238'],
-      why: 'Para bodas de noche y galas. El navy se ve más moderno que el negro: puro Chuck Bass.',
+      why: 'Ya tienes el negro de Carlos Nieto (S14). Este sería el segundo: el navy se ve más moderno, puro Chuck Bass.',
       ref: 'Suitsupply · Navy Three-Piece Tailored Fit Havana Tuxedo', det: 'Lana S110 de Vitale Barberis Canonico, solapa de pico en satín, con chaleco. Ref. C9353-S3. Unos 880 USD.',
       url: 'https://suitsupply.com/en-gi/men/suits/navy-three-piece-tailored-fit-havana-tuxedo/C9353-S3.html',
       f: [['Puesto', [SS_M + 'Mix_Match/default/Summer/C9353-S3_101.jpg']],
@@ -384,7 +384,7 @@
       f: [['La pieza', [EM('PPL351_161-2026_00.jpg?v=1785485303')]]],
       pins: [['Corbatín de día', pin('chuck bass bow tie')]] },
     { t: 'Corbatín de satín para el esmoquin', sw: ['#111111', '#1c2740'],
-      why: 'Si compras el esmoquin azul del Tier 3, este es el corbatín. El negro es el clásico; el azul oscuro de satín, a juego con el esmoquin, es más moderno.',
+      why: 'El negro ya lo tienes (K04, de Marinella). El azul oscuro de satín es para el esmoquin azul del Tier 3, si lo compras.',
       ref: 'E. Marinella · Self-Tie Silk Satin Bowtie, negro o azul oscuro', det: 'Satín de seda, para anudar. 150 € cada uno (unos 170 USD). La faja de satín negro: 250 € (unos 280).',
       url: EMU('black-silk-satin-bowtie-to-self-tie-solid-color'),
       alt: 'Para una fiesta en diciembre, el vinotinto de satín, mismo precio.',
@@ -535,22 +535,23 @@
   ];
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const card = (b, i) => `
-    <article class="buy">
+  const card = (b, i, list) => { const n = list.filter(x => !x.tengo).indexOf(b); return `
+    <article class="buy${b.tengo ? ' tengo' : ''}">
       ${b.f.length ? `<div class="buy-strip">${b.f.map(([cap, src]) => `<figure><img loading="lazy" referrerpolicy="no-referrer" alt="${esc(b.t + ', ' + cap.toLowerCase())}" data-src="${esc(JSON.stringify(src))}"><figcaption>${esc(cap)}</figcaption></figure>`).join('')}
         <p class="buy-nofoto" hidden>Las fotos no cargaron aquí. <a href="${esc(b.url)}" target="_blank" rel="noopener">Míralas en la tienda ↗</a></p></div>` : ''}
       <div class="buy-body">
-        <div class="buy-head"><span class="buy-n">${String(i + 1).padStart(2, '0')}</span>${b.sw.map(c => `<i style="background:${c}"></i>`).join('')}</div>
+        <div class="buy-head"><span class="buy-n">${b.tengo ? '✓ Ya lo tienes' : String(n + 1).padStart(2, '0')}</span>${b.sw.map(c => `<i style="background:${c}"></i>`).join('')}</div>
         <h3>${esc(b.t)}</h3>
+        ${b.tengo ? `<p class="buy-tengo"><b>Ya lo tienes:</b> ${esc(b.tengo)}</p>` : ''}
         <p class="buy-why">${esc(b.why)}</p>
         <p class="buy-ref"><b>${esc(b.ref)}</b> ${esc(b.det)} <a href="${esc(b.url)}" target="_blank" rel="noopener">${/pinterest/.test(b.url) ? 'Ver ejemplos' : /gentlemansgazette|bespokeunit/.test(b.url) ? 'Leer más' : 'Ver en la tienda'} ↗</a></p>
         ${b.alt ? `<p class="buy-alt"><b>Otra opción:</b> ${esc(b.alt)}</p>` : ''}
         ${b.pins.length ? `<p class="buy-pins">Más ejemplos: ${b.pins.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join(' · ')}</p>` : ''}
       </div>
-    </article>`;
+    </article>`; };
 
   const TIERS = [
-    ['tier1', 'Tier 1 · Lo que falta', 'Lo primero, en orden de prioridad: con esto tu clóset queda completo.', BUYS],
+    ['tier1', 'Tier 1 · Lo que falta', 'Lo primero, en orden de prioridad, revisado el 27 de octubre con todo lo nuevo. Al final, lo que ya tienes.', BUYS],
     ['blazer', 'El blazer azul', 'Cómo se ve un blazer de verdad: botones dorados o de cuerno, tela con textura y un azul distinto al del pantalón. La chaqueta de traje, en cambio, es lisa y con botones oscuros. Lleva estas fotos a Carlos Nieto.', BLAZER],
     ['zapatos', 'Zapatos de tus marcas', 'Más elegantes, de Christian Louboutin y Belgian Shoes, y uno de Louboutin con suela de goma para la lluvia.', ZAPATOS],
     ['tier2', 'Tier 2 · Lo siguiente', 'Para redondear: más color, tierra caliente y viajes.', TIER2],
@@ -570,7 +571,7 @@
       <p>Tres niveles: lo que te falta, lo siguiente y los antojos. Cada uno con el modelo exacto y fotos de la tienda, la prenda sola y puesta. Desliza las fotos y toca una para verla grande. Precios en dólares, revisados el 26 de octubre de 2026; los que estaban en otra moneda los pasé con la tasa de ese día ("unos").</p>
     </div>
     <nav class="tiers">${TIERS.map(([k, n]) => `<a href="#${k}">${n}</a>`).join('')}</nav>
-    ${TIERS.map(([k, n, d, list]) => `<div class="tier" id="${k}"><h3 class="tier-h">${n}</h3><p class="tier-d">${d}</p><div class="buys">${list.map(card).join('')}</div></div>`).join('')}
+    ${TIERS.map(([k, n, d, list]) => `<div class="tier" id="${k}"><h3 class="tier-h">${n}</h3><p class="tier-d">${d}</p><div class="buys">${list.filter(b => !b.tengo).concat(list.filter(b => b.tengo)).map((b, i, l) => card(b, i, l)).join('')}</div></div>`).join('')}
   </div>`;
   const after = document.getElementById('analisis');
   if (!after) return;
