@@ -17,13 +17,13 @@
       why: 'La pieza central del ivy, de Nate y de Harvey. Se usa con pantalón de otro color: tus grises (P01 y P02), el café (P06), el piedra (P09) y el chino caqui. Con tu pantalón azul (P05) no, porque se ve como un traje que no combina.',
       ref: 'Carlos Nieto (El Tesoro) · blazer azul marino', det: 'Qué pedir: tela con textura (hopsack, sarga o franela liviana), un azul distinto al de tu P05, botones dorados o de cuerno, una fila de dos o tres botones y media forro por el clima. Bolsillos de parche si lo quieres más ivy. Precio en pesos: pregúntalo en la tienda.',
       url: pin('navy blazer gold buttons patch pockets ivy'),
-      alt: 'Más ejemplos de tiendas en la sección "El blazer azul", justo debajo.',
+      alt: 'Más ejemplos de tiendas justo debajo, para llevarle a Carlos Nieto.',
       f: [['Así se ve un blazer', [YNAP('mrporter', '11813139151031275', 'ou')]],
           ['Botones dorados', [YNAP('mrporter', '11813139151031275', 'cu')]],
           ['Clásico de los 70', ['https://i0.wp.com/journal.styleforum.net/wp-content/uploads/2020/10/1970s-Blazer..jpg?resize=533%2C799&ssl=1']]],
       pins: [['Blazer navy con pantalón gris', pin('navy blazer grey trousers loafers ivy style')], ['Nate Archibald', pin('Nate Archibald blazer')], ['Botones dorados', pin('navy blazer brass buttons')]] },
     { t: 'Zapato con suela de goma para lluvia', sw: ['#4a3122'],
-      why: 'Estamos en temporada de lluvias y para lo formal solo el oxford burdeos (Z03) aguanta el agua; tus tenis de cuero (Z07, Z16, Z18) sirven para lo casual. Suela de goma con el cuero sellado. Si prefieres quedarte en tus marcas, mira el Louboutin Chambeliboat en la sección de zapatos.',
+      why: 'Estamos en temporada de lluvias y para lo formal solo el oxford burdeos (Z03) aguanta el agua; tus tenis de cuero (Z07, Z16, Z18) sirven para lo casual. Suela de goma con el cuero sellado. Si prefieres quedarte en tus marcas, mira el Louboutin Chambeliboat más abajo.',
       ref: 'Crockett & Jones · Pembroke, Dark Brown Grained Calf', det: 'Derby brogue en cuero de grano con suela de goma Storm Welt, Goodyear. Unos 870 USD.',
       url: 'https://www.careofcarl.co.uk/en/crockett-jones-pembroke-derbys-dark-brown-grained-calf',
       f: [['La prenda', ['https://www.careofcarl.co.uk/bilder/artiklar/zoom/13235111r_1.jpg?m=1672759890']],
@@ -216,7 +216,7 @@
       f: [['El frasco', ['https://bespokeunit.com/wp-content/uploads/2020/07/Carolina-Herrera-CH-Men-Priv%C3%A9-Packaging-Detail.jpg']]],
       pins: [] },
     { t: 'Bufanda Burberry de cachemira', sw: ['#c9a86f', '#7c1d2c'],
-      why: 'Para viajes a clima frío. Combina con la gabardina del Tier 1.',
+      why: 'Para viajes a clima frío. Combina con la gabardina (en Sacos y buzos).',
       ref: 'Burberry · Check Cashmere Scarf, Archive Beige', det: '100 % cachemira con el cuadro clásico. Unos 650 USD; más barata en el duty free.',
       url: 'https://www.stadiumgoods.com/products/check-mates-cashmere-scarf-archive-beige-240051',
       f: [['La pieza', ['https://www.stadiumgoods.com/cdn/shop/files/nd8emjgxl8nr30vzrz3d6pfrxcxs.png?crop=center&height=1024&v=1788372598&width=1024', 'https://www.stadiumgoods.com/cdn/shop/files/5798m8nh3s011oy5ghor9c8twq78.png?crop=center&height=480&v=1788372598&width=480']]],
@@ -365,7 +365,7 @@
       f: [['La pieza', [EM('GRZ3502_GZL01_1_00.jpg?v=1782485661')]]],
       pins: [['Grenadine con traje', pin('navy grenadine tie suit harvey specter')]] },
     { t: 'Regimental azul con rayas rojas', sw: ['#1c2740', '#8a1c2b'],
-      why: 'La de rayas, la más ivy de todas. Con blazer azul y oxford. Es la versión napolitana de la Polo del Tier 1: compra una de las dos.',
+      why: 'La de rayas, la más ivy de todas. Con blazer azul y oxford. Es la versión napolitana de la Polo de arriba: compra una de las dos.',
       ref: 'E. Marinella · Regimental Jacquard Silk Tie, Dark Blue / Red', det: 'Seda jacquard. 160 € (unos 180 USD).',
       url: EMU('dark-blue-sartorial-striped-silk-tie-reg141'),
       f: [['La pieza', [EM('REG141_3362_1_00.jpg?v=1792157461')]]],
@@ -383,15 +383,14 @@
       url: EMU('dark-blue-self-tie-printed-silk-bowtie'),
       f: [['La pieza', [EM('PPL351_161-2026_00.jpg?v=1785485303')]]],
       pins: [['Corbatín de día', pin('chuck bass bow tie')]] },
-    { t: 'Corbatín de satín para el esmoquin', sw: ['#111111', '#1c2740'],
-      why: 'El negro ya lo tienes (K04, de Marinella). El azul oscuro de satín es para el esmoquin azul del Tier 3, si lo compras.',
-      ref: 'E. Marinella · Self-Tie Silk Satin Bowtie, negro o azul oscuro', det: 'Satín de seda, para anudar. 150 € cada uno (unos 170 USD). La faja de satín negro: 250 € (unos 280).',
+    { t: 'Corbatín de satín azul para el esmoquin azul', sw: ['#1c2740'],
+      why: 'Es para el esmoquin azul (en Trajes y blazers), si lo compras. El negro ya lo tienes (K04).',
+      ref: 'E. Marinella · Self-Tie Silk Satin Bowtie, azul oscuro', det: 'Satín de seda, para anudar. 150 € (unos 170 USD).',
       url: EMU('black-silk-satin-bowtie-to-self-tie-solid-color'),
       alt: 'Para una fiesta en diciembre, el vinotinto de satín, mismo precio.',
-      f: [['Negro', [EM('PAPILLON_DA_ANNODARE_PPL123_00_1b4c584f-a9c8-4a78-9c8c-d62bd7ac3e53.jpg?v=1754495130')]],
-          ['Azul oscuro', [EM('PAPILLON_DA_ANNODARE_PPL314_01.jpg?v=1765183136')]],
+      f: [['Azul oscuro', [EM('PAPILLON_DA_ANNODARE_PPL314_01.jpg?v=1765183136')]],
           ['Vinotinto', [EM('PAPILLON_DA_ANNODARE_PPL237_00_1c7de07e-2af4-4ae1-a67c-8c2323b8dfab.jpg?v=1753956034')]]],
-      pins: [['Corbatín negro con esmoquin', pin('black satin bow tie tuxedo self tied')]] },
+      pins: [['Esmoquin azul con corbatín', pin('midnight navy tuxedo navy satin bow tie')]] },
     { t: 'Pañuelo de seda estampado', sw: ['#1c2740', '#2c4a8c'],
       why: 'Con el blazer sin corbata, en pico y suelto. Si llevas corbata, que el pañuelo no repita su estampado. Tu amarillo (K03) es el de verano; este es para el resto del año.',
       ref: 'E. Marinella · Hand-Printed Silk Pocket Square', det: 'Seda estampada a mano con borde de otro color y dobladillo a mano. 90 € (unos 100 USD).',
@@ -459,8 +458,7 @@
       why: 'El zapato más elegante que hay: cordones cerrados. Para los trajes y las reuniones serias. El café patinado va con el gris y con el azul.',
       ref: 'Christian Louboutin · Greggo Oxford, café', det: 'Becerro patinado, suela de cuero roja. 960 £ (unos 1.285 USD).',
       url: 'https://www.harrods.com/en-gb/p/christian-louboutin-greggo-oxford-shoes-000000000006816201',
-      alt: 'También en negro (Greggo o Greghost), el de los eventos de noche.',
-      f: [['La pieza', [HR('16fc3480e607778f7ed1cd085bcae79e')]], ['De lado', [HR('2c059f72f189b298149925ac9ff9e583')]], ['Detalle', [HR('44ca5a481507404196332110dad7b193')]]],
+            f: [['La pieza', [HR('16fc3480e607778f7ed1cd085bcae79e')]], ['De lado', [HR('2c059f72f189b298149925ac9ff9e583')]], ['Detalle', [HR('44ca5a481507404196332110dad7b193')]]],
       pins: [['Oxford café con traje gris', pin('brown oxford shoes charcoal suit')]] },
     { t: 'Doble hebilla (monk)', sw: ['#111111', '#4a2f1e'],
       why: 'El zapato de Harvey Specter: elegante pero con carácter. El negro va con tu traje gris carbón; el café, con el blazer.',
@@ -470,7 +468,7 @@
           ['Sartok café', [HR('0c5b8bcab8fd430f0a92305c8310e716')]], ['Sartok de lado', [HR('40e20be97d7d1e51a286815f1a0325fd')]]],
       pins: [['Harvey con monk', pin('harvey specter double monk strap shoes')]] },
     { t: 'Mocasín con suela de goma', sw: ['#5a3b22'],
-      why: 'El de tus marcas que aguanta el agua: suela de goma flexible, cuero café y el pasador plateado del Chambelimoc. Para lluvia ligera y el día a día; para aguacero, el Crockett & Jones del Tier 1 sigue siendo mejor.',
+      why: 'El de tus marcas que aguanta el agua: suela de goma flexible, cuero café y el pasador plateado del Chambelimoc. Para lluvia ligera y el día a día; para aguacero, el Crockett & Jones de arriba sigue siendo mejor.',
       ref: 'Christian Louboutin · Chambeliboat, becerro café', det: 'Suela de goma con el logo rojo grabado. Ref. 3250662BWI3. 4.750 AED (unos 1.295 USD).',
       url: 'https://www.levelshoes.com/christian-louboutin-chambeliboat-loafers-brown-calf-leather-men-loafers-ziubpo.html',
       f: [['La pieza', [`https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/3/2/3250662bwi3_1.jpg?ts=20251027101225`]],
@@ -535,32 +533,69 @@
   ];
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const card = (b, i, list) => { const n = list.filter(x => !x.tengo).indexOf(b); return `
-    <article class="buy${b.tengo ? ' tengo' : ''}">
+  const card = (b, n) => `
+    <article class="buy">
       ${b.f.length ? `<div class="buy-strip">${b.f.map(([cap, src]) => `<figure><img loading="lazy" referrerpolicy="no-referrer" alt="${esc(b.t + ', ' + cap.toLowerCase())}" data-src="${esc(JSON.stringify(src))}"><figcaption>${esc(cap)}</figcaption></figure>`).join('')}
         <p class="buy-nofoto" hidden>Las fotos no cargaron aquí. <a href="${esc(b.url)}" target="_blank" rel="noopener">Míralas en la tienda ↗</a></p></div>` : ''}
       <div class="buy-body">
-        <div class="buy-head"><span class="buy-n">${b.tengo ? '✓ Ya lo tienes' : String(n + 1).padStart(2, '0')}</span>${b.sw.map(c => `<i style="background:${c}"></i>`).join('')}</div>
+        <div class="buy-head"><span class="buy-n">${String(n).padStart(2, '0')}</span>${b.sw.map(c => `<i style="background:${c}"></i>`).join('')}</div>
         <h3>${esc(b.t)}</h3>
-        ${b.tengo ? `<p class="buy-tengo"><b>Ya lo tienes:</b> ${esc(b.tengo)}</p>` : ''}
         <p class="buy-why">${esc(b.why)}</p>
         <p class="buy-ref"><b>${esc(b.ref)}</b> ${esc(b.det)} <a href="${esc(b.url)}" target="_blank" rel="noopener">${/pinterest/.test(b.url) ? 'Ver ejemplos' : /gentlemansgazette|bespokeunit/.test(b.url) ? 'Leer más' : 'Ver en la tienda'} ↗</a></p>
         ${b.alt ? `<p class="buy-alt"><b>Otra opción:</b> ${esc(b.alt)}</p>` : ''}
         ${b.pins.length ? `<p class="buy-pins">Más ejemplos: ${b.pins.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join(' · ')}</p>` : ''}
       </div>
-    </article>`; };
+    </article>`;
 
-  const TIERS = [
-    ['tier1', 'Tier 1 · Lo que falta', 'Lo primero, en orden de prioridad, revisado el 27 de octubre con todo lo nuevo. Al final, lo que ya tienes.', BUYS],
-    ['blazer', 'El blazer azul', 'Cómo se ve un blazer de verdad: botones dorados o de cuerno, tela con textura y un azul distinto al del pantalón. La chaqueta de traje, en cambio, es lisa y con botones oscuros. Lleva estas fotos a Carlos Nieto.', BLAZER],
-    ['zapatos', 'Zapatos de tus marcas', 'Más elegantes, de Christian Louboutin y Belgian Shoes, y uno de Louboutin con suela de goma para la lluvia.', ZAPATOS],
-    ['tier2', 'Tier 2 · Lo siguiente', 'Para redondear: más color, tierra caliente y viajes.', TIER2],
-    ['tier3', 'Tier 3 · Antojos', 'Todo lo que se me ocurre, de lo grande a lo pequeño. Para anotarse.', TIER3],
-    ['lujo', 'Tier 3 · Bolsos', 'Bolsos de Bottega Veneta, Loewe, Louis Vuitton y Hermès, como referencia. Empieza por el tote de oficina.', LUJO],
-    ['gafas', 'Tier 3 · Gafas de sol', 'Elegidas para tu cara. Por tu foto: cara redondeada, mejillas llenas, mandíbula suave con barba y cejas oscuras y marcadas. Te van las monturas con ángulos (cuadradas, rectangulares o en D), con la ceja recta y del ancho de tu cara o un poco más; en carey, havana o metal. Evita las redondas pequeñas y las angostas.', GAFAS],
-    ['marinella', 'Accesorios · E. Marinella', 'Corbatas, corbatines y pañuelos de E. Marinella, la casa de Nápoles que las hace a mano desde 1914. Ya tienes de Carlos Nieto la corbata azul de raquetas (K01), la café de foulard (K02) y el pañuelo amarillo (K03): esto es lo que les falta. Empieza por la de florecitas y la grenadine.', MARINELLA],
-    ['valet', 'Valet stand · el galán de noche', 'Para dejar listo el saco, el pantalón y la corbata del día siguiente, y vaciar los bolsillos en la bandeja. Ralph Lauren Home tiene dos; los vintage de 1stDibs son los más ivy. Otra idea: con estas fotos, un ebanista de Medellín te hace uno en nogal o cedro por mucho menos.', VALET],
+  // Two buys that only need a description: the belt that replaces A01 and a hand steamer.
+  const EXTRA = [
+    { t: 'Correa café oscuro nueva', sw: ['#4a2f1e', '#b8b8b8'],
+      why: 'La café de Carlos Nieto (A01) tiene el cuero cuarteado y pelado: lo vimos en tus fotos del 27 de octubre. Mientras tanto uso la Montblanc café oscuro (A03b), pero te conviene una segunda café para alternar con los zapatos cafés y el burdeos.',
+      ref: 'Qué pedir', det: 'Cuero liso de becerro (no grabado), café oscuro, de 3 a 3,5 cm de ancho, hebilla sencilla plateada mate y sin logo grande. Pruébatela con el pantalón puesto: que te quede en el hueco del medio. En Carlos Nieto o Montblanc.',
+      url: pin('dark brown leather dress belt silver buckle men'),
+      f: [], pins: [] },
+    { t: 'Vaporizador de mano', sw: ['#f1eee6', '#2a3550'],
+      why: 'Varias prendas salen arrugadas en las fotos y el pantalón de la prueba pedía raya. Un vaporizador deja las oxford, el lino y los pantalones listos en dos minutos, y uno pequeño cabe en la maleta.',
+      ref: 'Steamery · Cirrus', det: 'El de mano más conocido para ropa fina y viajes. Mira el precio en la tienda.',
+      url: pin('steamery cirrus hand steamer'),
+      f: [], pins: [] },
   ];
+
+  // Categories, and inside each one the urgent first. Only titles listed here are shown:
+  // what Daniel already owns (chinos, camisas blancas, polos, lino, mocasín de gamuza, camisa rosada,
+  // suéter navy, medias de color) left the list on 27 October 2026.
+  const ALL = {};
+  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
+  const U = 'Urgente', S = 'Lo siguiente', A = 'Antojos', E = 'Ejemplos de blazer para llevar a Carlos Nieto';
+  const CATS = [
+    ['camisas', 'Camisas, polos y camisetas', 'Estás bien cubierto: oxford, camisas de vestir blancas, lila y rosada, lino y nueve polos. Aquí no hay nada urgente.',
+      [[S, ['Camisa rugby']], [A, ['Camisa de puño francés y mancuernas']]]],
+    ['sacos', 'Sacos y buzos', 'Suéteres, buzos, chaquetas y abrigos. Ya tienes suéteres en camel, gris, taupe y azul marino, y chaquetas para la llovizna.',
+      [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Chaqueta corta Uniqlo × JW Anderson']]]],
+    ['trajes', 'Trajes y blazers', 'Lo que va con corbata o sobre la camisa en una reunión. Aquí está la compra más importante de toda la lista: el blazer azul.',
+      [[U, ['Blazer azul marino, de blazer y no de traje']], [E, ['Polo Ralph Lauren con botones dorados', 'Polo de lino con textura', 'Polo de gabardina', 'Suitsupply de tejido con textura', 'Blazer cruzado']],
+       [S, ['Segundo traje, azul marino', 'Blazer de lino para tierra caliente']], [A, ['Esmoquin azul marino', 'Smoking jacket de terciopelo']]]],
+    ['pantalones', 'Pantalones', 'No te falta ninguno: tienes grises, azules, café, piedra, chinos y tres de lino. Lo pendiente es de sastre: bajarle 1 a 1,5 cm al azul de Massimo Dutti (P04) para que quiebre sobre el zapato.',
+      []],
+    ['zapatos', 'Zapatos', 'Tienes diez pares de tenis y solo dos oxford. Lo que sigue tiene que ser de cuero y de vestir, empezando por uno que aguante la lluvia.',
+      [[U, ['Zapato con suela de goma para lluvia', 'Mocasín de cuero café oscuro']], [S, ['Mocasín con suela de goma', 'Oxford café patinado', 'Doble hebilla (monk)', 'Belgian Henri, el más elegante de Belgian']], [A, ['Mocasín Louboutin de noche']]]],
+    ['accesorios', 'Accesorios', 'Correas, corbatas, pañuelos y lo que va en la muñeca o la cabeza. Ya tienes de Carlos Nieto la corbata de raquetas (K01), la de foulard (K02) y el pañuelo amarillo (K03), y el corbatín negro de Marinella (K04).',
+      [[U, ['Correa café oscuro nueva', 'Corbatas y pañuelo básicos']],
+       [S, ['Corbata napolitana de florecitas', 'Grenadine azul oscuro', 'Pañuelo blanco con borde de satín', 'Regimental azul con rayas rojas', 'Corbata tejida', 'Pañuelo de seda estampado', 'Corbatín estampado para anudar']],
+       [A, ['Corbata de siete pliegues', 'Reloj Cartier Tank', 'Bufanda Burberry de cachemira', 'Sombrero Panamá', 'Corbatín de satín azul para el esmoquin azul']]]],
+    ['bolsos', 'Bolsos y maletas', 'Para la oficina y los viajes. Si compras uno, que sea el de lona: es el que más vas a usar.',
+      [[S, ['Maletín de viaje de lona']], [A, ['Tote de oficina en cuero tejido', 'Tote Loewe Puzzle Fold', 'Louis Vuitton Low Key Cabas', 'Maletín de cuero para fin de semana', 'Hermès para la oficina y el viaje', 'El gran antojo: Cabat de Bottega']]]],
+    ['gafas', 'Gafas de sol', 'Elegidas para tu cara: redondeada, mejillas llenas, mandíbula suave con barba y cejas oscuras y marcadas. Te van las monturas con ángulos (cuadradas, rectangulares o en D), con la ceja recta y del ancho de tu cara o un poco más; en carey, havana o metal. Evita las redondas pequeñas y las angostas.',
+      [[A, ['Gafas Jacques Marie Mage Dealan', 'Mykita × Rimowa MR002, cuadradas', 'Gafas Jacques Marie Mage Kennedy', 'Mykita × Rimowa MR006, aviador', 'Gafas Persol 714 plegables']]]],
+    ['casa', 'Casa y cuidado', 'Para que la ropa dure y amanezca lista: el vaporizador, el galán de noche y el perfume. Otra idea para el galán: con estas fotos, un ebanista de Medellín te hace uno en nogal o cedro por mucho menos.',
+      [[U, ['Vaporizador de mano']], [A, ['Ralph Lauren Brennan', 'Ralph Lauren Colton', 'Inglés antiguo de roble', 'Italiano de los sesenta', 'La silla valet de Wegner', 'Perfume CH Men Privé', 'Hermès, solo para soñar']]]],
+  ];
+  const catHTML = ([k, n, d, groups]) => {
+    let i = 0;
+    const body = groups.map(([g, ts]) => `<h4 class="prio prio-${g === U ? 'u' : g === S ? 's' : g === A ? 'a' : 'e'}">${esc(g)}</h4><div class="buys">${ts.map(t => {
+      const b = ALL[t]; if (!b) { console.warn('compras: falta', t); return ''; } return card(b, ++i); }).join('')}</div>`).join('');
+    return `<div class="tier" id="${k}"><h3 class="tier-h">${esc(n)}</h3><p class="tier-d">${esc(d)}</p>${body}</div>`;
+  };
 
   const sec = document.createElement('section');
   sec.id = 'compras';
@@ -568,10 +603,10 @@
     <div class="sec-head">
       <div class="label">De la investigación de estilo</div>
       <h2>Qué comprar</h2>
-      <p>Tres niveles: lo que te falta, lo siguiente y los antojos. Cada uno con el modelo exacto y fotos de la tienda, la prenda sola y puesta. Desliza las fotos y toca una para verla grande. Precios en dólares, revisados el 26 de octubre de 2026; los que estaban en otra moneda los pasé con la tasa de ese día ("unos").</p>
+      <p>Por categorías, y en cada una primero lo urgente, luego lo siguiente y al final los antojos. Solo está lo que te falta: lo que ya tienes salió de la lista. Cada prenda con el modelo exacto y fotos de la tienda; desliza las fotos y toca una para verla grande. Precios en dólares, revisados el 26 de octubre de 2026.</p>
     </div>
-    <nav class="tiers">${TIERS.map(([k, n]) => `<a href="#${k}">${n}</a>`).join('')}</nav>
-    ${TIERS.map(([k, n, d, list]) => `<div class="tier" id="${k}"><h3 class="tier-h">${n}</h3><p class="tier-d">${d}</p><div class="buys">${list.filter(b => !b.tengo).concat(list.filter(b => b.tengo)).map((b, i, l) => card(b, i, l)).join('')}</div></div>`).join('')}
+    <nav class="tiers">${CATS.map(([k, n]) => `<a href="#${k}">${esc(n)}</a>`).join('')}</nav>
+    ${CATS.map(catHTML).join('')}
   </div>`;
   const after = document.getElementById('analisis');
   if (!after) return;
