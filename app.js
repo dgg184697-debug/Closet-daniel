@@ -45,11 +45,17 @@
     const franjas = [band(6, 12, 'Mañana'), band(12, 18, 'Tarde'), band(18, 24, 'Noche')].filter(Boolean);
     const ts = hrs.map(x => x.t), mm = hrs.reduce((s, x) => s + x.mm, 0);
     const fog = hrs.some(x => x.c === 45 || x.c === 48);
-    return { tmin: Math.min(...ts), tmax: Math.max(...ts), lluvia_mm: Math.round(mm * 10) / 10, franjas, llueve: franjas.some(f => f.lluvia) || mm >= 2, fog, mananaLluvia: !!(franjas[0] && franjas[0].lluvia) };
+    // Medellín's forecast shows a shower almost every day: only a real rain while he is out
+    // (6 a.m. to 8 p.m., a likely hour of 1 mm or more, or 3 mm in all) calls for rain shoes
+    const out = hrs.filter(x => x.h <= 20), outMm = out.reduce((s, x) => s + x.mm, 0);
+    const llueve = out.some(x => x.p >= 70 && x.mm >= 1) || outMm >= 3;
+    return { tmin: Math.min(...ts), tmax: Math.max(...ts), lluvia_mm: Math.round(mm * 10) / 10, franjas, llueve, fog, mananaLluvia: llueve && !!(franjas[0] && franjas[0].lluvia) };
   }
   function resumen(w) {
     const f = w.franjas, wet = f.filter(x => x.lluvia).map(x => x.nombre.toLowerCase());
     if (!wet.length) return w.tmax >= 27 ? 'Día seco y caluroso' : w.tmin <= 16 ? 'Día seco y fresco' : 'Día seco y templado';
+    if (!w.llueve && wet.join() === 'noche') return 'Lluvia en la noche, después de las 8: de día no hacen falta zapatos de lluvia';
+    if (!w.llueve) return `Lloviznas sueltas en la ${wet.join(' y la ')}`.replace('la mañana y la tarde', 'mañana y la tarde') + ': no hacen falta zapatos de lluvia';
     if (wet.length === f.length) return 'Lluvia durante todo el día';
     return `Lluvia en la ${wet.join(' y la ')}`.replace('la mañana y la tarde', 'mañana y la tarde');
   }

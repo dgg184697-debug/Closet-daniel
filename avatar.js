@@ -251,22 +251,28 @@ export function createAvatar(host, { onSwipe, look = SKIN_DEFAULT } = {}) {
     const mouth = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.018, 8, 24, Math.PI * 0.8), mat('#8a3b33')); mouth.rotation.z = Math.PI * 1.1; mouth.position.set(0, -0.2, 0.5); head.add(mouth);
   }
   if (look.beard) {
-    // stubble: dots on a shell over jaw, chin and upper lip, denser on the chin and moustache
-    const c = document.createElement('canvas'); c.width = c.height = 512; const g = c.getContext('2d');
+    // full trimmed beard, shaded rather than dotted: a soft alpha map on a shell over jaw, chin,
+    // cheeks and upper lip, with the mouth left clear and a faint grain so it reads as hair
+    const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
+    const img = g.createImageData(256, 256), px = img.data;
+    const ss = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+    const [br, bgc, bb] = [1, 3, 5].map(k => parseInt(look.beard.slice(k, k + 2), 16));
     let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    g.fillStyle = look.beard;
-    for (let i = 0; i < 26000; i++) {
-      const u = rnd(), w = rnd(), cu = Math.abs(u - 0.5) * 2; // 0 centre .. 1 sides
-      let d;
-      if (w < 0.13) d = cu < 0.2 ? 0.75 : (cu > 0.85 ? 0.35 : 0);            // moustache, sideburns
-      else if (w < 0.3) d = cu < 0.12 ? 0.15 : (cu > 0.6 ? 0.25 + 0.4 * cu : 0.08); // cheeks next to the mouth
-      else d = 0.35 + 0.45 * Math.min(1, (w - 0.3) / 0.4);                      // jaw and chin
-      if (rnd() > d * 0.55) continue;
-      g.globalAlpha = 0.55 + rnd() * 0.4; g.beginPath(); g.arc(u * 512, w * 512, 1.1 + rnd() * 1.3, 0, TAU); g.fill();
+    for (let y = 0; y < 256; y++) for (let x = 0; x < 256; x++) {
+      const cu = Math.abs(x / 255 - 0.5) * 2, th = 0.44 + 0.48 * y / 255; // cu: 0 front .. 1 sides; th: polar angle in turns of pi
+      const top = 0.605 - 0.15 * ss(0.3, 0.97, cu);                       // cheek line, from the mouth corners up to the sideburns
+      let a = ss(top - 0.012, top + 0.03, th);
+      a = Math.max(a, (1 - ss(0.2, 0.34, cu)) * ss(0.556, 0.572, th));   // moustache, joining the beard at the corners
+      a *= ss(0.9, 1.3, Math.hypot(cu / 0.19, (th - 0.634) / 0.027));     // mouth stays clear
+      a *= 1 - ss(0.86, 0.92, th) * 0.6;                                  // softer under the chin
+      a *= 1 - ss(0.84, 1, cu);                                           // fade in front of the ears
+      const i = (y * 256 + x) * 4, n = 0.8 + rnd() * 0.2;
+      px[i] = br; px[i + 1] = bgc; px[i + 2] = bb; px[i + 3] = Math.round(255 * 0.66 * a * n);
     }
+    g.putImageData(img, 0, 0);
     const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
     const bm = new THREE.MeshStandardMaterial({ map: tex, transparent: true, depthWrite: false, roughness: 1 });
-    const bd = new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.012, 48, 24, Math.PI / 2 - 1.3, 2.6, Math.PI * 0.56, Math.PI * 0.36), bm);
+    const bd = new THREE.Mesh(new THREE.SphereGeometry(B.headR * 1.012, 64, 40, Math.PI / 2 - 1.3, 2.6, Math.PI * 0.44, Math.PI * 0.48), bm);
     bd.scale.set(1.04, 0.98, 0.965); head.add(bd);
   }
   if (look.glasses) { const gm = mat('#222', { rough: 0.3 }); for (const sx of [-1, 1]) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 8, 28), gm); r.position.set(sx * 0.19, 0.04, 0.53); head.add(r); } const br = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 0.16, 6), gm); br.rotation.z = Math.PI / 2; br.position.set(0, 0.06, 0.56); head.add(br); }

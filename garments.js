@@ -1,7 +1,7 @@
 // How each garment looks on the cartoon avatar: flat colours and simple patterns,
 // picked by hand from the photos (the photos' warm light skews sampled colours).
 // Daniel, from his photo: warm light-medium skin, dark brown wavy, medium-long hair combed back,
-// light stubble beard and moustache, big smile, no glasses.
+// full trimmed beard and moustache, shaded, big smile, no glasses.
 export const SKIN_DEFAULT = { skin: '#e2ab86', hair: '#2f1f15', brows: '#23160e', eyes: '#2e1d13', beard: '#2e1f15', glasses: false,
   hairStyle: 'wavyBack', smile: true, thickBrows: true };
 
