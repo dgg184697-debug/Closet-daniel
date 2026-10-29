@@ -633,6 +633,8 @@ function fajar(s,finde){
   if(s.capa===TUX) return IN('con esmoquin, siempre.');
   if(s.corbata) return IN('con corbata va siempre por dentro.');
   if(SUIT[s.capa]) return IN('con traje, siempre.');
+  // Daniel prefers a polo worn on its own untucked, weekdays too (fit test, 29 October 2026)
+  if(/polo/.test(tipo)&&!s.capa&&!(P&&P.formalidad>=4)) return OUT('el polo solo, sin saco, va por fuera también entre semana: tiene el ruedo corto y recto, y suelto se ve más limpio que abombado sobre la correa.');
   if(!finde) return {...IN('entre semana va siempre por dentro.'),def:true};
   if(C.formalidad>=4) return IN('es camisa de vestir, de faldón largo: por fuera se ve descuidada, aunque sea fin de semana.');
   if(P&&P.formalidad>=4) return IN('el pantalón de vestir la pide adentro, aunque sea fin de semana.');
@@ -645,6 +647,7 @@ function fajar(s,finde){
 const fajaHTML=f=>f?`<b>${f.head}:</b> ${esc(f.t)}`:'';
 function fajaProbador(s){
   const f=fajar(s,true); if(!f) return '';
+  const w=fajar(s,false); if(w&&w.fuera) return fajaHTML(w);
   return f.fuera?`<b>Camisa:</b> entre semana, por dentro. El fin de semana puede ir por fuera: ${esc(f.t)}`:fajaHTML(f);
 }
 function verdict(){
