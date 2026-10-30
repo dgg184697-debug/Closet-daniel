@@ -597,6 +597,146 @@
     return `<div class="tier" id="${k}"><h3 class="tier-h">${esc(n)}</h3><p class="tier-d">${esc(d)}</p>${body}</div>`;
   };
 
+  // Research of 29 October 2026: light trousers and more blazers, to pick from before they move to their category.
+  const SSI = (t, path, w) => `https://cdn.suitsupply.com/image/upload/${t}/f_auto,q_auto,w_${w || 768}/products/${path}`;
+  const SSD = path => SSI('t_pdp-detail-default-desktop', path), SSH = path => SSI('t_pdp-hero-default-mobile', path, 1000);
+  const SSF = (kind, code) => SSI('t_pdp-product-default-desktop', `${kind}/default/${code}_${kind === 'trousers' ? 28 : 25}`, 1000);
+  const ZT = (a, b, x) => `https://img01.ztat.net/article/spp-media-p1/${a}/${b}.jpg?imwidth=762${x || ''}`;
+  const CLAROS = [
+    { t: 'Chino gris niebla', sw: ['#c9c8c2'],
+      why: 'Lo más cercano a lo que describes: gris claro, casi blanco, de algodón con textura de sarga, nada liso ni brillante. Va con el blazer azul, con los cafés y con tus oxford burdeos y los mocasines.',
+      ref: 'Polo Ralph Lauren · Greenwich Stretch Slim Fit Chino, Grey Fog', det: '97 % algodón y 3 % elastano, slim de pierna recta. 185 € (unos 210 USD); en rebaja, unos 165. Talla pequeño: pide una más.',
+      url: 'https://en.zalando.de/polo-ralph-lauren-slfhdnp-flat-front-chinos-grey-fog-po222e04n-k16.html',
+      alt: 'Suitsupply tiene uno parecido, el Light Grey Slim Leg Chino (B261703), hoy agotado.',
+      f: [['Puesto', [ZT('a758eb0c6c234fedac425f89432139c6', '19f27647825446e882303d62286919a4')]],
+          ['La prenda', [ZT('2d055e35e86646debaff68018e7fcd70', '59111a8f2b4f48b8ae45c678fac1bf8f', '&filter=packshot')]],
+          ['Puesto', [ZT('669ee54ebc3a4bf9b485ee8a803a80d5', '1156168359d04f15a6abe492ec847e21')]],
+          ['Detalle', [ZT('f9f779bc46d74316ad745b3184f98ca2', '8876b87d855b466bae8af728804fbcc6')]]],
+      pins: [['Gris claro con blazer azul', pin('light grey chinos navy blazer loafers')], ['Gris claro con café', pin('light grey trousers brown blazer loafers')]] },
+    { t: 'Pantalón gris claro de algodón y lana', sw: ['#cfcdc6'],
+      why: 'El más elegante sin ser de vestir: la mezcla con lana le da cuerpo y una textura mate que no brilla. Para reuniones con blazer y sin corbata.',
+      ref: 'Slowear (la casa de Incotex) · Regular Fit Trousers, light grey', det: '58 % algodón y 42 % lana, bragueta de botones, pierna recta. 435 € (unos 490 USD); en rebaja, unos 340.',
+      url: 'https://en.zalando.de/slowear-trousers-light-grey-08422e01z-c11.html',
+      f: [['Puesto', [ZT('49e1c0b87ecd4a80b1fc87f7a2b5b1db', '86f210eb877541edb804abca5a2829c2')]],
+          ['La prenda', [ZT('ed984cf126f8497ab8067ca2dbe692c1', '77a71619fb6546e7a6b64bf0856cae07', '&filter=packshot')]],
+          ['Puesto', [ZT('6e335f46adbe49f2815b98c6cfd63ef3', '5295641d5b734e77a8be24fc3f732549')]],
+          ['Detalle', [ZT('21ef30356b69447293323f121d2d27f4', 'b89f46e978f7438d886359c20217a936')]]],
+      pins: [['Incotex gris claro', pin('incotex light grey trousers blazer')]] },
+    { t: 'Jean blanco de sarga fina', sw: ['#f3f1ec'],
+      why: 'Si lo quieres tipo jean: blanco roto, de tela delgada que no se ve de trabajo. Con blazer azul y mocasines es el look de la Riviera; con polo, el fin de semana.',
+      ref: 'Suitsupply · White Straight Leg Jeans, ref. B1425', det: '100 % algodón de Candiani (Italia), sarga fina y suave. 199 USD.',
+      url: 'https://suitsupply.com/en-us/men/trousers/white-straight-leg-jeans/B1425.html',
+      alt: 'Si lo prefieres crudo (ecru, un poco más cálido), pídelo así: con tus cafés y burdeos se ve todavía mejor.',
+      f: [['Puesto', [SSH('trousers/default/winter/b1425_1')]],
+          ['Puesto', [SSD('trousers/default/winter/b1425_101')]],
+          ['La prenda', [SSF('trousers', 'b1425')]],
+          ['Puesto', [SSD('trousers/default/winter/b1425_104')]]],
+      pins: [['Jean blanco con blazer azul', pin('white jeans navy blazer loafers men')], ['Jean crudo (ecru)', pin('ecru jeans navy blazer brown loafers')]] },
+    { t: 'Chino crudo de pierna amplia', sw: ['#ece6d8'],
+      why: 'Crudo, casi blanco, en una pierna más amplia que baja angosta al tobillo: más moderno y relajado. Te lo pongo para comparar el corte; tus pantalones son más rectos.',
+      ref: 'Suitsupply · Off-White Wide Leg Tapered Chinos, ref. B18059', det: '98 % algodón y 2 % elastano de Cervotessile (Italia), con sarga sutil. 169 CAD (unos 120 USD).',
+      url: 'https://suitsupply.com/en-ca/men/trousers/off-white-wide-leg-tapered-chinos/B18059.html',
+      f: [['Puesto', [SSH('trousers/default/summer/b18059_1')]],
+          ['Puesto', [SSD('trousers/default/summer/b18059_101')]],
+          ['La prenda', [SSF('trousers', 'b18059')]],
+          ['Puesto', [SSD('trousers/default/summer/b18059_104')]]],
+      pins: [['Crudo con blazer', pin('off white trousers navy blazer men')]] },
+  ];
+  const BLAZERS2 = [
+    { t: 'Café claro (camel)', sw: ['#a8835c'],
+      why: 'El segundo blazer clásico después del azul: el de Agnelli y de Harvey en sus días libres. Va con tus grises, con el azul noche (P05), con el pantalón claro que estás buscando y con jean.',
+      ref: 'Suitsupply · Light Brown Tailored Fit Havana Blazer, ref. C23024', det: '95 % lana y 5 % cachemira de Rogna (Italia), tejido liso con un leve pelo. Unos 579 USD.',
+      url: 'https://suitsupply.com/en-qa/men/jackets/light-brown-havana-blazer/C23024.html',
+      f: [['Puesto', [SSH('jackets/default/winter/c23024_1')]], ['Puesto', [SSD('jackets/default/winter/c23024_101')]],
+          ['La prenda', [SSF('jackets', 'c23024')]], ['Puesto', [SSD('jackets/default/winter/c23024_103')]]],
+      pins: [['Blazer camel con gris', pin('camel blazer grey trousers men')], ['Agnelli', pin('Gianni Agnelli camel jacket')]] },
+    { t: 'Gris claro de cuadros (Príncipe de Gales)', sw: ['#b9bcbd', '#8a8f94'],
+      why: 'Con cuadros suaves se ve que no es de traje. Fresco para Medellín, y con pantalón azul marino o café queda muy elegante. Con el pantalón gris claro, no: dos grises claros parecen traje que no combina.',
+      ref: 'Suitsupply · Light Grey Tailored Fit Havana Blazer, ref. C2114', det: 'Lino, seda, lana y algodón de Ferla (Italia). 529 € (unos 595 USD).',
+      url: 'https://suitsupply.com/zh-cn/men/jackets/light-grey-checked-tailored-fit-havana-blazer/C2114A.html',
+      f: [['Puesto', [SSI('t_plp-card-default-desktop', 'jackets/default/summer/c2114_1'), SSH('jackets/default/summer/c2114_1')]],
+          ['Puesto', [SSD('jackets/default/summer/c2114_101')]], ['La prenda', [SSF('jackets', 'c2114')]]],
+      pins: [['Gales gris con pantalón azul', pin('light grey glen check blazer navy trousers')]] },
+    { t: 'Café de cuadros', sw: ['#7a5a3c', '#c2a77f'],
+      why: 'El blazer de campo: café con cuadros, para viernes y viajes. Con el pantalón gris claro o crudo es una combinación de libro; también con jean y con tus oxford burdeos.',
+      ref: 'Suitsupply · Mid Brown Checked Havana Blazer en lino, ref. C2051', det: '100 % lino irlandés de Baird McNutt (Reino Unido). 429 € (unos 480 USD). Hoy agotado: está como referencia.',
+      url: 'https://suitsupply.com/en-es/men/jackets/mid-brown-checked-tailored-fit-havana-blazer/C2051.html',
+      alt: 'Disponible en lana: Suitsupply Roma Relaxed Fit, café de cuadros de Rogna (BBL10035CB1), 699 USD. Más abrigado.',
+      f: [['Puesto', [SSH('jackets/default/winter/c2051_1')]], ['Puesto', [SSD('jackets/default/winter/c2051_101')]],
+          ['La prenda', [SSF('jackets', 'c2051')]], ['En lana (Roma)', [SSI('t_plp-card-default-desktop', 'jackets/default/winter/bbl10035cb1_1')]]],
+      pins: [['Cuadros café con gris claro', pin('brown check blazer light grey trousers')]] },
+    { t: 'Azul de cuadros, seda y cachemira', sw: ['#2a3550', '#6c7a96'],
+      why: 'Un segundo azul que no repite al liso: cuadros que se ven de cerca y una tela con brillo seco de seda. Para cenas y eventos; con el pantalón claro queda espectacular.',
+      ref: 'Suitsupply · Navy Checked Tailored Fit Havana Blazer, ref. C261015', det: '60 % cachemira, 32 % seda y 8 % lino de Piacenza (Italia). 649 € (unos 730 USD).',
+      url: 'https://suitsupply.com/en-es/men/jackets/navy-checked-tailored-fit-havana-blazer/C261015.html',
+      f: [['Puesto', [SSH('jackets/default/summer/c261015_1')]], ['Puesto', [SSD('jackets/default/summer/c261015_101')]],
+          ['La prenda', [SSF('jackets', 'c261015')]], ['Puesto', [SSD('jackets/default/summer/c261015_103')]]],
+      pins: [['Blazer azul de cuadros', pin('navy check blazer white trousers')]] },
+    { t: 'Verde', sw: ['#6f7d5a'],
+      why: 'El color de antojo: verde salvia u oliva. Con pantalón claro, crudo o gris, y zapatos cafés, es muy ivy y muy de la Riviera.',
+      ref: 'Suitsupply · Light Green Tailored Fit Havana Blazer, ref. C1815', det: 'Lana, seda, lino y cachemira de E. Thomas (Italia). Hoy agotado: como referencia del color.',
+      url: 'https://suitsupply.com/en-us/men/jackets/light-green-tailored-fit-havana-blazer/C1815.html',
+      f: [['La prenda', [SSF('jackets', 'c1815'), SSH('jackets/default/summer/c1815_1')]]],
+      pins: [['Blazer verde con pantalón claro', pin('sage green blazer cream trousers men')], ['Oliva', pin('olive blazer light grey trousers loafers')]] },
+    { t: 'Seersucker o madras (de verano)', sw: ['#9fb6d6', '#f3f1ec'],
+      why: 'Lo más ivy que hay para el calor: seersucker de rayas azul y blanco, o madras de cuadros de colores. Para tierra caliente, bodas de día y viajes. Es el antojo divertido.',
+      ref: 'Qué buscar', det: 'Algodón liviano, sin forro. Polo Ralph Lauren y Brooks Brothers los sacan cada verano; Carlos Nieto te lo puede hacer en lino de rayas.',
+      url: pin('seersucker blazer men white trousers'),
+      f: [], pins: [['Seersucker', pin('seersucker blazer men ivy')], ['Madras', pin('madras blazer men preppy')]] },
+  ];
+  const CAR = n => `https://www.carminashoemaker.com/cdnassets/${n}.webp`;
+  const TASSEL = [
+    { t: 'Café oscuro de becerro, el clásico', sw: ['#3f2a1d'],
+      why: 'El tassel loafer de libro: becerro café oscuro, horma elegante y suela de cuero. Va con el blazer azul, con el pantalón gris claro que buscas, con chinos y con traje gris sin corbata. Es el que te recomiendo primero.',
+      ref: 'Crockett & Jones · Cavendish', det: 'Hecho a mano en Northampton (Inglaterra), con suela de cuero cosida (Goodyear). 820 € (unos 930 USD) en Care of Carl, con tallas disponibles.',
+      url: 'https://www.careofcarl.com/en/crockett-jones-cavendish-tassel-loafer-dark-brown-calf',
+      alt: 'En gamuza café oscuro, 780 € (unos 885 USD): más informal y muy lindo con el pantalón claro, pero no para días de lluvia.',
+      f: [['El zapato', COC('12680411r')], ['De lado', [`https://www.careofcarl.com/bilder/artiklar/zoom/12680411r_2.jpg`]],
+          ['Detalle', [`https://www.careofcarl.com/bilder/artiklar/zoom/12680411r_3.jpg`]], ['En gamuza', COC('12680311r')]],
+      pins: [['Tassel café con pantalón gris claro', pin('brown tassel loafers light grey trousers navy blazer')]] },
+    { t: 'Cordobán burdeos, el que dura toda la vida', sw: ['#5a1f24'],
+      why: 'El cuero de cordobán (shell cordovan) brilla sin lustrarlo, no se arruga y aguanta la lluvia mejor que el becerro. El color burdeos es el más ivy: con gris claro, azul y café queda perfecto.',
+      ref: 'Carmina · Cordovan Tassel Loafer 80481, horma Uetam', det: 'Cordobán Horween, suela Rendenbach que aguanta el agua, cosido a mano en Mallorca. 744 € (unos 845 USD). Hoy agotado en burdeos; en negro y bourbon también existe. Puedes pedir aviso.',
+      url: 'https://www.carminashoemaker.com/en/cordovan-loafers-burgundy-80481',
+      f: [['El zapato', [CAR('tassel_loafers_burgundy_cordovan_80481_l-2'), CAR('tassel_loafers_burgundy_cordovan_80481_m-2')]],
+          ['De lado', [CAR('tassel_loafers_burgundy_cordovan_80481_ladl-2')]], ['Detalle', [CAR('tassel_loafers_burgundy_cordovan_80481_sadl-3')]],
+          ['De frente', [CAR('tassel_loafers_burgundy_cordovan_80481_fadl-2')]]],
+      pins: [['Cordobán burdeos con chino', pin('burgundy shell cordovan tassel loafers chinos')]] },
+    { t: 'El original americano', sw: ['#4b1c1f'],
+      why: 'El tassel loafer que inventó el estilo ivy: el de los abogados de Nueva York y de Harvey. Mismo cordobán burdeos, horma americana un poco más ancha.',
+      ref: 'Alden · 563 Tassel Moccasin, cordobán burdeos (#8), horma Aberdeen', det: 'Hecho en Massachusetts. 967 USD en J.Press, hoy agotado en muchas tallas: se consigue pidiéndolo en Alden o J.Press.',
+      url: 'https://jpress.com/search?q=tassel',
+      f: [['El zapato', ['https://jpress.com/cdn/shop/files/JSH9011SC-TASSLE_BRW-copy.jpg?v=1747160530&width=1024']]],
+      pins: [['Alden tassel con jean', pin('alden 563 tassel loafer outfit')]] },
+    { t: 'Café de becerro, la mejor relación precio', sw: ['#5b3a24'],
+      why: 'Misma idea que el Crockett & Jones a la mitad del precio, hecho en España con cuero francés. Si quieres empezar con uno y después subir a cordobán, es este.',
+      ref: 'Carmina · Tassel Loafer 734, horma Forest, box-calf café', det: 'Cuero de Annonay (Francia), suela de cuero cosida (Goodyear). 426 € (unos 485 USD). Hoy agotado en café; existe en negro y burdeos.',
+      url: 'https://www.carminashoemaker.com/en/tassel-loafers-brown-boxcalf-734',
+      f: [['El zapato', [CAR('brown_tassel_loafers_carmina_734_l-2'), CAR('brown_tassel_loafers_carmina_734_m-2')]],
+          ['De lado', [CAR('brown_tassel_loafers_carmina_734_ladl')]], ['Detalle', [CAR('brown_tassel_loafers_carmina_734_sadl')]]],
+      pins: [] },
+    { t: 'Louboutin con borla (tu marca)', sw: ['#2b1d18', '#b0202a'],
+      why: 'Louboutin casi no hace tassel loafers: el único que encontré es el Grave Moc, con borla anudada y puntos perforados pintados a mano. Es más llamativo que los clásicos; para fines de semana.',
+      ref: 'Christian Louboutin · Grave Moc', det: 'Becerro, suela roja, hecho en España. Agotado en Harrods y el que salía era en rojo; pregunta en la tienda si lo tienen en negro o café.',
+      url: 'https://www.harrods.com/en-gb/p/christian-louboutin-grave-moc-calf-leather-loafers-000000000007798750',
+      f: [['El zapato', [HR('e2d38a0329a24cf5d92e8843fe01045b')]], ['De lado', [HR('05551816372887cf29436fb0fc8c327a')]], ['Detalle', [HR('ad92a062030d0c3a73ab6e79d0be109d')]]],
+      pins: [] },
+  ];
+  const inv = document.createElement('section');
+  inv.id = 'investigacion';
+  let invN = 0;
+  const invBlock = (k, h, d, list) => `<div class="tier" id="${k}"><h3 class="tier-h">${esc(h)}</h3><p class="tier-d">${esc(d)}</p><div class="buys">${list.map(b => card(b, ++invN)).join('')}</div></div>`;
+  inv.innerHTML = `<div class="wrap">
+    <div class="sec-head">
+      <div class="label">Para escoger</div>
+      <h2>Investigación 29 de octubre</h2>
+      <p>Ejemplos para que me digas cuál es el que tienes en mente. Lo que escojas lo paso a Qué comprar, en su categoría.</p>
+    </div>
+    <nav class="tiers"><a href="#inv-pantalones">Pantalones claros</a><a href="#inv-blazers">Más blazers</a><a href="#inv-tassel">Tassel loafers</a></nav>
+    ${invBlock('inv-pantalones', 'Pantalones claros', 'Gris claro casi blanco, que no sea liso como el de vestir. Hay tres tonos: gris niebla (el más versátil, va con todo lo que tienes), crudo (cálido, mejor con cafés y burdeos) y blanco (el más llamativo, para fin de semana). Que tenga textura mate: sarga de algodón, mezcla con lana o jean delgado.', CLAROS)}
+    ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'En orden: el café claro es el siguiente clásico; luego el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', BLAZERS2))}
+    ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Belgian Shoes no los hace, así que te pongo las casas del mismo nivel. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos.', TASSEL))}
+  </div>`;
   const sec = document.createElement('section');
   sec.id = 'compras';
   sec.innerHTML = `<div class="wrap">
@@ -613,9 +753,13 @@
   after.after(sec);
   const tab = document.querySelector('nav.tabs a[href="#analisis"]');
   if (tab) { const a = document.createElement('a'); a.href = '#compras'; a.textContent = 'Qué comprar'; tab.after(a); }
+  const last = [...document.querySelectorAll('section')].filter(x => x !== sec).pop();
+  (last || sec).after(inv);
+  const tabs = document.querySelector('nav.tabs');
+  if (tabs) { const a = document.createElement('a'); a.href = '#investigacion'; a.textContent = 'Investigación'; tabs.appendChild(a); }
 
   // each photo walks its list of sources; when a card is left with none, say so and link the shop
-  sec.querySelectorAll('img[data-src]').forEach(img => {
+  [...sec.querySelectorAll('img[data-src]'), ...inv.querySelectorAll('img[data-src]')].forEach(img => {
     const list = JSON.parse(img.dataset.src); let k = 0;
     img.onerror = () => {
       if (++k < list.length) { img.src = list[k]; return; }
@@ -631,10 +775,11 @@
   box.className = 'buybox';
   box.innerHTML = '<img alt=""><button type="button" aria-label="Cerrar">×</button>';
   document.body.appendChild(box);
-  sec.addEventListener('click', e => {
+  const zoom = e => {
     const img = e.target.closest('.buy-strip img'); if (!img) return;
     const big = box.querySelector('img'); big.referrerPolicy = 'no-referrer'; big.src = img.currentSrc || img.src; big.alt = img.alt;
     box.showModal();
-  });
+  };
+  sec.addEventListener('click', zoom); inv.addEventListener('click', zoom);
   box.addEventListener('click', () => box.close());
 })();
