@@ -46,7 +46,7 @@
     const ts = hrs.map(x => x.t), mm = hrs.reduce((s, x) => s + x.mm, 0);
     const fog = hrs.some(x => x.c === 45 || x.c === 48);
     // Medellín's forecast shows a shower almost every day: only a real rain while he is out
-    // (6 a.m. to 8 p.m., a likely hour of 1 mm or more, or 3 mm in all) calls for rain shoes
+    // (6 a.m. to 8 p.m., a likely hour of 1 mm or more, or 3 mm in all) counts as a rainy day
     const out = hrs.filter(x => x.h <= 20), outMm = out.reduce((s, x) => s + x.mm, 0);
     const llueve = out.some(x => x.p >= 70 && x.mm >= 1) || outMm >= 3;
     return { tmin: Math.min(...ts), tmax: Math.max(...ts), lluvia_mm: Math.round(mm * 10) / 10, franjas, llueve, fog, mananaLluvia: llueve && !!(franjas[0] && franjas[0].lluvia) };
@@ -54,8 +54,8 @@
   function resumen(w) {
     const f = w.franjas, wet = f.filter(x => x.lluvia).map(x => x.nombre.toLowerCase());
     if (!wet.length) return w.tmax >= 27 ? 'Día seco y caluroso' : w.tmin <= 16 ? 'Día seco y fresco' : 'Día seco y templado';
-    if (!w.llueve && wet.join() === 'noche') return 'Lluvia en la noche, después de las 8: de día no hacen falta zapatos de lluvia';
-    if (!w.llueve) return `Lloviznas sueltas en la ${wet.join(' y la ')}`.replace('la mañana y la tarde', 'mañana y la tarde') + ': no hacen falta zapatos de lluvia';
+    if (!w.llueve && wet.join() === 'noche') return 'Lluvia en la noche, después de las 8';
+    if (!w.llueve) return `Lloviznas sueltas en la ${wet.join(' y la ')}`.replace('la mañana y la tarde', 'mañana y la tarde');
     if (wet.length === f.length) return 'Lluvia durante todo el día';
     return `Lluvia en la ${wet.join(' y la ')}`.replace('la mañana y la tarde', 'mañana y la tarde');
   }
@@ -63,7 +63,14 @@
   /* ---------- outfit of the day ---------- */
   const RAIN_OK = ['Z03', 'Z07', 'Z16', 'Z18'];
   const BELT_FOR = { Z02: ['A03', 'A04'], Z03: ['A03b'], Z04: ['A02', 'A03b'], Z06: ['A03b'], Z01: ['A02', 'A03b'], Z05: ['A02', 'A03b'], Z07: ['A02', 'A03b'], Z08: ['A02', 'A03b'], Z09: ['A02', 'A03b'], Z10: ['A02', 'A03b'], Z11: ['A02'], Z12: ['A02'], Z13: ['A02'], Z14: ['A02'], Z15: ['A02', 'A03b'], Z16: ['A02', 'A03b'], Z17: ['A02'], Z18: ['A02', 'A03b'] };
-  const LAYERS = ['S11', 'S07', 'S04', 'S13', 'S01', 'S05', 'S12', 'S08', 'S03'];
+  // Rain only rules out the delicate shoes (suede, canvas, Belgians) when something on the agenda is outdoors:
+  // the rest of the day he is under a roof, so any shoe works (Daniel, 30 October 2026).
+  // Layers go by temperature: thin knits for a fresh morning, thicker ones when it is cold.
+  const LAYERS_THIN = ['S01', 'S13', 'S08', 'S04', 'S05', 'S03'], LAYERS_THICK = ['S11', 'S07', 'S12', 'S09'];
+  const THICK = [...LAYERS_THICK, 'S02', 'S06', 'S16', 'S17', 'S18'];
+  const OUTDOOR = /afuera|aire libre|exterior|finca|paseo|golf|tenis|parque|caminata|estadio|piscina|playa|terraza|recorrido|tour|visita de obra|asado|cancha/;
+  const isOutdoor = events => (events || []).some(e => OUTDOOR.test((e.titulo + ' ' + e.categoria + ' ' + e.lugar).toLowerCase()));
+  const tempLevel = w => w.tmax >= 27 && w.tmin >= 18 ? 'calor' : w.tmin <= 14 ? 'frio' : w.tmin <= 17 || w.fog ? 'fresco' : 'templado';
   function dayKind(events, day) {
     const txt = (events || []).map(e => (e.titulo + ' ' + e.categoria + ' ' + e.lugar).toLowerCase()).join(' | ');
     const dow = new Date(day + 'T12:00:00-05:00').getUTCDay(); const weekend = dow === 0 || dow === 6;
@@ -75,16 +82,21 @@
     return weekend ? { target: 2.2, label: 'fin de semana' } : { target: 3, label: 'día de agencia' };
   }
   function adapt(o, w) {
-    const c = { capa: o.capa, camisa: o.arriba, corbata: o.corbata || null, panuelo: o.panuelo || null, pantalon: o.abajo, correa: o.correa, zapatos: o.zapatos, rain: w.llueve };
+    const c = { capa: o.capa, camisa: o.arriba, corbata: o.corbata || null, panuelo: o.panuelo || null, pantalon: o.abajo, correa: o.correa, zapatos: o.zapatos, rain: w.wet };
     const why = [];
     if (o.capa === TUX) return { c, why }; // black tie is fixed, and it is indoors
-    if (w.llueve && !RAIN_OK.includes(c.zapatos)) { c.zapatos = INV[c.pantalon].formalidad >= 3 ? 'Z03' : 'Z07'; why.push(c.zapatos === 'Z03' ? 'oxford burdeos de cuero que aguantan el agua' : 'tenis de cuero, que no se dañan con la lluvia'); }
+    if (w.wet && !RAIN_OK.includes(c.zapatos)) { c.zapatos = INV[c.pantalon].formalidad >= 3 ? 'Z03' : 'Z07'; why.push(c.zapatos === 'Z03' ? 'oxford burdeos de cuero, porque vas a estar afuera con lluvia' : 'tenis de cuero, porque vas a estar afuera con lluvia'); }
     if (!NO_BELT.includes(c.pantalon) && !(BELT_FOR[c.zapatos] || []).includes(c.correa)) c.correa = (BELT_FOR[c.zapatos] || ['A03b'])[0];
     if (NO_BELT.includes(c.pantalon)) c.correa = null;
-    const cool = w.tmin <= 17 || w.fog || w.mananaLluvia;
-    if (cool && !c.capa) { c.capa = LAYERS.find(s => INV[s] && s !== c.capa && INV[s].color !== INV[c.pantalon].color) || null; if (c.capa) why.push('una capa para la mañana fresca'); }
-    if (w.tmax >= 27 && c.capa && !SUIT[c.capa]) { c.capa = null; why.push('sin capa, porque hace calor'); }
-    if (w.llueve && !c.capa && INV.S20 && INV[c.pantalon].formalidad <= 4) { c.capa = 'S20'; why.push('la Harrington de Burberry encima, para la lluvia'); }
+    const lvl = tempLevel(w), t0 = Math.round(w.tmin);
+    if ((lvl === 'frio' || lvl === 'fresco') && !c.capa) {
+      const L = lvl === 'frio' ? [...LAYERS_THICK, ...LAYERS_THIN] : [...LAYERS_THIN, ...LAYERS_THICK];
+      c.capa = L.find(s => INV[s] && INV[s].color !== INV[c.pantalon].color) || null;
+      if (c.capa) why.push(lvl === 'frio' ? `un saco grueso para la mañana de ${t0}°` : `un saco delgado para la mañana de ${t0}° que puedes quitarte al mediodía`);
+    }
+    if (lvl === 'templado' && c.capa && THICK.includes(c.capa)) { const thin = LAYERS_THIN.find(s => INV[s] && INV[s].color !== INV[c.pantalon].color); if (thin) { c.capa = thin; why.push(`un saco más delgado, porque hace ${t0}° a ${Math.round(w.tmax)}°`); } }
+    if (lvl === 'calor' && c.capa && !SUIT[c.capa]) { c.capa = null; why.push('sin saco, porque hace calor'); }
+    if (w.wet && !c.capa && INV.S20 && INV[c.pantalon].formalidad <= 4) { c.capa = 'S20'; why.push('la Harrington de Burberry encima, porque vas a estar afuera con lluvia'); }
     if (!c.camisa && !c.capa) c.camisa = 'C02';
     return { c, why };
   }
@@ -99,7 +111,7 @@
       const col = colorCheck(c, j.avg);
       let score = -Math.abs(j.avg - kind.target) * 3 - j.notes.filter(n => n.lvl === 'bad').length * 10 - j.notes.length * 1.5 - col.bad.length * 5 + col.score * .3;
       if ((KIND_GROUP[kind.label] || []).includes(o.grupo)) score += 2;
-      if (w.llueve && o.grupo === 'Lluvia') score += 1; if (w.tmax >= 28 && o.grupo === 'Calor y tierra caliente') score += 1;
+      if (w.wet && o.grupo === 'Lluvia') score += 1; if (w.tmax >= 28 && o.grupo === 'Calor y tierra caliente') score += 1;
       score += (hash(day + o.id) % 100) / 100; // a little variety between days
       if (!best || score > best.score) best = { o, c, why, score };
     }
@@ -110,18 +122,18 @@
   const HEAVY = ['S16', 'S17', 'S18'];
   const keyOf = c => ORDER.map(k => c[k] || '-').join('|');
   function generate(w, kind, locks, ban, avoid) {
-    const casual = kind.target <= 2.4, hot = w.tmax >= 27, cool = w.tmin <= 17 || w.fog || w.mananaLluvia;
+    const casual = kind.target <= 2.4, lvl = tempLevel(w), hot = lvl === 'calor', cool = lvl === 'frio' || lvl === 'fresco';
     const free = id => id && !ban.includes(id);
     const P = {
       camisa: LISTS.camisa.filter(free).filter(id => casual || !HOME_ONLY.includes(id)),
       capa: LISTS.capa.filter(free).filter(id => id !== TUX && (casual || !HOME_ONLY.includes(id)) && (w.tmin <= 14 || !HEAVY.includes(id)) && (!SUIT[id] || kind.target >= 3.6)),
       pantalon: LISTS.pantalon.filter(free).filter(id => !Object.values(SUIT).includes(id) || kind.target >= 3.6),
-      zapatos: LISTS.zapatos.filter(free).filter(id => !w.llueve || RAIN_OK.includes(id)),
+      zapatos: LISTS.zapatos.filter(free).filter(id => !w.wet || RAIN_OK.includes(id)),
     };
     const pick = L => L[Math.floor(Math.random() * L.length)];
     const seen = new Map();
     for (let t = 0; t < 3000 && seen.size < 400; t++) {
-      const c = { capa: null, camisa: null, corbata: null, panuelo: null, pantalon: null, correa: null, zapatos: null, rain: w.llueve };
+      const c = { capa: null, camisa: null, corbata: null, panuelo: null, pantalon: null, correa: null, zapatos: null, rain: w.wet };
       if ('capa' in locks) c.capa = locks.capa;
       else if ('pantalon' in locks && Object.entries(SUIT).some(([j, pt]) => pt === locks.pantalon) && kind.target >= 3.6 && Math.random() < .5) c.capa = Object.keys(SUIT).find(j => SUIT[j] === locks.pantalon);
       else { const pc = hot ? (kind.target >= 3.8 ? .2 : 0) : cool ? .75 : .4; if (Math.random() < pc) c.capa = pick(P.capa.filter(x => !hot || SUIT[x])) || null; }
@@ -140,7 +152,8 @@
       if (hot && ok.c.capa && !SUIT[ok.c.capa]) sc -= 3;
       if (hot && [ok.c.camisa, ok.c.pantalon].some(i => i && INV[i].tono.tela === 'lino')) sc += 1;
       if (cool && !ok.c.capa) sc -= 1;
-      if (w.llueve && ok.c.capa === 'S20') sc += 1;
+      if (ok.c.capa && THICK.includes(ok.c.capa)) sc += lvl === 'frio' ? .5 : lvl === 'templado' ? -1.5 : 0;
+      if (w.wet && ok.c.capa === 'S20') sc += 1;
       seen.set(key, { ...ok, sc });
     }
     const all = [...seen.values()].sort((a, b) => b.sc - a.sc);
@@ -179,15 +192,21 @@
     const w = summarize(fc, day);
     let events = null, agErr = '';
     try { events = await agendaFor(day); } catch (e) { agErr = e.message === 'clave' ? 'La clave de la agenda no funcionó.' : 'No pude leer la agenda.'; }
+    w.afuera = isOutdoor(events); w.wet = w.llueve && w.afuera;
     $('#agbtn').textContent = store.get('agenda_clave', '') ? 'Agenda conectada' : 'Conectar agenda';
     const kind = dayKind(events, day);
     ds = loadDay(day);
     const best = pickOutfit(w, kind, day, ds.ban);
     const fecha = new Date(day + 'T12:00:00-05:00').toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', timeZone: 'America/Bogota' });
-    const consejo = w.llueve ? 'Nada de gamuza ni Belgian: zapatos de cuero y paraguas a la mano.' : w.tmax >= 27 ? 'Telas livianas y colores claros; el suéter sobra.' : w.tmin <= 16 ? 'Mañana fría: lleva una capa que puedas quitarte al mediodía.' : '';
+    const lvl = tempLevel(w), t0 = Math.round(w.tmin), t1 = Math.round(w.tmax);
+    const consejo = (lvl === 'calor' ? `Día caluroso, hasta ${t1}°: telas livianas y colores claros; el saco sobra.`
+      : lvl === 'frio' ? `Mañana fría, de ${t0}°: saco grueso o chaqueta; al mediodía sube a ${t1}°, así que algo que te puedas quitar.`
+      : lvl === 'fresco' ? `Mañana fresca, de ${t0}°: un saco delgado que puedas quitarte cuando suba a ${t1}°.`
+      : `Templado, de ${t0}° a ${t1}°: el saco es opcional.`)
+      + (w.wet ? ' Va a llover y tienes algo afuera: hoy nada de gamuza ni Belgian, y paraguas a la mano.' : w.llueve ? ' Puede llover, pero bajo techo da igual el zapato: solo lleva paraguas.' : '');
     ctx = { w, kind, day, best, base: {
       revisado: new Date(fcAt).toISOString(), fuente: 'Open-Meteo', ciudad: 'Medellín',
-      etiqueta: (sel === 'hoy' ? 'Hoy, ' : 'Mañana, ') + fecha, resumen: resumen(w), tmin: w.tmin, tmax: w.tmax, lluvia_mm: w.lluvia_mm, llueve: w.llueve,
+      etiqueta: (sel === 'hoy' ? 'Hoy, ' : 'Mañana, ') + fecha, resumen: resumen(w), tmin: w.tmin, tmax: w.tmax, lluvia_mm: w.lluvia_mm, llueve: w.llueve, zap_lluvia: w.wet,
       franjas: w.franjas, consejo: agErr ? (consejo ? consejo + ' ' : '') + agErr : consejo, agenda: events || undefined } };
     showDay();
   }
@@ -222,8 +241,8 @@
     const { w, kind } = ctx;
     const r = generate(w, kind, locks, ds.ban, avoid);
     if (!r) {
-      const z = locks.zapatos; const rainy = w.llueve && z && !RAIN_OK.includes(z);
-      showDay(rainy ? `Con lluvia, ${name(z)} (${z}) se daña: no encontré una pinta que combine con ellos hoy.` : 'Con lo que dejaste fijo no encontré otra pinta que combine para hoy. Suelta una prenda e intenta otra vez.');
+      const z = locks.zapatos; const rainy = w.wet && z && !RAIN_OK.includes(z);
+      showDay(rainy ? `Con lluvia y algo afuera, ${name(z)} (${z}) se daña: no encontré una pinta que combine con ellos hoy.` : 'Con lo que dejaste fijo no encontré otra pinta que combine para hoy. Suelta una prenda e intenta otra vez.');
       return false;
     }
     const kept = Object.values(locks).filter(Boolean);

@@ -354,7 +354,7 @@ footer .wrap{padding-block:22px 40px;font-family:var(--mono);font-size:.78rem;co
     <div class="sec-head">
       <div class="label">Como el clóset de Cher en Clueless</div>
       <h2>Probador</h2>
-      <p>Desliza el dedo sobre cada prenda para cambiarla, o usa las flechas. El probador revisa la correa contra los zapatos, la formalidad de la mezcla y si los zapatos aguantan la lluvia.</p>
+      <p>Desliza el dedo sobre cada prenda para cambiarla, o usa las flechas. El probador revisa la correa contra los zapatos, la formalidad de la mezcla y, si vas a estar afuera con lluvia, que los zapatos la aguanten.</p>
     </div>
     <div class="probador">
       <div class="stage-frame">
@@ -373,7 +373,7 @@ footer .wrap{padding-block:22px 40px;font-family:var(--mono);font-size:.78rem;co
       <div class="console">
         <div class="rows" id="rows"></div>
         <div class="controls">
-          <label class="switch" for="rain"><input type="checkbox" id="rain"> ¿Llueve hoy?</label>
+          <label class="switch" for="rain"><input type="checkbox" id="rain"> ¿Afuera con lluvia?</label>
           <button class="btn ghost" id="shuffle" type="button">Al azar</button>
         </div>
         <div class="verdict ok" id="verdict">
@@ -557,7 +557,7 @@ function judge(s){
   if(s.corbata&&s.camisa&&INV[s.camisa].formalidad<=2) add('warn',`${name(s.camisa)} (${s.camisa}) es muy casual para corbata. Va mejor con la camisa de vestir o un oxford azul.`);
   if(s.corbata&&RELAXED_SHOES.includes(sh)) add('warn','Corbata con zapato relajado: para corbata, mejor un oxford de cuero.');
   if(s.panuelo&&!['S14','S15'].includes(s.capa)) add('warn','El pañuelo luce en el bolsillo de un saco: úsalo con el saco del traje (S15) o el esmoquin (S14).');
-  if(s.rain&&NOT_IN_RAIN.includes(sh)) add('bad',`Con lluvia, ${name(sh)} (${sh}) se daña. Usa el oxford burdeos (Z03) o unos tenis de cuero (Z07, Z16 o Z18).`);
+  if(s.rain&&NOT_IN_RAIN.includes(sh)) add('bad',`Afuera con lluvia, ${name(sh)} (${sh}) se daña. Usa el oxford burdeos (Z03) o unos tenis de cuero (Z07, Z16 o Z18).`);
   if(!s.rain&&sh==='Z03'&&f.length&&Math.max(...f)<=3) add('warn','El oxford burdeos es muy formal para el resto. Prueba los belgas o el Chelsea.');
   return {notes:out,avg:f.reduce((a,b)=>a+b,0)/f.length};
 }
@@ -800,9 +800,9 @@ function wxRender(w){
     ${(()=>{const f=fajar(p,typeof p.finde==='boolean'?p.finde:isFinde());return f?`<p class="faja${f.fuera?' out':''}">${fajaHTML(f)}</p>`:''})()}
     <div class="pctl" id="pctl"></div>
     ${p.por_que?`<p class="why">${esc(p.por_que)}</p>`:''}
-    ${(()=>{const s0={rain:!!w.llueve};ORDER.forEach(k=>s0[k]=p[k]&&INV[p[k]]?p[k]:null);if(!s0.pantalon&&s0.capa!==TUX)return'';const ex=explain(s0);return ex.good.length?`<div class="whyc"><div class="label">Por qué combina</div><ul>${ex.good.map(t=>`<li>${esc(t)}</li>`).join('')}${ex.bad.map(t=>`<li class="ojo">Ojo con el color: ${esc(t)}</li>`).join('')}</ul></div>`:''})()}
+    ${(()=>{const s0={rain:!!w.zap_lluvia};ORDER.forEach(k=>s0[k]=p[k]&&INV[p[k]]?p[k]:null);if(!s0.pantalon&&s0.capa!==TUX)return'';const ex=explain(s0);return ex.good.length?`<div class="whyc"><div class="label">Por qué combina</div><ul>${ex.good.map(t=>`<li>${esc(t)}</li>`).join('')}${ex.bad.map(t=>`<li class="ojo">Ojo con el color: ${esc(t)}</li>`).join('')}</ul></div>`:''})()}
     <button class="btn" type="button" id="wxtry">Abrir en el probador</button>`:'<p class="empty">Sin pinta sugerida en esta revisión.</p>'}</div>`;
-  const t=$('#wxtry'); if(t) t.addEventListener('click',()=>{ORDER.forEach(k=>st[k]=p[k]&&INV[p[k]]?p[k]:null);if(!st.pantalon)st.pantalon=LISTS.pantalon[0];if(!st.zapatos)st.zapatos=LISTS.zapatos[0];st.rain=!!w.llueve;$('#rain').checked=st.rain;st.preset=matchPreset();render();$('#probador').scrollIntoView()});
+  const t=$('#wxtry'); if(t) t.addEventListener('click',()=>{ORDER.forEach(k=>st[k]=p[k]&&INV[p[k]]?p[k]:null);if(!st.pantalon)st.pantalon=LISTS.pantalon[0];if(!st.zapatos)st.zapatos=LISTS.zapatos[0];st.rain=!!w.zap_lluvia;$('#rain').checked=st.rain;st.preset=matchPreset();render();$('#probador').scrollIntoView()});
 }
 </script>
 <script src="app.js"></script>
