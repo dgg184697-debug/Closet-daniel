@@ -565,14 +565,31 @@
   // Categories, and inside each one the urgent first. Only titles listed here are shown:
   // what Daniel already owns (chinos, camisas blancas, polos, lino, mocasín de gamuza, camisa rosada,
   // suéter navy, medias de color) left the list on 27 October 2026; the pink Polo oxford came back on 30 October.
+  // Ordered on 30 October 2026 at theory.com; they leave this list when they arrive and go into the closet.
+  const THI = (code, v) => [`https://ak-media.theory.com/i/theory/TH_${code}_${v}?$TH-pdp-desktop$`, `https://ak-media.theory.com/i/theory/TH_${code}_${v}?%24TH-pdp-desktop-thumb%24`];
+  const POR_LLEGAR = [
+    { t: 'Pantalón crema de Theory', sw: ['#ece5d4'],
+      why: 'El pantalón crema que buscabas: ni gris ni blanco. Va con el blazer azul que viene, con tus sacos camel (S01, S11) y azules, y con la chaqueta café que pediste con él.',
+      ref: 'Theory · Zaine Pant in Moonsoft Cotton, Winter Ivory, talla 36', det: '97 % algodón y 3 % elastano, slim. Pedido el 30 de octubre en rebaja (90 USD, antes 225).',
+      url: 'https://www.theory.com/men/pants/zaine-pant-in-moonsoft-cotton/Q0274204_2H5.html',
+      f: [['Puesto', THI('Q0274204_2H5', 'L0')], ['La prenda', THI('Q0274204_2H5', '0')]], pins: [] },
+    { t: 'Chaqueta café de cuatro botones de Theory', sw: ['#5b4334'],
+      why: 'Tu chaqueta de fin de semana, en el color que te faltaba: de casual tenías cinco azules y la Harrington beige. Con el pantalón crema, con grises, con tus azules y con jean. Reemplaza a la de JW Anderson.',
+      ref: 'Theory · Four-Button Jacket in Moonsoft Cotton, Classic Brown, talla L', det: 'Sarga de algodón japonés sin forro, bolsillos de parche. Pedida el 30 de octubre en rebaja (219 USD, antes 365); venta final, solo cambio de talla.',
+      url: 'https://www.theory.com/men/blazers-and-jackets/four-button-jacket-in-moonsoft-cotton/Q0774103_TXO.html',
+      f: [['Puesta', THI('Q0774103_TXO', 'L0')], ['La prenda', THI('Q0774103_TXO', '0')]], pins: [] },
+  ];
+
   const ALL = {};
-  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
+  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA, POR_LLEGAR].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
   const U = 'Urgente', S = 'Lo siguiente', A = 'Antojos', E = 'Ejemplos de blazer para llevar a Carlos Nieto';
   const CATS = [
+    ['llegar', 'Por llegar', 'Lo que ya pediste. Cuando llegue, mándame la foto y lo paso a tu clóset.',
+      [['Pedido a Theory el 30 de octubre', ['Pantalón crema de Theory', 'Chaqueta café de cuatro botones de Theory']]]],
     ['camisas', 'Camisas, polos y camisetas', 'Estás bien cubierto: oxford, camisas de vestir blancas, lila y rosada, lino y nueve polos. Lo que sigue es la oxford rosada de Polo, que pediste.',
       [[S, ['Oxford rosada', 'Camisa rugby']], [A, ['Camisa de puño francés y mancuernas']]]],
     ['sacos', 'Sacos y buzos', 'Suéteres, buzos, chaquetas y abrigos. Ya tienes suéteres en camel, gris, taupe y azul marino, y chaquetas para la llovizna.',
-      [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Chaqueta corta Uniqlo × JW Anderson']]]],
+      [[S, ['Gabardina Burberry', 'Suéter de cable crema']]]],
     ['trajes', 'Trajes y blazers', 'Lo que va con corbata o sobre la camisa en una reunión. Aquí está la compra más importante de toda la lista: el blazer azul.',
       [[U, ['Blazer azul marino, de blazer y no de traje']], [E, ['Polo Ralph Lauren con botones dorados', 'Polo de lino con textura', 'Polo de gabardina', 'Suitsupply de tejido con textura', 'Blazer cruzado']],
        [S, ['Segundo traje, azul marino', 'Blazer de lino para tierra caliente']], [A, ['Esmoquin azul marino', 'Smoking jacket de terciopelo']]]],
@@ -854,7 +871,7 @@
       <p>Ejemplos para que me digas cuál es el que tienes en mente. Lo que escojas lo paso a Qué comprar, en su categoría.</p>
     </div>
     <nav class="tiers"><a href="#inv-crema">Pantalones crema</a><a href="#inv-pantalones">Primera ronda</a><a href="#inv-blazers">Más blazers</a><a href="#inv-marcas">Theory, Polo y N.Peal</a><a href="#inv-tassel">Tassel loafers</a></nav>
-    ${invBlock('inv-crema', 'Pantalones crema', 'El intermedio que buscas: ni gris ni blanco. En las tiendas búscalo como cream, ivory, ecru, stone o warm white; en español, crema, marfil, crudo o hueso. Es un blanco con un toque cálido, que se ve más elegante y más fácil de combinar que el blanco puro. Aquí van del más elegante al más casual.', CREMAS, TONOS)}
+    ${invBlock('inv-crema', 'Pantalones crema', 'Resuelto: pediste el Zaine de Theory en marfil, que está en Por llegar. Esto queda como referencia. El intermedio que buscas: ni gris ni blanco. En las tiendas búscalo como cream, ivory, ecru, stone o warm white; en español, crema, marfil, crudo o hueso. Es un blanco con un toque cálido, que se ve más elegante y más fácil de combinar que el blanco puro. Aquí van del más elegante al más casual.', CREMAS, TONOS)}
     ${(invN = 0, invBlock('inv-pantalones', 'Primera ronda: muy grises o muy blancos', 'Los que viste antes, para comparar. Ya me dijiste que estos no son.', CLAROS))}
     ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'En orden: el café claro es el siguiente clásico; luego el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', BLAZERS2))}
     ${(invN = 0, invBlock('inv-marcas', 'De tus marcas: Theory, Polo y N.Peal', 'Lo mismo que estamos buscando (pantalón crema y blazers) en Theory y Polo, y de N.Peal el cachemir que les va: un blazer de punto para viajar y dos suéteres para debajo del blazer. Cada tarjeta trae la historia de la marca.', MARCAS))}
