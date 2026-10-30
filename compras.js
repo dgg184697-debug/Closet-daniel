@@ -580,8 +580,42 @@
       f: [['Puesta', THI('Q0774103_TXO', 'L0')], ['La prenda', THI('Q0774103_TXO', '0')]], pins: [] },
   ];
 
+  // Barbour, asked for on 30 October 2026 as an "antojo".
+  const ZB = (a, b, x) => `https://img01.ztat.net/article/spp-media-p1/${a}/${b}.jpg?imwidth=762${x || ''}`;
+  const H_BARBOUR = 'John Barbour, un escocés, abrió en 1894 una tienda en South Shields, un puerto del norte de Inglaterra, vendiendo impermeables de tela aceitada a marineros y pescadores. La chaqueta de algodón encerado salió de ahí. Margaret Barbour diseñó la Bedale en 1980 para montar a caballo y la Beaufort en 1983 para la cacería, y la familia real británica le dio sus tres Royal Warrants. Sigue siendo de la familia, y en la fábrica de South Shields te la vuelven a encerar y la reparan de por vida.';
+  const BARBOUR = [
+    { t: 'Barbour liviana para Medellín', sw: ['#5c5a3c'],
+      why: 'La que más vas a usar: es la versión liviana de la Ashby, con cera delgada y forro de algodón, así que no da calor en Medellín. Corte más entallado y moderno, para salir con jean o chinos y suéter. La cera aguanta la lluvia, y es la mejor para el avión y las ciudades.',
+      ref: 'Barbour · Lightweight Ashby Wax (MWX1377), verde oliva', det: '100 % algodón encerado, forro de algodón. 329 € (unos 370 USD); hoy a 296 € (unos 335 USD).',
+      url: 'https://en.zalando.de/barbour-light-jacket-olive-green-ba222t0d2-n11.html', hist: H_BARBOUR,
+      f: [['Puesta', [ZB('6a959c567d5d490580bd9a31fd269773', 'f7bf1b453667412aa197ec34793f119b')]], ['La prenda', [ZB('aa841e8d1df84aac83f8b3a634794166', '4bbd865d23414795a2d838ca7a0df144', '&filter=packshot')]],
+          ['Puesta', [ZB('9aa9e88c94364419bc7b78e9ed01060c', 'c5454f0c66bf4eb2bc8a018d8ad74604')]], ['Detalle', [ZB('4e9a254bac224deaaaa2c5f44a23635c', '349b204c29954cf386ce23fef88f7fc3')]]],
+      pins: [['Barbour con suéter y chinos', pin('barbour ashby olive sweater chinos men')]] },
+    { t: 'Barbour Bedale, la clásica', sw: ['#4f4e33', '#8a5a3c'],
+      why: 'La Barbour de toda la vida: corta (se hizo para montar a caballo), cuello de pana café y bolsillos grandes. Es la más ivy y la más reconocible. Encima de un suéter de cuello redondo o de la oxford con corbata de punto. Su cera es más gruesa: para días frescos, Bogotá y viajes a clima frío.',
+      ref: 'Barbour · Classic Bedale Jacket, verde oliva', det: 'Algodón encerado clásico, forro de cuadros tartán. 399,95 € (unos 450 USD).',
+      url: 'https://en.zalando.de/barbour-bedale-winter-jacket-olive-ba222d00c-604.html', hist: H_BARBOUR,
+      f: [['Puesta', [ZB('f535018d91c83ba4925d4f616a094159', 'd56c69a85f24427abe00a75a6e2db9a3')]], ['La prenda', [ZB('937e1aa6c17f31989ed66466dfabd30c', 'e20b44687f4b4b929e68df45d4eb6b5b', '&filter=packshot')]],
+          ['Puesta', [ZB('64cd18cf92d33d2c8701f42321d84d9b', 'a2e78ac98017437595989b567b651932')]], ['Detalle', [ZB('fee80f25bab4303ea7c5d0875b45aa7b', '0ea3c301cbbc439ea98786217aef22a4')]]],
+      pins: [['Bedale ivy', pin('barbour bedale olive preppy outfit')], ['Bedale con blazer', pin('barbour bedale over tweed blazer')]] },
+    { t: 'Barbour Beaufort, la de viaje', sw: ['#7f8466'],
+      why: 'Más larga que la Bedale: tapa el blazer, así que sirve para llegar a una reunión en un día de lluvia. Tiene un bolsillo grande por dentro de la espalda (era para la cacería), donde caben el pasaporte y un libro. Es la mejor para viajar.',
+      ref: 'Barbour · Modern Beaufort Jacket, sage', det: 'Algodón encerado, 85 cm de largo en talla M. 479,95 € (unos 540 USD). La Beaufort clásica también viene en verde oliva y en azul marino.',
+      url: 'https://en.zalando.de/barbour-modern-beaufort-jacket-light-jacket-sageshadow-classic-ba222t08i-n11.html', hist: H_BARBOUR,
+      f: [['Puesta', [ZB('6f5a1d7b299c4ec7a2a579461cb772bc', '1677169c48c147ab855f0aa0eb1182b7')]], ['La prenda', [ZB('b26d3034f94e4a48ac8131bdfc7c3510', 'cf32c64901954ae69763bbbfd9c9f773', '&filter=packshot')]],
+          ['Puesta', [ZB('84c7730e746e47c68d2a6b632f24d1f8', '8d436950479b4e6cb586e75462498983')]], ['Detalle', [ZB('4c44abd9d8684063914edda7d54701d9', '67fdec75fd9c4cdeaa7399f6ec827040')]]],
+      pins: [['Beaufort sobre blazer', pin('barbour beaufort over suit blazer')]] },
+    { t: 'Barbour acolchada, sin cera', sw: ['#5a5b3e'],
+      why: 'La más liviana y la más barata: acolchado en rombos, sin cera, se dobla en la maleta. Va encima de la camisa o debajo de una chaqueta encerada en un viaje frío. Ojo: se parece a tu chaqueta acolchada de Polo (S17), así que es la última de esta lista.',
+      ref: 'Barbour · Heritage Liddesdale Quilt, verde oliva', det: 'Nailon acolchado, cuello de pana. 179,95 € (unos 205 USD); hoy a 161,95 € (unos 185 USD).',
+      url: 'https://en.zalando.de/barbour-liddesdale-light-jacket-oliv-ba222g005-604.html', hist: H_BARBOUR,
+      f: [['La prenda', [ZB('19bde6915eba3a5683df59e774240203', '107b7d3022124d15a36ff8ae6ce419dc', '&filter=packshot')]], ['Puesta', [ZB('8ac5e4123d944cf8a06205a69c7ebf02', 'ace904a108704d1d8f9ea7986d7fd421')]],
+          ['Puesta', [ZB('2d4154c4a5ce3465b9506688fae62d96', '3df689049a96452d881bf24fd69a5283')]]],
+      pins: [['Liddesdale con oxford', pin('barbour liddesdale olive oxford shirt chinos')]] },
+  ];
+
   const ALL = {};
-  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA, POR_LLEGAR].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
+  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA, POR_LLEGAR, BARBOUR].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
   const U = 'Urgente', S = 'Lo siguiente', A = 'Antojos', E = 'Ejemplos de blazer para llevar a Carlos Nieto';
   const CATS = [
     ['llegar', 'Por llegar', 'Lo que ya pediste. Cuando llegue, mándame la foto y lo paso a tu clóset.',
@@ -589,7 +623,7 @@
     ['camisas', 'Camisas, polos y camisetas', 'Estás bien cubierto: oxford, camisas de vestir blancas, lila y rosada, lino y nueve polos. Lo que sigue es la oxford rosada de Polo, que pediste.',
       [[S, ['Oxford rosada', 'Camisa rugby']], [A, ['Camisa de puño francés y mancuernas']]]],
     ['sacos', 'Sacos y buzos', 'Suéteres, buzos, chaquetas y abrigos. Ya tienes suéteres en camel, gris, taupe y azul marino, y chaquetas para la llovizna.',
-      [[S, ['Gabardina Burberry', 'Suéter de cable crema']]]],
+      [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Barbour liviana para Medellín', 'Barbour Bedale, la clásica', 'Barbour Beaufort, la de viaje', 'Barbour acolchada, sin cera']]]],
     ['trajes', 'Trajes y blazers', 'Lo que va con corbata o sobre la camisa en una reunión. Aquí está la compra más importante de toda la lista: el blazer azul.',
       [[U, ['Blazer azul marino, de blazer y no de traje']], [E, ['Polo Ralph Lauren con botones dorados', 'Polo de lino con textura', 'Polo de gabardina', 'Suitsupply de tejido con textura', 'Blazer cruzado']],
        [S, ['Segundo traje, azul marino', 'Blazer de lino para tierra caliente']], [A, ['Esmoquin azul marino', 'Smoking jacket de terciopelo']]]],
