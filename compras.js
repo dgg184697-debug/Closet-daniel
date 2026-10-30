@@ -543,6 +543,7 @@
         <p class="buy-why">${esc(b.why)}</p>
         <p class="buy-ref"><b>${esc(b.ref)}</b> ${esc(b.det)} <a href="${esc(b.url)}" target="_blank" rel="noopener">${/pinterest/.test(b.url) ? 'Ver ejemplos' : /gentlemansgazette|bespokeunit/.test(b.url) ? 'Leer más' : 'Ver en la tienda'} ↗</a></p>
         ${b.alt ? `<p class="buy-alt"><b>Otra opción:</b> ${esc(b.alt)}</p>` : ''}
+        ${b.hist ? `<p class="buy-hist"><b>La historia.</b> ${esc(b.hist)}</p>` : ''}
         ${b.pins.length ? `<p class="buy-pins">Más ejemplos: ${b.pins.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join(' · ')}</p>` : ''}
       </div>
     </article>`;
@@ -602,6 +603,45 @@
   const SSD = path => SSI('t_pdp-detail-default-desktop', path), SSH = path => SSI('t_pdp-hero-default-mobile', path, 1000);
   const SSF = (kind, code) => SSI('t_pdp-product-default-desktop', `${kind}/default/${code}_${kind === 'trousers' ? 28 : 25}`, 1000);
   const ZT = (a, b, x) => `https://img01.ztat.net/article/spp-media-p1/${a}/${b}.jpg?imwidth=762${x || ''}`;
+  const CREMAS = [
+    { t: 'Chino crema de Incotex', sw: ['#ebe4d3'],
+      why: 'El punto medio exacto: blanco marfil con un toque cálido, ni gris ni blanco de nevera. Sarga de algodón mate, corte recto que se angosta al tobillo. Con blazer azul, camel o de cuadros, y con mocasines cafés o burdeos.',
+      ref: 'Incotex (Slowear) · Chino, color natural ivory', det: '100 % algodón, hecho en Italia. 390 € (unos 440 USD); hoy en rebaja a 273 € (unos 310 USD).',
+      url: 'https://en.zalando.de/slowear-tapered-fit-incotex-chinos-natural-ivory-08422e029-t11.html',
+      hist: 'Incotex empezó en 1951, cuando Carlo Compagno abrió un taller cerca de Venecia que hacía pantalones y uniformes. Nunca quiso hacer otra cosa: hoy es la marca de pantalones italianos más respetada, la que muchos sastres recomiendan para llevar con sus sacos.',
+      f: [['Puesto', [ZT('377c36047dc04cbf979e690c1729b633', '7cf9174db31e46e9808b4a3bfb2c9992')]],
+          ['La prenda', [ZT('50e08d227e5f4855bd0c5d6ad35f6f04', '3bef25ded05f441c8fcead674714b538', '&filter=packshot')]],
+          ['Puesto', [ZT('246a6cbcdf0b41caaaf01d0b64dee06f', 'ac92dfa4b13c4ec5ab27375bb613f791')]],
+          ['Detalle', [ZT('79074b9ac48f4bfcb2480ce11af4bb50', '19564645060c4c5196643eb8bba64819')]]],
+      pins: [['Chino crema con blazer azul', pin('cream chinos navy blazer brown loafers')], ['Con camel', pin('cream trousers camel blazer men')]] },
+    { t: 'Chino crema arena de Ralph Lauren', sw: ['#e2d8c3'],
+      why: 'Un poco más cálido que el anterior: crema que tira a piedra. Es el más fácil de combinar con tus cafés, y no se ve como tus chinos caqui porque es mucho más claro.',
+      ref: 'Polo Ralph Lauren · Bedford Stretch Straight Fit Chino, Classic Stone', det: '97 % algodón y 3 % elastano, pierna recta. 190 € (unos 215 USD); hoy en rebaja a 152 € (unos 170 USD).',
+      url: 'https://en.zalando.de/polo-ralph-lauren-bedford-stretch-straight-fit-chino-pant-chinos-classic-stone-po222e0an-a11.html',
+      f: [['La prenda', [ZT('a094ee5ef9c94ae0b0eeba2f98b75119', '8814ebd565bc40b98f8a90b34c5deac9', '&filter=packshot')]],
+          ['Puesto', [ZT('fdbd30bca1634a78b5e3def123425739', '547a1cc1b14d4141917b39bdb9fd5982')]],
+          ['Puesto', [ZT('77c873cc2f2b41daa24f41660aa18490', 'dd1e8c9c1e9c43fabaebb53ec4a03324')]],
+          ['Detalle', [ZT('38972a220c9d47dd9c7ded941d8d4bd5', '2f6d81fc08e04f3a80afe22abd9f4fd4')]]],
+      pins: [['Stone chinos con blazer', pin('stone chinos navy blazer loafers ivy')]] },
+    { t: 'Pana color crema', sw: ['#efe8d8'],
+      why: 'Si lo que te gusta es la textura: pana (corduroy) fina en blanco cálido. Es muy Ralph Lauren y muy de otoño; con suéter, con blazer café o de cuadros, y con mocasines. Para las noches frías y los viajes.',
+      ref: 'Polo Ralph Lauren · Straight Fit Stretch Corduroy Pant, Warm White', det: '99 % algodón, pierna recta. 205 € (unos 230 USD).',
+      url: 'https://en.zalando.de/polo-ralph-lauren-stretch-straight-fit-corduroy-trouser-trousers-warm-white-po222e086-a12.html',
+      f: [['La prenda', [ZT('64b15c8f10734810ad52a20220b7bb1a', 'cc6b4b85e05d4742a77babc4f2724459', '&filter=packshot')]],
+          ['Puesto', [ZT('912058eb3bcd4bc2bb64cab402f0a4fe', '43e067a44bf64895b4dc7d0e0446bb57')]],
+          ['Puesto', [ZT('332604ee37e846c9baf88b338b4d137c', '9f0f2ced57204717ace30ff5e9086911')]],
+          ['Detalle', [ZT('45b40ea5554b4de09d7fc94b7c5b3666', 'ca2a91d3ece94d0381f0a85a714cc40b')]]],
+      pins: [['Pana crema con blazer', pin('cream corduroy trousers blazer loafers men')]] },
+    { t: 'Jean crema', sw: ['#ece3cf'],
+      why: 'La versión jean del mismo color: crema, no blanco. Con polo, con camisa de oxford o con blazer azul para los viernes. Es el más casual de los cuatro.',
+      ref: 'Polo Ralph Lauren · Sullivan Slim Stretch Jean, Andover Cream', det: '98 % algodón, slim de pierna recta. 165 € (unos 185 USD); hoy en rebaja a 132 € (unos 150 USD).',
+      url: 'https://en.zalando.de/polo-ralph-lauren-sullivan-slim-polo-pony-stretch-jean-slim-fit-jeans-hdn-andover-cream-po222g071-a11.html',
+      f: [['La prenda', [ZT('925091ec2a954aa8bcb554229fcc7405', '54db1d09b7cb4dd78fac57a42605e9dd', '&filter=packshot')]],
+          ['Puesto', [ZT('7aa09d851302489cb74947cee213c8ef', 'efde0c71c49e4e4dbb7246a53ead7b2b')]],
+          ['Puesto', [ZT('df65192df95f44f19a7ab53682e9ef7f', '30db843a32c84c8aaa96f8a31b64e1e2')]],
+          ['Detalle', [ZT('8b3080692a1b4527b1e6e20b7addb46c', 'e8e8c8f93d834b0e8be6d7250f122f42')]]],
+      pins: [['Jean crema con blazer azul', pin('cream jeans navy blazer loafers men')]] },
+  ];
   const CLAROS = [
     { t: 'Chino gris niebla', sw: ['#c9c8c2'],
       why: 'Lo más cercano a lo que describes: gris claro, casi blanco, de algodón con textura de sarga, nada liso ni brillante. Va con el blazer azul, con los cafés y con tus oxford burdeos y los mocasines.',
@@ -691,6 +731,7 @@
       ref: 'Crockett & Jones · Cavendish', det: 'Hecho a mano en Northampton (Inglaterra), con suela de cuero cosida (Goodyear). 820 € (unos 930 USD) en Care of Carl, con tallas disponibles.',
       url: 'https://www.careofcarl.com/en/crockett-jones-cavendish-tassel-loafer-dark-brown-calf',
       alt: 'En gamuza café oscuro, 780 € (unos 885 USD): más informal y muy lindo con el pantalón claro, pero no para días de lluvia.',
+      hist: 'La fundaron en 1879 dos cuñados, James Crockett y Charles Jones, en Northampton, la capital inglesa del zapato. Sigue siendo de la familia Jones (va en la cuarta generación) y hace todo en la misma fábrica de 1890. Daniel Craig los usa en las películas de James Bond y salen en Succession. Tienda principal: Jermyn Street, Londres.',
       f: [['El zapato', COC('12680411r')], ['De lado', [`https://www.careofcarl.com/bilder/artiklar/zoom/12680411r_2.jpg`]],
           ['Detalle', [`https://www.careofcarl.com/bilder/artiklar/zoom/12680411r_3.jpg`]], ['En gamuza', COC('12680311r')]],
       pins: [['Tassel café con pantalón gris claro', pin('brown tassel loafers light grey trousers navy blazer')]] },
@@ -698,6 +739,7 @@
       why: 'El cuero de cordobán (shell cordovan) brilla sin lustrarlo, no se arruga y aguanta la lluvia mejor que el becerro. El color burdeos es el más ivy: con gris claro, azul y café queda perfecto.',
       ref: 'Carmina · Cordovan Tassel Loafer 80481, horma Uetam', det: 'Cordobán Horween, suela Rendenbach que aguanta el agua, cosido a mano en Mallorca. 744 € (unos 845 USD). Hoy agotado en burdeos; en negro y bourbon también existe. Puedes pedir aviso.',
       url: 'https://www.carminashoemaker.com/en/cordovan-loafers-burgundy-80481',
+      hist: 'Empezó en 1866 en Inca (Mallorca), cuando el zapatero Matías Pujadas abrió un taller de zapatos a la medida. En los años sesenta su bisnieto, José Albaladejo, y su esposa, Carmina Ramis, le pusieron el nombre de ella a la marca. Los mocasines fueron su gran éxito en los 70 y 80. Hoy la manejan cinco hermanos Albaladejo, y entre los conocedores es la mejor calidad por precio de Europa.',
       f: [['El zapato', [CAR('tassel_loafers_burgundy_cordovan_80481_l-2'), CAR('tassel_loafers_burgundy_cordovan_80481_m-2')]],
           ['De lado', [CAR('tassel_loafers_burgundy_cordovan_80481_ladl-2')]], ['Detalle', [CAR('tassel_loafers_burgundy_cordovan_80481_sadl-3')]],
           ['De frente', [CAR('tassel_loafers_burgundy_cordovan_80481_fadl-2')]]],
@@ -706,36 +748,56 @@
       why: 'El tassel loafer que inventó el estilo ivy: el de los abogados de Nueva York y de Harvey. Mismo cordobán burdeos, horma americana un poco más ancha.',
       ref: 'Alden · 563 Tassel Moccasin, cordobán burdeos (#8), horma Aberdeen', det: 'Hecho en Massachusetts. 967 USD en J.Press, hoy agotado en muchas tallas: se consigue pidiéndolo en Alden o J.Press.',
       url: 'https://jpress.com/search?q=tassel',
+      hist: 'Alden es de Massachusetts desde 1884. Hacia 1950 inventó el tassel loafer (la historia completa está arriba). Su cordobán viene de Horween, una curtiembre de Chicago de 1905, la más famosa del mundo en ese cuero. Es el zapato de la Ivy League por excelencia.',
       f: [['El zapato', ['https://jpress.com/cdn/shop/files/JSH9011SC-TASSLE_BRW-copy.jpg?v=1747160530&width=1024']]],
       pins: [['Alden tassel con jean', pin('alden 563 tassel loafer outfit')]] },
     { t: 'Café de becerro, la mejor relación precio', sw: ['#5b3a24'],
       why: 'Misma idea que el Crockett & Jones a la mitad del precio, hecho en España con cuero francés. Si quieres empezar con uno y después subir a cordobán, es este.',
-      ref: 'Carmina · Tassel Loafer 734, horma Forest, box-calf café', det: 'Cuero de Annonay (Francia), suela de cuero cosida (Goodyear). 426 € (unos 485 USD). Hoy agotado en café; existe en negro y burdeos.',
+      ref: 'Carmina · Tassel Loafer 734, horma Forest, box-calf café',
+      hist: 'Misma casa mallorquina de 1866 que el de cordobán. El 734 es su modelo más clásico, en la horma Forest, una de las más antiguas de la fábrica.', det: 'Cuero de Annonay (Francia), suela de cuero cosida (Goodyear). 426 € (unos 485 USD). Hoy agotado en café; existe en negro y burdeos.',
       url: 'https://www.carminashoemaker.com/en/tassel-loafers-brown-boxcalf-734',
       f: [['El zapato', [CAR('brown_tassel_loafers_carmina_734_l-2'), CAR('brown_tassel_loafers_carmina_734_m-2')]],
           ['De lado', [CAR('brown_tassel_loafers_carmina_734_ladl')]], ['Detalle', [CAR('brown_tassel_loafers_carmina_734_sadl')]]],
       pins: [] },
+    { t: 'Belgian con borla, lo más cercano a tus Belgian Shoes', sw: ['#4a3324'],
+      why: 'Si lo que quieres es la suavidad y la suela delgada de tus Belgian Shoes pero con borla: es un Belgian loafer con borla en vez de moño. Liviano, se dobla como pantufla y se ve muy elegante. Solo para días secos.',
+      ref: 'Baudoin & Lange · Sagan Classic con borla, gamuza café oscuro', det: 'Hecho a mano en Italia. Unos 780 USD en su página; en Care of Carl el café oscuro está agotado. Más barato: Berwick (España) hace un Belgian con borla en gamuza.',
+      url: 'https://www.careofcarl.com/en/baudoin-lange-sagan-classic-tassel-loafers-dark-brown-suede',
+      hist: 'Marca joven de Londres, de 2016: la fundaron Allan Baudoin, un parisino que se formó como zapatero a la medida, y Bo van Langeveld, expiloto de carreras. Tomaron la forma del Belgian loafer y la hicieron más estructurada para la ciudad. Roger Federer los usa.',
+      f: [['El zapato', COC('26002411r')], ['De lado', [`https://www.careofcarl.com/bilder/artiklar/zoom/26002411r_2.jpg`]], ['Detalle', [`https://www.careofcarl.com/bilder/artiklar/zoom/26002411r_3.jpg`]]],
+      pins: [['Belgian con borla', pin('belgian loafer tassel suede men')]] },
     { t: 'Louboutin con borla (tu marca)', sw: ['#2b1d18', '#b0202a'],
       why: 'Louboutin casi no hace tassel loafers: el único que encontré es el Grave Moc, con borla anudada y puntos perforados pintados a mano. Es más llamativo que los clásicos; para fines de semana.',
-      ref: 'Christian Louboutin · Grave Moc', det: 'Becerro, suela roja, hecho en España. Agotado en Harrods y el que salía era en rojo; pregunta en la tienda si lo tienen en negro o café.',
+      ref: 'Christian Louboutin · Grave Moc',
+      hist: 'Louboutin abrió en París en 1991 haciendo zapatos de mujer. La suela roja nació en 1993, cuando pintó una suela con el esmalte de uñas rojo de su asistente. La línea de hombre llegó después, ya famosa por los mocasines con taches; los clásicos de borla casi no los hace.', det: 'Becerro, suela roja, hecho en España. Agotado en Harrods y el que salía era en rojo; pregunta en la tienda si lo tienen en negro o café.',
       url: 'https://www.harrods.com/en-gb/p/christian-louboutin-grave-moc-calf-leather-loafers-000000000007798750',
       f: [['El zapato', [HR('e2d38a0329a24cf5d92e8843fe01045b')]], ['De lado', [HR('05551816372887cf29436fb0fc8c327a')]], ['Detalle', [HR('ad92a062030d0c3a73ab6e79d0be109d')]]],
       pins: [] },
   ];
+  const TONOS = `<div class="tonos">${[['#c9c8c2', 'Gris niebla', 'ronda 1'], ['#e2d8c3', 'Crema piedra', ''], ['#ebe4d3', 'Marfil', ''], ['#efe8d8', 'Blanco cálido', ''], ['#f6f5f2', 'Blanco', 'ronda 1']].map(([c, n, r]) => `<span><i style="background:${c}"></i>${n}${r ? ` <em>(${r})</em>` : ''}</span>`).join('')}</div>`;
+  const HIST_TASSEL = `<div class="inv-hist">
+      <h4>La historia del tassel loafer</h4>
+      <p>A finales de los años cuarenta, el actor húngaro Paul Lukas (ganador del Óscar en 1944) volvió de Europa con unos zapatos de cordones que terminaban en borlas y quería algo parecido en Estados Unidos. El encargo pasó por varios zapateros de Nueva York y Los Ángeles hasta llegar a Alden, en Massachusetts. Hacia 1950, Alden tomó su penny loafer, le quitó los cordones y dejó solo las borlas: así nació el tassel loafer.</p>
+      <p>Brooks Brothers lo empezó a vender, y los estudiantes de la Ivy League lo adoptaron enseguida. En los cincuenta y sesenta lo usaban Fred Astaire y Dean Martin; en los ochenta se volvió el zapato de los abogados y banqueros de Boston y Nueva York, y le quedó la fama de "zapato de abogado". Por eso le va tan bien a un look de Harvey Specter un viernes.</p>
+      <p>Cómo se usa: es más formal que el penny loafer y menos que un zapato de cordones. Va con blazer, con traje gris o azul sin corbata, con chinos y con jean oscuro. Las medias, del color del pantalón.</p>
+      <h4>¿Y Belgian Shoes?</h4>
+      <p>Revisé su catálogo y hoy solo hacen tres modelos de hombre (Mr. Casual, Henri y Traveler) y tres de mujer (Juliette, Midinette y Travelette), todos con el moño, ninguno con borla, y no venden por internet. Fueron creados en 1955 por Henri Bendel, sobrino del fundador de los almacenes Bendel de Nueva York, y se hacen a mano en Izegem (Bélgica), cosidos al revés y volteados; por eso son tan suaves. No encontré registro de un modelo con borla, pero tu memoria de la tienda puede ser de algo que tuvieron solo en la tienda o por encargo. Lo más seguro es preguntarles: <b>information@belgianshoes.com</b> o +1 212 755 7372 (tienda en 110 East 55th Street, Nueva York). Mientras tanto, abajo está el Belgian con borla de Baudoin & Lange, que es lo más parecido.</p>
+    </div>`;
   const inv = document.createElement('section');
   inv.id = 'investigacion';
   let invN = 0;
-  const invBlock = (k, h, d, list) => `<div class="tier" id="${k}"><h3 class="tier-h">${esc(h)}</h3><p class="tier-d">${esc(d)}</p><div class="buys">${list.map(b => card(b, ++invN)).join('')}</div></div>`;
+  const invBlock = (k, h, d, list, intro) => `<div class="tier" id="${k}"><h3 class="tier-h">${esc(h)}</h3><p class="tier-d">${esc(d)}</p>${intro || ''}<div class="buys">${list.map(b => card(b, ++invN)).join('')}</div></div>`;
   inv.innerHTML = `<div class="wrap">
     <div class="sec-head">
       <div class="label">Para escoger</div>
       <h2>Investigación 29 de octubre</h2>
       <p>Ejemplos para que me digas cuál es el que tienes en mente. Lo que escojas lo paso a Qué comprar, en su categoría.</p>
     </div>
-    <nav class="tiers"><a href="#inv-pantalones">Pantalones claros</a><a href="#inv-blazers">Más blazers</a><a href="#inv-tassel">Tassel loafers</a></nav>
-    ${invBlock('inv-pantalones', 'Pantalones claros', 'Gris claro casi blanco, que no sea liso como el de vestir. Hay tres tonos: gris niebla (el más versátil, va con todo lo que tienes), crudo (cálido, mejor con cafés y burdeos) y blanco (el más llamativo, para fin de semana). Que tenga textura mate: sarga de algodón, mezcla con lana o jean delgado.', CLAROS)}
+    <nav class="tiers"><a href="#inv-crema">Pantalones crema</a><a href="#inv-pantalones">Primera ronda</a><a href="#inv-blazers">Más blazers</a><a href="#inv-tassel">Tassel loafers</a></nav>
+    ${invBlock('inv-crema', 'Pantalones crema', 'El intermedio que buscas: ni gris ni blanco. En las tiendas búscalo como cream, ivory, ecru, stone o warm white; en español, crema, marfil, crudo o hueso. Es un blanco con un toque cálido, que se ve más elegante y más fácil de combinar que el blanco puro. Aquí van del más elegante al más casual.', CREMAS, TONOS)}
+    ${(invN = 0, invBlock('inv-pantalones', 'Primera ronda: muy grises o muy blancos', 'Los que viste antes, para comparar. Ya me dijiste que estos no son.', CLAROS))}
     ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'En orden: el café claro es el siguiente clásico; luego el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', BLAZERS2))}
-    ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Belgian Shoes no los hace, así que te pongo las casas del mismo nivel. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos.', TASSEL))}
+    ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Cada opción trae la historia de su marca. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos.', TASSEL, HIST_TASSEL))}
   </div>`;
   const sec = document.createElement('section');
   sec.id = 'compras';
