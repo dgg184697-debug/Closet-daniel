@@ -102,7 +102,7 @@
   // Tier 2: what rounds out the wardrobe once tier 1 is covered
   const TIER2 = [
     { t: 'Oxford rosada', sw: ['#f2c9cf'],
-      why: 'La camisa más ivy después de la blanca y la azul. Con el blazer navy y pantalón gris es Nate de pies a cabeza.',
+      why: 'La pediste el 30 de octubre. Es distinta a tu rosada de vestir: oxford de cuello abotonado, más informal y más ivy. Con el blazer azul y pantalón gris o crema es Nate de pies a cabeza; los viernes, sin corbata y con mocasines.',
       ref: 'Polo Ralph Lauren · Custom Fit Oxford Shirt, Pink', det: 'Oxford 100 % algodón, cuello abotonado, corte entre clásico y slim. Unos 175 USD.',
       url: 'https://www.boozt.com/eu/en/polo-ralph-lauren/oxford-cubdppcs_26113325/211629170',
       alt: 'Viene también en blanco, azul y rayas azul y blanco.',
@@ -564,13 +564,13 @@
 
   // Categories, and inside each one the urgent first. Only titles listed here are shown:
   // what Daniel already owns (chinos, camisas blancas, polos, lino, mocasín de gamuza, camisa rosada,
-  // suéter navy, medias de color) left the list on 27 October 2026.
+  // suéter navy, medias de color) left the list on 27 October 2026; the pink Polo oxford came back on 30 October.
   const ALL = {};
   [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
   const U = 'Urgente', S = 'Lo siguiente', A = 'Antojos', E = 'Ejemplos de blazer para llevar a Carlos Nieto';
   const CATS = [
-    ['camisas', 'Camisas, polos y camisetas', 'Estás bien cubierto: oxford, camisas de vestir blancas, lila y rosada, lino y nueve polos. Aquí no hay nada urgente.',
-      [[S, ['Camisa rugby']], [A, ['Camisa de puño francés y mancuernas']]]],
+    ['camisas', 'Camisas, polos y camisetas', 'Estás bien cubierto: oxford, camisas de vestir blancas, lila y rosada, lino y nueve polos. Lo que sigue es la oxford rosada de Polo, que pediste.',
+      [[S, ['Oxford rosada', 'Camisa rugby']], [A, ['Camisa de puño francés y mancuernas']]]],
     ['sacos', 'Sacos y buzos', 'Suéteres, buzos, chaquetas y abrigos. Ya tienes suéteres en camel, gris, taupe y azul marino, y chaquetas para la llovizna.',
       [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Chaqueta corta Uniqlo × JW Anderson']]]],
     ['trajes', 'Trajes y blazers', 'Lo que va con corbata o sobre la camisa en una reunión. Aquí está la compra más importante de toda la lista: el blazer azul.',
