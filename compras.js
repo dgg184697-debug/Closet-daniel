@@ -724,6 +724,66 @@
       url: pin('seersucker blazer men white trousers'),
       f: [], pins: [['Seersucker', pin('seersucker blazer men ivy')], ['Madras', pin('madras blazer men preppy')]] },
   ];
+  const TH = (code, v) => [`https://ak-media.theory.com/i/theory/TH_${code}_${v}?$TH-pdp-desktop$`, `https://ak-media.theory.com/i/theory/TH_${code}_${v}?%24TH-pdp-desktop-thumb%24`];
+  const NP = f => `https://us.npeal.com/cdn/shop/files/${f}&width=600`;
+  const H_THEORY = 'Theory nació en Nueva York en 1997, fundada por Andrew Rosen y Elie Tahari, con una idea sencilla: ropa de oficina limpia, bien cortada y con telas que se mueven. Desde 2009 es de Fast Retailing, la misma empresa de Uniqlo. No tiene tienda en Colombia: se compra en Estados Unidos.';
+  const H_POLO = 'Ralph Lauren nació en el Bronx y fue vendedor en Brooks Brothers. En 1967 empezó vendiendo corbatas anchas con el nombre Polo; en 1968 hizo su primera línea de hombre, y el jinete de polo apareció a comienzos de los setenta. Es la marca que convirtió el estilo ivy en el uniforme del viejo dinero americano.';
+  const H_NPEAL = 'N.Peal abrió en 1936 en el Burlington Arcade de Londres, junto a Piccadilly, y fue de las primeras casas en vender cachemir de lujo. Hizo los suéteres de James Bond en Skyfall y Spectre, y hoy tiene una colección con el actor Stanley Tucci. Su página de Estados Unidos solo envía dentro de ese país.';
+  const MARCAS = [
+    { t: 'Theory · Pantalón crema', sw: ['#ece5d4'],
+      why: 'El pantalón crema que buscas, en la versión de Theory: blanco invierno (winter ivory), algodón con un poco de elasticidad, corte slim y limpio. El más moderno de los cremas; muy bien con blazer azul y con el camel.',
+      ref: 'Theory · Zaine Pant in Moonsoft Cotton, Winter Ivory', det: '97 % algodón y 3 % elastano, slim. 225 USD; hoy en rebaja a 90 USD en theory.com.',
+      url: 'https://www.theory.com/men/pants/zaine-pant-in-moonsoft-cotton/Q0274204_2H5.html', hist: H_THEORY,
+      f: [['Puesto', TH('Q0274204_2H5', 'L0')], ['De espalda', TH('Q0274204_2H5', 'B0')], ['Detalle', TH('Q0274204_2H5', 'D0')], ['La prenda', TH('Q0274204_2H5', '0')]],
+      pins: [['Pantalón crema con blazer', pin('ivory trousers navy blazer men')]] },
+    { t: 'Theory · Blazer café jaspeado', sw: ['#6b5443'],
+      why: 'Un blazer café de tela jaspeada (con varios tonos de hilo), semiestructurado y liviano. Es el café de blazer, no de traje: va con el pantalón crema, con gris, con jean y con tus oxford burdeos.',
+      ref: 'Theory · Clinton Blazer in Motion Wool, Walnut Melange', det: '54 % lana con poliéster y algo de elástico: no arruga y aguanta viajes, pero no es lana pura. 495 USD; hoy en rebaja a 198 USD.',
+      url: 'https://www.theory.com/men/blazers-and-jackets/clinton-blazer-in-motion-wool/P0371101_1SJ.html', hist: H_THEORY,
+      alt: 'También viene en café más oscuro (Brownwood Melange) y gris carbón.',
+      f: [['Puesto', TH('P0371101_1SJ', 'L0')], ['De espalda', TH('P0371101_1SJ', 'B0')], ['Detalle', TH('P0371101_1SJ', 'D0')], ['La prenda', TH('P0371101_1SJ', '0')]],
+      pins: [['Blazer café con crema', pin('brown melange blazer cream trousers men')]] },
+    { t: 'Polo · Blazer café de espiga', sw: ['#7a5b40', '#a88a68'],
+      why: 'El café de cuadros que te gustó, en la versión Polo: tejido de espiga (herringbone) café claro, muy de campo inglés. Con pantalón crema y mocasines tassel es exactamente el look ivy.',
+      ref: 'Polo Ralph Lauren · Polo Modern Fit Herringbone Sport Coat', det: 'Slim. 43 % lana y 55 % poliéster: ojo, más sintético de lo que esperarías por el precio. 500 € (unos 565 USD).',
+      url: 'https://en.zalando.de/polo-ralph-lauren-polo-modern-fit-herringbone-sport-coat-blazer-jacket-brown-po222a06i-o11.html', hist: H_POLO,
+      f: [['La prenda', [ZT('0b41ea4b45c24fc184eec36ac8770d88', 'fe7db5fda93c4d20896a5cbb5830dcd5', '&filter=packshot')]],
+          ['Puesto', [ZT('f819ad43379f4ed091034d2d6971406b', '7a35e22059af4ae4ad504aa53964f33e')]],
+          ['Puesto', [ZT('0cabb575dc9a4819a77b7f41da2fce3c', '5ca12a56620d4118b3408e4f9af14da5')]],
+          ['Detalle', [ZT('cb39e4fb835046a89d1b4745b15a4352', 'fe854df06ed54764b576e8d98d25e660')]]],
+      pins: [['Espiga café con crema', pin('brown herringbone sport coat cream trousers loafers')]] },
+    { t: 'Polo · Blazer Príncipe de Gales café y verde', sw: ['#6e5a3e', '#5f6b4a'],
+      why: 'Cuadros de Gales en café con un hilo verde: el blazer de fin de semana de Ralph Lauren. Más lana que el de espiga. Con pantalón crema, con gris y con suéter de cuello redondo debajo.',
+      ref: 'Polo Ralph Lauren · Polo Modern Fit Glen Plaid Sport Coat, brown/green', det: '55 % lana y 45 % poliéster, corte regular. 495 € (unos 560 USD).',
+      url: 'https://en.zalando.de/polo-ralph-lauren-blazer-jacket-browngreen-po222a070-o11.html', hist: H_POLO,
+      f: [['La prenda', [ZT('56f61c507a1a4b04937211d561b1cedd', '1de18dc3f6ac4a1a936a347d50d89e91', '&filter=packshot')]],
+          ['Puesto', [ZT('352dea90e6224207893ff729f53ce4cb', 'b56b768beadf44f9847208f258351af9')]],
+          ['Puesto', [ZT('3f4fac0a356a43ef86bad9846cd0300f', '0eec555349224af996a6e040c4a8cb41')]],
+          ['Detalle', [ZT('667814c20f184768b3d39242cb9a8ea9', 'da20883a19f646858a86736164dc752a')]]],
+      pins: [['Gales café con suéter', pin('brown glen plaid sport coat crewneck sweater men')]] },
+    { t: 'N.Peal · Blazer tejido para viajar', sw: ['#24304a'],
+      why: 'Un blazer de punto, suave como un suéter pero con forma de saco: no se arruga en el avión y llega impecable a la reunión. Para ti, que viajas tanto, es el blazer de viaje. Es azul, pero tan distinto al de Carlos Nieto que no se repiten.',
+      ref: 'N.Peal x Stanley Tucci · Knitted Blazer, Navy Blue', det: 'Mezcla de algodón, seda y cachemir en tejido Milano. 895 USD.',
+      url: 'https://us.npeal.com/products/tucci-knitted-blazer-navy-blue', hist: H_NPEAL,
+      alt: 'La versión más fina, toda de cachemir: Grosvenor Milano Cashmere Jacket, 1.250 USD (también en gris).',
+      f: [['Puesto', [NP('TUCCI_NPG110818ST_NVY_1-op.jpg?v=1758187866')]], ['La prenda', [NP('TUCCI_NPG110818ST_NVY_2.jpg?v=1758187866')]],
+          ['Detalle', [NP('TUCCI_NPG110818ST_NVY_3.jpg?v=1758187866')]], ['Detalle', [NP('TUCCI_NPG110818ST_NVY_4.jpg?v=1758187866')]]],
+      pins: [['Blazer de punto', pin('knitted blazer navy men travel')]] },
+    { t: 'N.Peal · Suéter crema de cachemir y seda', sw: ['#efe9db'],
+      why: 'El suéter (saco) de cuello redondo en blanco marfil: debajo del blazer azul, del camel o del café, con pantalón crema o gris. Delgado, para el clima de Medellín por la noche y para aviones.',
+      ref: 'N.Peal · Covent Fine Gauge Round Neck, New Ivory White', det: '70 % cachemir y 30 % seda, tejido fino. 450 USD. Talla justo: si dudas, una más.',
+      url: 'https://us.npeal.com/products/mens-fine-gauge-cashmere-round-neck-jumper-new-ivory-white', hist: H_NPEAL,
+      f: [['Puesto', [NP('AW26_NPG000476_NIV_1_7dd62b09-1f56-4b6f-895e-35ef6a9f2949.jpg?v=1792493921')]], ['Puesto', [NP('AW26_NPG000476_NIV_2_d455509b-b8e8-40de-bad1-892385f816a0.jpg?v=1792493920')]],
+          ['La prenda', [NP('AW26_NPG000476_NIV_3_eba64ccf-ff8e-4595-aae7-a3577b1983b3.jpg?v=1792493920')]], ['Detalle', [NP('AW26_NPG000476_NIV_4_5a40b122-bced-4755-a41a-a931fc9d9a13.jpg?v=1792493920')]]],
+      pins: [['Suéter crema con blazer', pin('cream crewneck sweater navy blazer men')]] },
+    { t: 'N.Peal · Suéter café, el de James Bond', sw: ['#5a3e2e'],
+      why: 'Cuello redondo de cachemir puro en café cacao: el mismo modelo que usó Bond en Skyfall. Café con pantalón crema es de las mejores combinaciones que hay, y debajo del blazer azul también.',
+      ref: 'N.Peal · Oxford Round Neck, Cocoa Brown', det: '100 % cachemir orgánico. 475 USD. Viene en 14 colores; el azul marino también es un básico.',
+      url: 'https://us.npeal.com/products/mens-oxford-round-neck-cashmere-jumper-cocoa-brown', hist: H_NPEAL,
+      f: [['Puesto', [NP('AW26_NPG000132R_COA_1.jpg?v=1788348084')]], ['Puesto', [NP('AW26_NPG000132R_COA_2.jpg?v=1788348085')]],
+          ['La prenda', [NP('AW26_NPG000132R_COA_3.jpg?v=1788348085')]], ['Detalle', [NP('AW26_NPG000132R_COA_4.jpg?v=1788348085')]]],
+      pins: [['Suéter café con crema', pin('brown crewneck sweater cream trousers men')]] },
+  ];
   const CAR = n => `https://www.carminashoemaker.com/cdnassets/${n}.webp`;
   const TASSEL = [
     { t: 'Café oscuro de becerro, el clásico', sw: ['#3f2a1d'],
@@ -793,10 +853,11 @@
       <h2>Investigación 29 de octubre</h2>
       <p>Ejemplos para que me digas cuál es el que tienes en mente. Lo que escojas lo paso a Qué comprar, en su categoría.</p>
     </div>
-    <nav class="tiers"><a href="#inv-crema">Pantalones crema</a><a href="#inv-pantalones">Primera ronda</a><a href="#inv-blazers">Más blazers</a><a href="#inv-tassel">Tassel loafers</a></nav>
+    <nav class="tiers"><a href="#inv-crema">Pantalones crema</a><a href="#inv-pantalones">Primera ronda</a><a href="#inv-blazers">Más blazers</a><a href="#inv-marcas">Theory, Polo y N.Peal</a><a href="#inv-tassel">Tassel loafers</a></nav>
     ${invBlock('inv-crema', 'Pantalones crema', 'El intermedio que buscas: ni gris ni blanco. En las tiendas búscalo como cream, ivory, ecru, stone o warm white; en español, crema, marfil, crudo o hueso. Es un blanco con un toque cálido, que se ve más elegante y más fácil de combinar que el blanco puro. Aquí van del más elegante al más casual.', CREMAS, TONOS)}
     ${(invN = 0, invBlock('inv-pantalones', 'Primera ronda: muy grises o muy blancos', 'Los que viste antes, para comparar. Ya me dijiste que estos no son.', CLAROS))}
     ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'En orden: el café claro es el siguiente clásico; luego el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', BLAZERS2))}
+    ${(invN = 0, invBlock('inv-marcas', 'De tus marcas: Theory, Polo y N.Peal', 'Lo mismo que estamos buscando (pantalón crema y blazers) en Theory y Polo, y de N.Peal el cachemir que les va: un blazer de punto para viajar y dos suéteres para debajo del blazer. Cada tarjeta trae la historia de la marca.', MARCAS))}
     ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Cada opción trae la historia de su marca. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos.', TASSEL, HIST_TASSEL))}
   </div>`;
   const sec = document.createElement('section');
