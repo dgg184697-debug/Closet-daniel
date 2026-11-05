@@ -33,6 +33,8 @@ export const STYLE = {
   C23: { base: '#a8794a', polo: true, pique: true },
   C24: { base: '#6a6a44', polo: true, waffle: true },
   C25: { base: '#f4f1e8', stripe: '#1f2c52', stripeH: true, collar: 'rugby' },
+  C26: { base: '#f1ece0', collar: 'bd', pocket: true, linen: true },
+  C27: { base: '#a9b39b', collar: 'point', linen: true },
   // layers: kind decides neckline, sleeves and front details
   S01: { base: '#b88a57', kind: 'polo', buttons: '#e9dfcf', pockets: true },
   S02: { base: '#9b9ea4', kind: 'crew', fleece: true },
@@ -57,6 +59,7 @@ export const STYLE = {
   S18: { base: '#22293f', kind: 'jacket', baffles: true, gloss: true, patch: true },
   S19: { base: '#262c42', kind: 'jacket', lining: '#c0272d' },
   S20: { base: '#a8957e', kind: 'jacket', harrington: true, lining: '#c9b28c' },
+  S21: { base: '#6b5643', kind: 'jacket', collarColor: '#2c2420', buttons: '#2c2420', pockets: true },
   // ties and pocket square
   K01: { base: '#263a78', dot: '#d9b24c', dotShape: 'racket' },
   K02: { base: '#5a3328', dot: '#f2efe6', dotShape: 'flower' },
@@ -68,6 +71,7 @@ export const STYLE = {
   P07: { base: '#20283b' }, P08: { base: '#46484d', sheen: true }, P09: { base: '#bbae9b' },
   P10: { base: '#1f2740', linen: true }, P11: { base: '#c2b49c' }, P12: { base: '#e3d9c6', linen: true },
   P13: { base: '#cdbb9d', linen: true, drawstring: true },
+  P14: { base: '#eee7d8' },
   // belts
   A01: { base: '#5b3927', buckle: 'rect' }, A02: { base: '#6c7889', buckle: 'oval', woven: true },
   A03: { base: '#161616', buckle: 'horseshoe' }, A03b: { base: '#3c2a20', buckle: 'horseshoe' },

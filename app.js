@@ -66,7 +66,7 @@
   // Rain only rules out the delicate shoes (suede, canvas, Belgians) when something on the agenda is outdoors:
   // the rest of the day he is under a roof, so any shoe works (Daniel, 30 October 2026).
   // Layers go by temperature: thin knits for a fresh morning, thicker ones when it is cold.
-  const LAYERS_THIN = ['S01', 'S13', 'S08', 'S04', 'S05', 'S03'], LAYERS_THICK = ['S11', 'S07', 'S12', 'S09'];
+  const LAYERS_THIN = ['S01', 'S13', 'S08', 'S04', 'S05', 'S03', 'S21'], LAYERS_THICK = ['S11', 'S07', 'S12', 'S09'];
   const THICK = [...LAYERS_THICK, 'S02', 'S06', 'S16', 'S17', 'S18'];
   const OUTDOOR = /afuera|aire libre|exterior|finca|paseo|golf|tenis|parque|caminata|estadio|piscina|playa|terraza|recorrido|tour|visita de obra|asado|cancha/;
   const isOutdoor = events => (events || []).some(e => OUTDOOR.test((e.titulo + ' ' + e.categoria + ' ' + e.lugar).toLowerCase()));
