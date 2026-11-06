@@ -98,6 +98,8 @@
     if (lvl === 'calor' && c.capa && !SUIT[c.capa]) { c.capa = null; why.push('sin saco, porque hace calor'); }
     if (w.wet && !c.capa && INV.S20 && INV[c.pantalon].formalidad <= 4) { c.capa = 'S20'; why.push('la Harrington de Burberry encima, porque vas a estar afuera con lluvia'); }
     if (!c.camisa && !c.capa) c.camisa = 'C02';
+    // dark sneakers need something dark on top (Daniel, 6 November 2026): if the layer came off, switch to light sneakers
+    if (isDarkSneaker(c.zapatos) && !darkTop(c)) { c.zapatos = ['Z07', 'Z16', 'Z18'].find(z => INV[z]) || c.zapatos; why.push('tenis blancos, porque sin chaqueta oscura los tenis oscuros le pesan a la pinta'); if (!NO_BELT.includes(c.pantalon) && !(BELT_FOR[c.zapatos] || []).includes(c.correa)) c.correa = (BELT_FOR[c.zapatos] || ['A03b'])[0]; }
     return { c, why };
   }
   function hash(s) { let h = 0; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) | 0; return Math.abs(h); }

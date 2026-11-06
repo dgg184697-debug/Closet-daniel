@@ -525,6 +525,9 @@ const RELAXED_SHOES=['Z01','Z05','Z07','Z08','Z09','Z10','Z11','Z12','Z13','Z14'
 const NOT_IN_RAIN=['Z01','Z02','Z04','Z05','Z06','Z08','Z09','Z10','Z11','Z12','Z13','Z14','Z15','Z17'];
 const HOME_ONLY=['S02','S06','S09','S10','C25'];
 const NO_BELT=['P06','P13'], TUX='S14', SUIT={S15:'P08'};
+/* dark sneakers only with something dark on top, like a jacket or a sweater; with a light polo or shirt alone, light shoes (Daniel, 6 November 2026) */
+const isDarkSneaker=z=>!!z&&!!INV[z]&&/^tenis/i.test(INV[z].tipo)&&INV[z].tono.v>=3;
+const darkTop=s=>[s.capa,s.camisa].some(i=>i&&INV[i]&&INV[i].tono.v>=(i===s.capa?3:4));
 function judge(s){
   const out=[]; const add=(lvl,t)=>out.push({lvl,t});
   if(!s.capa&&!s.camisa) add('bad','Falta la parte de arriba: escoge una camisa o un suéter.');
@@ -557,6 +560,7 @@ function judge(s){
   if(s.corbata&&s.camisa&&INV[s.camisa].formalidad<=2) add('warn',`${name(s.camisa)} (${s.camisa}) es muy casual para corbata. Va mejor con la camisa de vestir o un oxford azul.`);
   if(s.corbata&&RELAXED_SHOES.includes(sh)) add('warn','Corbata con zapato relajado: para corbata, mejor un oxford de cuero.');
   if(s.panuelo&&!['S14','S15'].includes(s.capa)) add('warn','El pañuelo luce en el bolsillo de un saco: úsalo con el saco del traje (S15) o el esmoquin (S14).');
+  if(!tux&&isDarkSneaker(sh)&&!darkTop(s)) add('bad',`${name(sh)} (${sh}) son oscuros y arriba todo es claro: el peso se va a los pies. Tenis oscuros solo con una chaqueta o un suéter oscuro encima; si no, tenis blancos o claros.`);
   if(s.rain&&NOT_IN_RAIN.includes(sh)) add('bad',`Afuera con lluvia, ${name(sh)} (${sh}) se daña. Usa el oxford burdeos (Z03) o unos tenis de cuero (Z07, Z16 o Z18).`);
   if(!s.rain&&sh==='Z03'&&f.length&&Math.max(...f)<=3) add('warn','El oxford burdeos es muy formal para el resto. Prueba los belgas o el Chelsea.');
   return {notes:out,avg:f.reduce((a,b)=>a+b,0)/f.length};
