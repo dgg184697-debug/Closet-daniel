@@ -614,21 +614,28 @@
       pins: [['Liddesdale con oxford', pin('barbour liddesdale olive oxford shirt chinos')]] },
   ];
 
+  // 7 November 2026: he bought the blue blazer at Carlos Nieto (S22, mid navy with metal buttons). He asked to keep a similar one pending.
+  const BLAZER_OSCURO = { t: 'Segundo blazer, azul marino oscuro', sw: ['#1a2238', '#c9a24a'],
+      why: 'Ya tienes el blazer azul de Carlos Nieto (S22), que es un azul marino medio con botones metálicos: perfecto de día. Este sería el azul casi negro clásico, para la noche, las cenas y lo más formal. Tela hopsack o sarga, botones dorados o de cuerno. Igual que el S22: con pantalones que no sean azules.',
+      ref: 'Suitsupply · Navy Tailored Fit Havana Blazer, ref. C25216', det: 'Lana All Season de Reda con textura, medio canvas. 399 USD. Trae botones oscuros: cámbialos por dorados en Carlos Nieto. Otra opción: pedirlo en Carlos Nieto en un azul más oscuro que el S22.',
+      url: 'https://suitsupply.com/en-us/men/jackets/navy-tailored-fit-havana-blazer/C25216.html',
+      f: [['Puesto', [SS_M + 'Jackets/default/Winter/C25216_101.jpg']], ['La prenda', [SS + 'b_rgb:efefef,bo_300px_solid_rgb:efefef,c_pad,w_2600/b_rgb:efefef,c_pad,dpr_1,w_850,h_1530,f_auto,q_auto,fl_progressive/products/Jackets/default/Winter/C25216_1.jpg']],
+          ['Tela', [SS_M + 'Jackets/default/C25216_23.jpg']]],
+      pins: [['Blazer azul oscuro con botones dorados', pin('dark navy blazer brass buttons grey trousers')]] };
   const ALL = {};
-  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, VALET, EXTRA, POR_LLEGAR, BARBOUR].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
+  [BUYS, TIER2, TIER3, LUJO, GAFAS, MARINELLA, BLAZER, ZAPATOS, EXTRA, POR_LLEGAR, BARBOUR, [BLAZER_OSCURO]].forEach(l => l.forEach(b => { ALL[b.t] = b; }));
   const U = 'Urgente', S = 'Lo siguiente', A = 'Antojos', E = 'Ejemplos de blazer para llevar a Carlos Nieto';
   const CATS = [
     ['camisas', 'Camisas, polos y camisetas', 'Estás bien cubierto: oxford, camisas de vestir blancas, lila y rosada, lino y nueve polos. Lo que sigue es la oxford rosada de Polo, que pediste.',
       [[S, ['Oxford rosada', 'Camisa rugby']], [A, ['Camisa de puño francés y mancuernas']]]],
     ['sacos', 'Sacos y buzos', 'Suéteres, buzos, chaquetas y abrigos. Ya tienes suéteres en camel, gris, taupe y azul marino, chaquetas para la llovizna y la chaqueta café de Theory (S21).',
-      [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Barbour liviana para Medellín', 'Barbour Bedale, la clásica', 'Barbour Beaufort, la de viaje', 'Barbour acolchada, sin cera']]]],
-    ['trajes', 'Trajes y blazers', 'Lo que va con corbata o sobre la camisa en una reunión. Aquí está la compra más importante de toda la lista: el blazer azul.',
-      [[U, ['Blazer azul marino, de blazer y no de traje']], [E, ['Polo Ralph Lauren con botones dorados', 'Polo de lino con textura', 'Polo de gabardina', 'Suitsupply de tejido con textura', 'Blazer cruzado']],
-       [S, ['Segundo traje, azul marino', 'Blazer de lino para tierra caliente']], [A, ['Esmoquin azul marino', 'Smoking jacket de terciopelo']]]],
+      [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Barbour liviana para Medellín']]]],
+    ['trajes', 'Trajes y blazers', 'Ya tienes el blazer azul de Carlos Nieto (S22), el traje gris carbón (S15 con P08), el esmoquin (S14) y la chaqueta café de Theory (S21). Nada es urgente: lo que sigue es un segundo azul más oscuro para la noche y el blazer camel.',
+      [[S, ['Segundo blazer, azul marino oscuro', 'Café claro (camel)', 'Segundo traje, azul marino', 'Blazer de lino para tierra caliente']], [A, ['Esmoquin azul marino', 'Smoking jacket de terciopelo']]]],
     ['pantalones', 'Pantalones', 'No te falta ninguno: tienes grises, azules, café, piedra, crema (el Theory, P14), chinos y tres de lino. Lo pendiente es de sastre: bajarle 1 a 1,5 cm al azul de Massimo Dutti (P04) para que quiebre sobre el zapato.',
       []],
-    ['zapatos', 'Zapatos', 'Tienes diez pares de tenis y solo dos oxford. Lo que sigue tiene que ser de cuero y de vestir, empezando por uno que aguante la lluvia.',
-      [[U, ['Zapato con suela de goma para lluvia', 'Mocasín de cuero café oscuro']], [S, ['Mocasín con suela de goma', 'Oxford café patinado', 'Doble hebilla (monk)', 'Belgian Henri, el más elegante de Belgian']], [A, ['Mocasín Louboutin de noche']]]],
+    ['zapatos', 'Zapatos', 'Tienes diez pares de tenis y solo dos oxford. Lo que sigue tiene que ser de cuero y de vestir, empezando por uno que aguante la lluvia. Después, los tassel loafers: el clásico café de Crockett & Jones y el de Louboutin.',
+      [[U, ['Zapato con suela de goma para lluvia', 'Mocasín de cuero café oscuro']], [S, ['Café oscuro de becerro, el clásico', 'Louboutin con borla (tu marca)', 'Mocasín con suela de goma', 'Oxford café patinado', 'Doble hebilla (monk)', 'Belgian Henri, el más elegante de Belgian']], [A, ['Mocasín Louboutin de noche']]]],
     ['accesorios', 'Accesorios', 'Correas, corbatas, pañuelos y lo que va en la muñeca o la cabeza. Ya tienes de Carlos Nieto la corbata de raquetas (K01), la de foulard (K02) y el pañuelo amarillo (K03), y el corbatín negro de Marinella (K04).',
       [[U, ['Correa café oscuro nueva', 'Corbatas y pañuelo básicos']],
        [S, ['Corbata napolitana de florecitas', 'Grenadine azul oscuro', 'Pañuelo blanco con borde de satín', 'Regimental azul con rayas rojas', 'Corbata tejida', 'Pañuelo de seda estampado', 'Corbatín estampado para anudar']],
@@ -637,8 +644,8 @@
       [[S, ['Maletín de viaje de lona']], [A, ['Tote de oficina en cuero tejido', 'Tote Loewe Puzzle Fold', 'Louis Vuitton Low Key Cabas', 'Maletín de cuero para fin de semana', 'Hermès para la oficina y el viaje', 'El gran antojo: Cabat de Bottega']]]],
     ['gafas', 'Gafas de sol', 'Elegidas para tu cara: redondeada, mejillas llenas, mandíbula suave con barba y cejas oscuras y marcadas. Te van las monturas con ángulos (cuadradas, rectangulares o en D), con la ceja recta y del ancho de tu cara o un poco más; en carey, havana o metal. Evita las redondas pequeñas y las angostas.',
       [[A, ['Gafas Jacques Marie Mage Dealan', 'Mykita × Rimowa MR002, cuadradas', 'Gafas Jacques Marie Mage Kennedy', 'Mykita × Rimowa MR006, aviador', 'Gafas Persol 714 plegables']]]],
-    ['casa', 'Casa y cuidado', 'Para que la ropa dure y amanezca lista: el vaporizador, el galán de noche y el perfume. Otra idea para el galán: con estas fotos, un ebanista de Medellín te hace uno en nogal o cedro por mucho menos.',
-      [[U, ['Vaporizador de mano']], [A, ['Ralph Lauren Brennan', 'Ralph Lauren Colton', 'Inglés antiguo de roble', 'Italiano de los sesenta', 'La silla valet de Wegner', 'Perfume CH Men Privé', 'Hermès, solo para soñar']]]],
+    ['casa', 'Casa y cuidado', 'Para que la ropa dure y amanezca lista: el vaporizador y el perfume.',
+      [[U, ['Vaporizador de mano']], [A, ['Perfume CH Men Privé']]]],
   ];
   const catHTML = ([k, n, d, groups]) => {
     let i = 0;
@@ -892,6 +899,9 @@
       <h4>¿Y Belgian Shoes?</h4>
       <p>Revisé su catálogo y hoy solo hacen tres modelos de hombre (Mr. Casual, Henri y Traveler) y tres de mujer (Juliette, Midinette y Travelette), todos con el moño, ninguno con borla, y no venden por internet. Fueron creados en 1955 por Henri Bendel, sobrino del fundador de los almacenes Bendel de Nueva York, y se hacen a mano en Izegem (Bélgica), cosidos al revés y volteados; por eso son tan suaves. No encontré registro de un modelo con borla, pero tu memoria de la tienda puede ser de algo que tuvieron solo en la tienda o por encargo. Lo más seguro es preguntarles: <b>information@belgianshoes.com</b> o +1 212 755 7372 (tienda en 110 East 55th Street, Nueva York). Mientras tanto, abajo está el Belgian con borla de Baudoin & Lange, que es lo más parecido.</p>
     </div>`;
+  [...TASSEL, ...BLAZERS2].forEach(b => { ALL[b.t] = b; });
+  const MOVED = ['Café oscuro de becerro, el clásico', 'Louboutin con borla (tu marca)', 'Café claro (camel)'];
+  const keep = l => l.filter(b => !MOVED.includes(b.t));
   const inv = document.createElement('section');
   inv.id = 'investigacion';
   let invN = 0;
@@ -902,12 +912,10 @@
       <h2>Investigación 29 de octubre</h2>
       <p>Ejemplos para que me digas cuál es el que tienes en mente. Lo que escojas lo paso a Qué comprar, en su categoría.</p>
     </div>
-    <nav class="tiers"><a href="#inv-crema">Pantalones crema</a><a href="#inv-pantalones">Primera ronda</a><a href="#inv-blazers">Más blazers</a><a href="#inv-marcas">Theory, Polo y N.Peal</a><a href="#inv-tassel">Tassel loafers</a></nav>
-    ${invBlock('inv-crema', 'Pantalones crema', 'Resuelto: ya tienes el Zaine de Theory en marfil (P14). Esto queda como referencia. El intermedio que buscas: ni gris ni blanco. En las tiendas búscalo como cream, ivory, ecru, stone o warm white; en español, crema, marfil, crudo o hueso. Es un blanco con un toque cálido, que se ve más elegante y más fácil de combinar que el blanco puro. Aquí van del más elegante al más casual.', CREMAS, TONOS)}
-    ${(invN = 0, invBlock('inv-pantalones', 'Primera ronda: muy grises o muy blancos', 'Los que viste antes, para comparar. Ya me dijiste que estos no son.', CLAROS))}
-    ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'En orden: el café claro es el siguiente clásico; luego el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', BLAZERS2))}
-    ${(invN = 0, invBlock('inv-marcas', 'De tus marcas: Theory, Polo y N.Peal', 'Lo mismo que estamos buscando (pantalón crema y blazers) en Theory y Polo, y de N.Peal el cachemir que les va: un blazer de punto para viajar y dos suéteres para debajo del blazer. Cada tarjeta trae la historia de la marca.', MARCAS))}
-    ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Cada opción trae la historia de su marca. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos.', TASSEL, HIST_TASSEL))}
+    <nav class="tiers"><a href="#inv-blazers">Más blazers</a><a href="#inv-marcas">Theory, Polo y N.Peal</a><a href="#inv-tassel">Tassel loafers</a></nav>
+    ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'El café claro (camel) ya pasó a Qué comprar. Siguen el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', keep(BLAZERS2)))}
+    ${(invN = 0, invBlock('inv-marcas', 'De tus marcas: Theory, Polo y N.Peal', 'Blazers de Theory y Polo, y de N.Peal el cachemir que les va: un blazer de punto para viajar y dos suéteres para debajo del blazer. Cada tarjeta trae la historia de la marca.', MARCAS.filter(b => b.t !== 'Theory · Pantalón crema')))}
+    ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Cada opción trae la historia de su marca. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos. El clásico café y el de Louboutin ya pasaron a Qué comprar, en Zapatos.', keep(TASSEL), HIST_TASSEL))}
   </div>`;
   const sec = document.createElement('section');
   sec.id = 'compras';
@@ -915,7 +923,7 @@
     <div class="sec-head">
       <div class="label">De la investigación de estilo</div>
       <h2>Qué comprar</h2>
-      <p>Por categorías, y en cada una primero lo urgente, luego lo siguiente y al final los antojos. Solo está lo que te falta: lo que ya tienes salió de la lista. Cada prenda con el modelo exacto y fotos de la tienda; desliza las fotos y toca una para verla grande. Precios en dólares, revisados el 26 de octubre de 2026.</p>
+      <p>Por categorías, y en cada una primero lo urgente, luego lo siguiente y al final los antojos. Solo está lo que te falta: lo que ya tienes salió de la lista. Cada prenda con el modelo exacto y fotos de la tienda; desliza las fotos y toca una para verla grande. Precios en dólares. Lista revisada el 7 de noviembre de 2026, con el blazer azul y la camisa Travel ya comprados.</p>
     </div>
     <nav class="tiers">${CATS.map(([k, n]) => `<a href="#${k}">${esc(n)}</a>`).join('')}</nav>
     ${CATS.map(catHTML).join('')}

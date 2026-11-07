@@ -35,6 +35,7 @@ export const STYLE = {
   C25: { base: '#f4f1e8', stripe: '#1f2c52', stripeH: true, collar: 'rugby' },
   C26: { base: '#f1ece0', collar: 'bd', pocket: true, linen: true },
   C27: { base: '#a9b39b', collar: 'point', linen: true },
+  C28: { base: '#c9dcf1', collar: 'spread', weave: true },
   // layers: kind decides neckline, sleeves and front details
   S01: { base: '#b88a57', kind: 'polo', buttons: '#e9dfcf', pockets: true },
   S02: { base: '#9b9ea4', kind: 'crew', fleece: true },
@@ -53,6 +54,7 @@ export const STYLE = {
   S14: { base: '#151515', kind: 'blazer', shawl: true, lapel: '#2a2a2c', buttons: '#2a2a2c', oneButton: true,
     shirt: { base: '#f8f7f3', collar: 'spread', pique: true }, pants: { base: '#161616', satin: '#2c2c2e' } },
   S15: { base: '#45474c', kind: 'blazer', lapel: '#45474c', buttons: '#1e1f22', sheen: true },
+  S22: { base: '#2e3f73', kind: 'blazer', lapel: '#2e3f73', buttons: '#c9c2ab' },
   // outerwear: jacket kinds have a stand collar and a front closure
   S16: { base: '#27304a', kind: 'gilet', quilt: true, lining: '#3a5a3a' },
   S17: { base: '#262d45', kind: 'jacket', quilt: true, collarColor: '#5d5a35', snaps: true, pockets: true },
