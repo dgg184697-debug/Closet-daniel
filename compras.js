@@ -632,7 +632,7 @@
       [[S, ['Gabardina Burberry', 'Suéter de cable crema']], [A, ['Barbour liviana para Medellín']]]],
     ['trajes', 'Trajes y blazers', 'Ya tienes el blazer azul de Carlos Nieto (S22), el traje gris carbón (S15 con P08), el esmoquin (S14) y la chaqueta café de Theory (S21). Nada es urgente: lo que sigue es un segundo azul más oscuro para la noche y el blazer camel.',
       [[S, ['Segundo blazer, azul marino oscuro', 'Café claro (camel)', 'Segundo traje, azul marino', 'Blazer de lino para tierra caliente']], [A, ['Esmoquin azul marino', 'Smoking jacket de terciopelo']]]],
-    ['pantalones', 'Pantalones', 'No te falta ninguno: tienes grises, azules, café, piedra, crema (el Theory, P14), chinos y tres de lino. Lo pendiente es de sastre: bajarle 1 a 1,5 cm al azul de Massimo Dutti (P04) para que quiebre sobre el zapato.',
+    ['pantalones', 'Pantalones', 'De vestir no te falta ninguno: tienes grises, azules, café, piedra, crema (el Theory, P14), chinos y tres de lino. Para menos formal, mira Investigación → Pantalones menos formales: jean oscuro, café de 5 bolsillos y chino oliva. Lo pendiente es de sastre: bajarle 1 a 1,5 cm al azul de Massimo Dutti (P04) para que quiebre sobre el zapato.',
       []],
     ['zapatos', 'Zapatos', 'Tienes diez pares de tenis y solo dos oxford. Lo que sigue tiene que ser de cuero y de vestir, empezando por uno que aguante la lluvia. Después, los tassel loafers: el clásico café de Crockett & Jones y el de Louboutin.',
       [[U, ['Zapato con suela de goma para lluvia', 'Mocasín de cuero café oscuro']], [S, ['Café oscuro de becerro, el clásico', 'Louboutin con borla (tu marca)', 'Mocasín con suela de goma', 'Oxford café patinado', 'Doble hebilla (monk)', 'Belgian Henri, el más elegante de Belgian']], [A, ['Mocasín Louboutin de noche']]]],
@@ -902,6 +902,78 @@
   [...TASSEL, ...BLAZERS2].forEach(b => { ALL[b.t] = b; });
   const MOVED = ['Café oscuro de becerro, el clásico', 'Louboutin con borla (tu marca)', 'Café claro (camel)'];
   const keep = l => l.filter(b => !MOVED.includes(b.t));
+  // 9 Nov research: trousers between dress pants and jeans. Uses the closet's own photos (IMGV/INV from index.html).
+  const RL7 = id => [`https://dtcralphlauren.scene7.com/is/image/PoloGSI/${id}?$rl_4x5_zoom$`, `https://dtcralphlauren.scene7.com/is/image/PoloGSI/${id}?%24rl_4x5_pdp%24`];
+  const APC = f => [`https://www.apcstore.com/cdn/shop/files/${f}`];
+  const PANTS = [
+    { t: 'Jean azul oscuro, la versión elegante', sw: ['#1f2a44'],
+      why: 'Sí te va, con condiciones: índigo oscuro parejo, sin desgaste, sin rotos y sin lavados claros, corte slim recto y largo sin quiebre. Así el jean deja de ser "de fin de semana" y entra en el estilo de Nate Archibald: blazer, oxford y mocasines. Es el pantalón que más pintas nuevas te abre: va con tus dos chaquetas, tus polos, tus oxford y todos los suéteres.',
+      ref: 'A.P.C. · Petit New Standard, índigo', det: 'Jean francés minimalista, sin logos ni costuras de color: el más limpio para usar con blazer. Corte ajustado de tiro medio, 98 % algodón y 2 % elastano. 230 € (unos 265 USD). Ojo: talla pequeño, pide una más.',
+      url: 'https://www.apcstore.com/products/petit-new-standard-jeans-iai-cozzi-m09047',
+      alt: 'Si quieres probar primero si el jean te convence antes de gastar: Uniqlo Slim Straight Selvedge, de la fábrica japonesa Kaihara, unos 50 a 60 USD.',
+      hist: 'A.P.C. (Atelier de Production et de Création) la fundó Jean Touitou en París en 1987. Su jean New Standard, crudo y sin adornos, se volvió desde los noventa el jean de culto de la gente que se viste clásico: es el jean "que no parece jean de marca".',
+      f: [['El jean', APC('COZZI-M09047IAI_00_85d347ed-9b70-4bb7-9cf0-f5625455e219.jpg')], ['Puesto', APC('COZZI-M09047IAI_01.jpg')], ['De espalda', APC('COZZI-M09047IAI_03.jpg')], ['Detalle', APC('COZZI-M09047IAI_04.jpg')]],
+      pins: [['Jean oscuro con blazer azul', pin('dark jeans navy blazer oxford shirt loafers men')], ['Jean con chaqueta café', pin('dark selvedge jeans brown jacket loafers')]] },
+    { t: 'Jean oscuro de Polo (tu marca)', sw: ['#24304a'],
+      why: 'La opción de Ralph Lauren: selvedge (orillo) con algo de elástico, más cómodo para el calor de Medellín y para viajar. Un poco más "americano" que el A.P.C.: con más carácter, igual de oscuro.',
+      ref: 'Polo Ralph Lauren · Sullivan Slim Stretch Selvedge Jean, lavado Yorke', det: '198 USD. En la página de Estados Unidos estaba agotado en todas las tallas: pregunta en Polo de Bogotá o mira el Sullivan Slim Stretch en lavado oscuro (rinse).',
+      url: 'https://www.ralphlauren.com/men-clothing-jeans/sullivan-slim-stretch-selvedge-jean/480839.html', hist: H_POLO,
+      f: [['El jean', RL7('s7-1330121_alternate10')]],
+      pins: [['Ralph Lauren con jean', pin('ralph lauren navy blazer jeans menswear')]] },
+    { t: 'Theory de 5 bolsillos, en café', sw: ['#5a4535'],
+      why: 'El mismo pantalón que ya te gusta (tu gris P02, corte de jean pero de sarga) en un color que hoy no tienes en casual: café corteza. Es el que más le sirve al blazer azul S22, porque no es azul, y va con camisas blancas, azules y rosadas, polos blancas y azules, y mocasines taupe o belgas.',
+      ref: 'Theory · Raffi 5-Pocket Pant in Neoteric Twill, Bark', det: 'Algodón con nailon y elástico en cuatro direcciones: fresco, no arruga, bueno para viajes. Corte slim. 195 USD (a veces en rebaja a 117).',
+      url: 'https://www.theory.com/raffi/L0774201_D01.html', hist: H_THEORY,
+      alt: 'También viene en azul marino oscuro (Dark Navy) y en blanco cálido (Warm Ivory), pero el azul no va con S22 y el blanco se parece a tu crema P14.',
+      f: [['Puesto', TH('L0774201_D01', 'L0')], ['De espalda', TH('L0774201_D01', 'B0')], ['Detalle', TH('L0774201_D01', 'F0')], ['La prenda', TH('L0774201_D01', '0')]],
+      pins: [['Pantalón café con blazer azul', pin('brown chinos navy blazer white oxford men')]] },
+    { t: 'Chino verde oliva', sw: ['#6b6b4a'],
+      why: 'El color ivy que te falta. Verde oliva suave con blazer azul y camisa blanca es de los clásicos del estilo preppy, y le da vida a tus polos blancas, azules y camel sin verse formal. Es el mismo chino Zaine que tu crema, así que ya sabes tu talla (36) y cómo te queda.',
+      ref: 'Theory · Zaine Pant in Moonsoft Cotton, Willow Green', det: '97 % algodón, 3 % elastano, slim. 225 USD; a veces en rebaja a 90 USD.',
+      url: 'https://www.theory.com/men/pants/zaine-pant-in-moonsoft-cotton/Q0274204_UGT.html', hist: H_THEORY,
+      alt: 'En el mismo modelo está Classic Brown, pero es la tela y el color de tu chaqueta café S21: juntos serían un traje casual. Sirve si lo quieres así; si no, mejor el café de 5 bolsillos de arriba.',
+      f: [['Puesto', TH('Q0274204_UGT', 'L0')], ['De espalda', TH('Q0274204_UGT', 'B0')], ['Detalle', TH('Q0274204_UGT', 'D0')], ['La prenda', TH('Q0274204_UGT', '0')]],
+      pins: [['Oliva con blazer azul', pin('olive chinos navy blazer white shirt preppy')]] },
+    { t: 'Pana fina café, para tierra fría', sw: ['#6e4a33'],
+      why: 'Un antojo, no una urgencia: la pana (corduroy) es el pantalón casual más ivy que existe, pero en Medellín da calor. Es para viajes a Bogotá, Europa o Estados Unidos en invierno, con suéter y la chaqueta acolchada.',
+      ref: 'Polo Ralph Lauren · Andover Slim Fit Stretch Corduroy Pant, Cooper Brown', det: '175 USD. Viene también en azul (Aviator Navy), tan, negro y verde. Estaba agotado en varias tallas.',
+      url: 'https://www.ralphlauren.com/men-clothing-pants/andover-slim-fit-stretch-corduroy-pant/100058058.html', hist: H_POLO,
+      f: [['El pantalón', RL7('s7-AI710979455502_alternate10')]],
+      pins: [['Pana con suéter', pin('brown corduroy trousers navy sweater preppy')]] },
+  ];
+  const thumb = id => INV[id] ? `<figure class="pc-i"><img loading="lazy" src="img/${id}.webp${(IMGV || {})[id] || ''}" alt="${esc(INV[id].tipo + ' ' + INV[id].color)}"><figcaption>${id}</figcaption></figure>` : '';
+  const LEVELS = [
+    ['De vestir', 'Para reunión o con corbata. Con camisa y blazer se ven formales: es lo que sientes.', ['P01', 'P05', 'P06', 'P08']],
+    ['En el medio', 'Se pueden usar con blazer o sin él; los de vestir de tela liviana y tus chinos de Theory.', ['P03', 'P04', 'P07', 'P09', 'P14']],
+    ['Casuales de algodón', 'El estilo que buscas: algodón, 5 bolsillos o chino. Aquí solo hay dos, los dos claros; con los chinos de Theory del medio (P07 y P14) son cuatro, y el único oscuro, P07, es azul: no va con el blazer S22.', ['P02', 'P11']],
+    ['De lino', 'Para calor y tierra caliente.', ['P10', 'P12', 'P13']],
+  ];
+  const COMBOS = [
+    ['Blazer y gris', 'Oxford blanca por dentro, mocasín taupe y correa café: la pinta más fácil de la semana.', ['S22', 'C02', 'P02', 'A03b', 'Z08']],
+    ['Blazer y crema', 'Oxford de rayas azules y belgas azules: todo el azul arriba y abajo, el crema en el medio.', ['S22', 'C01', 'P14', 'A02', 'Z05']],
+    ['Blazer con polo', 'Polo blanca por dentro, chino piedra y tenis blancos. Bien vestido sin camisa.', ['S22', 'C17', 'P11', 'Z07']],
+    ['Chaqueta café y crema', 'Polo azul marino y mocasín taupe. Casual de agencia.', ['S21', 'C21', 'P14', 'Z08']],
+    ['Chaqueta café y azul', 'Con tu chino azul de Theory, que no va con el blazer S22 pero sí con la café.', ['S21', 'C02', 'P07', 'Z01']],
+    ['Sin chaqueta, con punto', 'Cárdigan camel sobre lino azul cielo, gris de 5 bolsillos y tenis blancos.', ['S01', 'C09', 'P02', 'Z07']],
+  ];
+  const JEAN = [
+    'Índigo oscuro y parejo. Nada de lavado claro, desgaste ni rotos: entre más oscuro, más elegante.',
+    'Slim recto, que no se pegue a la pierna, y largo sin quiebre (que no se acumule sobre el zapato, igual que lo que le estamos subiendo a P02, P11 y P14).',
+    'Con el blazer azul S22 es la excepción a la regla de "nada azul abajo": el jean es otra tela y debe ser claramente más oscuro que el blazer. Ponle camisa blanca, rosada (C08) o rayas para separar los dos azules. Con la chaqueta café S21, la Harrington S20 o el cárdigan camel S01 funciona sin pensarlo.',
+    'Zapatos: mocasines (taupe Z08), belgas, Chelsea taupe Z04 o tenis blancos Z07/Z16. Nunca con tus oxford negros de vestir (Z02).',
+    'Correa café o la trenzada; camisa por dentro con blazer, polo y oxford por fuera el fin de semana.',
+  ];
+  const PANTS_INTRO = `<div class="inv-hist">
+      <h4>Lo que encontré en tu clóset</h4>
+      <p>Tienes 14 pantalones y no son tantos de vestir como sientes: 4 son de vestir puros (P01, P05, P06 y el del traje P08). El problema es otro: con tu blazer nuevo S22, que no va con azules, las únicas opciones casuales de algodón son el gris de Theory (P02), el crema de Theory (P14) y el piedra de Lululemon (P11). Todos son claros. Te falta un pantalón casual oscuro.</p>
+      <p>La escalera de formalidad, de más a menos: pantalón de lana de vestir → chino de vestir → chino de algodón → 5 bolsillos de sarga → jean oscuro → lino. Lo que buscas está en los tres escalones del medio, y ahí tienes espacio para crecer.</p>
+    </div>
+    <div class="pc-lv">${LEVELS.map(([h, d, ids]) => `<div class="pc-row"><div class="pc-t"><b>${esc(h)}</b><span>${esc(d)}</span></div><div class="pc-imgs">${ids.map(thumb).join('')}</div></div>`).join('')}</div>
+    <div class="inv-hist"><h4>Pintas que ya puedes hacer</h4><p>Con lo que tienes hoy, bien vestido pero menos formal:</p></div>
+    <div class="pc-combos">${COMBOS.map(([h, d, ids]) => `<div class="pc-c"><b>${esc(h)}</b><div class="pc-imgs">${ids.map(thumb).join('')}</div><span>${esc(d)}</span></div>`).join('')}</div>
+    <div class="inv-hist"><h4>¿Un jean? Sí, con estas reglas</h4><ul>${JEAN.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+      <h4>Lo que te falta, en orden</h4>
+      <p>1. Un jean azul oscuro. 2. Un 5 bolsillos o chino café, el oscuro que va con el blazer S22. 3. Un chino verde oliva. Lo demás (caqui, blanco, crema) ya lo tienes con P09, P11 y P14. La pana es un antojo para tierra fría.</p></div>`;
   const inv = document.createElement('section');
   inv.id = 'investigacion';
   let invN = 0;
@@ -909,10 +981,11 @@
   inv.innerHTML = `<div class="wrap">
     <div class="sec-head">
       <div class="label">Para escoger</div>
-      <h2>Investigación 29 de octubre</h2>
+      <h2>Investigación</h2>
       <p>Ejemplos para que me digas cuál es el que tienes en mente. Lo que escojas lo paso a Qué comprar, en su categoría.</p>
     </div>
-    <nav class="tiers"><a href="#inv-blazers">Más blazers</a><a href="#inv-marcas">Theory, Polo y N.Peal</a><a href="#inv-tassel">Tassel loafers</a></nav>
+    <nav class="tiers"><a href="#inv-pantalones">Pantalones menos formales</a><a href="#inv-blazers">Más blazers</a><a href="#inv-marcas">Theory, Polo y N.Peal</a><a href="#inv-tassel">Tassel loafers</a></nav>
+    ${(invN = 0, invBlock('inv-pantalones', 'Pantalones menos formales · 9 de noviembre', 'Para estar muy bien vestido sin verte de reunión: qué tienes, qué pintas ya puedes hacer, si te va un jean y qué te falta. Cuando escojas, lo paso a Qué comprar.', PANTS, PANTS_INTRO))}
     ${(invN = 0, invBlock('inv-blazers', 'Más blazers, después del azul', 'El café claro (camel) ya pasó a Qué comprar. Siguen el gris de cuadros y el café de cuadros, que se ven bien con el pantalón claro; después los antojos. Todos de blazer, no de traje: tela con textura o cuadros y botones que no sean los del traje.', keep(BLAZERS2)))}
     ${(invN = 0, invBlock('inv-marcas', 'De tus marcas: Theory, Polo y N.Peal', 'Blazers de Theory y Polo, y de N.Peal el cachemir que les va: un blazer de punto para viajar y dos suéteres para debajo del blazer. Cada tarjeta trae la historia de la marca.', MARCAS.filter(b => b.t !== 'Theory · Pantalón crema')))}
     ${(invN = 0, invBlock('inv-tassel', 'Tassel loafers', 'Mocasín con borlas: el zapato ivy por excelencia, entre el mocasín y el zapato de vestir. Cada opción trae la historia de su marca. Para todos los días, cuero liso o cordobán; la gamuza, solo para días secos. El clásico café y el de Louboutin ya pasaron a Qué comprar, en Zapatos.', keep(TASSEL), HIST_TASSEL))}
