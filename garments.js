@@ -36,6 +36,7 @@ export const STYLE = {
   C26: { base: '#f1ece0', collar: 'bd', pocket: true, linen: true },
   C27: { base: '#a9b39b', collar: 'point', linen: true },
   C28: { base: '#c9dcf1', collar: 'spread', weave: true },
+  C29: { base: '#d8cfbd', polo: true, pique: true },
   // layers: kind decides neckline, sleeves and front details
   S01: { base: '#b88a57', kind: 'polo', buttons: '#e9dfcf', pockets: true },
   S02: { base: '#9b9ea4', kind: 'crew', fleece: true },
